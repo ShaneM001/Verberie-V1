@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Market Intelligence Report — Sadel Group</title>
+<title>Site Intelligence Report — Sadel Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_simple.min.css" rel="stylesheet">
@@ -13,25 +13,23 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Official Sadel brand palette */
   --navy:       #1C2746;
   --navy-deep:  #131b33;
   --navy-mid:   #253060;
   --light-blue: #587391;
-  --light-blue-hover: #4a6380;
+  --lb-pale:    #EEF2F6;
+  --lb-hover:   #4a6380;
   --platinum:   #EFEFEF;
-  --platinum-dark: #E0E0E0;
+  --plat-dark:  #E0E0E0;
   --ruby:       #941824;
   --ruby-light: #f5e8e9;
   --white:      #FFFFFF;
   --body-text:  #2d2d2d;
   --muted:      #6b7280;
   --border:     #d4d8e0;
-
-  /* Typography */
-  --header-font: 'Hind Siliguri', Arial, sans-serif;
-  --body-font:   'Lato', Arial, sans-serif;
-  --max:         1240px;
+  --header-font:'Hind Siliguri', Arial, sans-serif;
+  --body-font:  'Lato', Arial, sans-serif;
+  --max:        1240px;
 }
 
 html { scroll-behavior: smooth; }
@@ -53,117 +51,112 @@ body {
   background: var(--navy);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
   border-bottom: 3px solid var(--light-blue);
 }
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 40px;
-  height: 60px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
 .nav-brand {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .nav-brand-sadel {
   font-family: var(--header-font);
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--white);
   text-transform: uppercase;
 }
 .nav-brand-group {
-  font-family: var(--header-font);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 400;
   letter-spacing: 0.22em;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.45);
   text-transform: uppercase;
 }
 .nav-links {
   display: flex;
-  gap: 2px;
+  gap: 0;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
 }
 .nav-links a {
-  font-family: var(--body-font);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.55);
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 6px 11px;
   border-radius: 2px;
   transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
 }
-.nav-links a:hover {
-  color: var(--white);
-  background: rgba(255,255,255,0.08);
-}
+.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.08); }
 .nav-badge {
-  font-family: var(--body-font);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--white);
   background: var(--ruby);
-  padding: 5px 12px;
+  padding: 4px 11px;
   border-radius: 2px;
+  flex-shrink: 0;
 }
 
 /* ── Hero ── */
 .report-hero {
   background: var(--navy);
-  padding: 64px 40px 60px;
+  padding: 60px 40px 56px;
   position: relative;
   overflow: hidden;
 }
-/* Subtle geometric background texture inspired by brand cover */
 .report-hero::before {
   content: '';
   position: absolute;
-  top: -60px; right: -80px;
-  width: 480px; height: 480px;
-  border: 1px solid rgba(88,115,145,0.25);
+  top: -80px; right: -100px;
+  width: 500px; height: 500px;
+  border: 1px solid rgba(88,115,145,0.2);
   border-radius: 50%;
   pointer-events: none;
 }
 .report-hero::after {
   content: '';
   position: absolute;
-  top: 40px; right: 60px;
-  width: 300px; height: 300px;
-  border: 1px solid rgba(88,115,145,0.15);
+  top: 60px; right: 80px;
+  width: 280px; height: 280px;
+  border: 1px solid rgba(88,115,145,0.12);
   border-radius: 50%;
   pointer-events: none;
 }
 .hero-inner {
   max-width: var(--max);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 48px;
-  align-items: center;
   position: relative;
   z-index: 1;
 }
 .hero-label {
-  font-family: var(--body-font);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--light-blue);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -171,67 +164,121 @@ body {
 .hero-label::before {
   content: '';
   display: block;
-  width: 3px;
-  height: 14px;
+  width: 3px; height: 14px;
   background: var(--light-blue);
   border-radius: 1px;
 }
 .hero-title {
   font-family: var(--header-font);
-  font-size: clamp(30px, 3.5vw, 48px);
+  font-size: clamp(28px, 3.5vw, 46px);
   font-weight: 600;
   line-height: 1.15;
   color: var(--white);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   letter-spacing: 0.02em;
 }
 .hero-subtitle {
-  font-family: var(--body-font);
   font-size: 15px;
   font-weight: 300;
-  color: rgba(255,255,255,0.55);
-  max-width: 520px;
+  color: rgba(255,255,255,0.5);
+  max-width: 580px;
   line-height: 1.7;
+  margin-bottom: 32px;
 }
-.hero-stats {
+.hero-meta {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  flex-shrink: 0;
-  border: 1px solid rgba(88,115,145,0.35);
-  border-radius: 3px;
-  overflow: hidden;
+  gap: 24px;
+  flex-wrap: wrap;
 }
-.hero-stat {
-  padding: 18px 28px;
-  border-bottom: 1px solid rgba(88,115,145,0.25);
-  text-align: center;
-  min-width: 130px;
-}
-.hero-stat:last-child { border-bottom: none; }
-.hero-stat-num {
-  font-family: var(--header-font);
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.hero-stat-label {
-  font-family: var(--body-font);
-  font-size: 10px;
+.hero-meta-item {
+  font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+.hero-meta-item strong {
+  color: rgba(255,255,255,0.75);
+  font-weight: 700;
+  margin-right: 6px;
 }
 
-/* ── Wrapper ── */
-.wrapper {
+/* ── Contents panel ── */
+.contents-panel {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.contents-inner {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 40px;
 }
+.contents-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  cursor: pointer;
+  user-select: none;
+}
+.contents-toggle-label {
+  font-family: var(--header-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.contents-toggle-label::before {
+  content: '';
+  display: block;
+  width: 3px; height: 14px;
+  background: var(--light-blue);
+  border-radius: 1px;
+}
+.contents-arrow {
+  font-size: 12px;
+  color: var(--light-blue);
+  transition: transform 0.2s;
+}
+.contents-arrow.open { transform: rotate(180deg); }
+.contents-grid {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding: 8px 0 16px;
+}
+.contents-grid.open { display: grid; }
+.contents-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+.contents-item:hover { background: var(--lb-pale); }
+.contents-num {
+  font-family: var(--header-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--light-blue);
+  min-width: 20px;
+}
+.contents-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+/* ── Wrapper ── */
+.wrapper { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
 
 /* ── Sections ── */
 section {
@@ -245,12 +292,10 @@ section:last-child { border-bottom: none; }
 .section-hdr {
   display: flex;
   align-items: center;
-  gap: 0;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 .section-hdr-bar {
-  width: 4px;
-  height: 22px;
+  width: 4px; height: 22px;
   background: var(--light-blue);
   border-radius: 1px;
   margin-right: 12px;
@@ -264,6 +309,14 @@ section:last-child { border-bottom: none; }
   text-transform: uppercase;
   color: var(--navy);
 }
+.section-hdr-num {
+  font-family: var(--header-font);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--light-blue);
+  margin-right: 10px;
+  letter-spacing: 0.1em;
+}
 .section-hdr-rule {
   flex: 1;
   height: 1px;
@@ -271,203 +324,30 @@ section:last-child { border-bottom: none; }
   margin-left: 16px;
 }
 
-/* ── KPI cards ── */
-.kpi-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-.kpi-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--light-blue);
-  border-radius: 2px;
-  padding: 24px 22px 20px;
-  transition: border-top-color 0.2s, box-shadow 0.2s;
-}
-.kpi-card:hover {
-  border-top-color: var(--navy);
-  box-shadow: 0 2px 12px rgba(28,39,70,0.08);
-}
-.kpi-label {
-  font-family: var(--body-font);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--light-blue);
-  margin-bottom: 10px;
-}
-.kpi-value {
-  font-family: var(--header-font);
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--navy);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.kpi-change { font-size: 12px; color: #2a6e45; font-weight: 400; }
-.kpi-change.down { color: var(--ruby); }
-.kpi-sub { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 300; }
-
-/* ── Map ── */
-.map-shell {
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  background: var(--white);
-}
-.panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  background: var(--white);
-}
-.panel-header-left .panel-title {
-  font-family: var(--header-font);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--navy);
-  letter-spacing: 0.02em;
-}
-.panel-header-left .panel-sub {
-  font-family: var(--body-font);
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 2px;
-  font-weight: 300;
-}
-.panel-actions { display: flex; gap: 8px; }
-.btn {
-  font-family: var(--body-font);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 7px 16px;
-  border-radius: 2px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--navy);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.btn:hover { background: var(--platinum); border-color: var(--light-blue); }
-.btn-navy {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: var(--white);
-}
-.btn-navy:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
-.btn-ruby {
-  background: var(--ruby);
-  border-color: var(--ruby);
-  color: var(--white);
-}
-.btn-ruby:hover { background: #7a1420; border-color: #7a1420; }
-
-.map-body {
-  width: 100%;
-  height: 520px;
-  background: #dde2ea;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-}
-.map-body svg { opacity: 0.25; color: var(--navy); }
-.map-body-label {
-  font-family: var(--header-font);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--light-blue);
-}
-.map-body-hint {
-  font-family: var(--body-font);
-  font-size: 12px;
-  color: var(--muted);
-  background: rgba(255,255,255,0.85);
-  padding: 8px 18px;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-}
-.map-body-hint code {
-  font-family: monospace;
-  font-size: 11px;
-  background: #e8edf5;
-  color: var(--navy);
-  padding: 1px 6px;
-  border-radius: 2px;
-}
-
-/* ── Charts ── */
-.chart-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 12px;
-}
-.chart-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 24px;
-}
-.chart-card-title {
-  font-family: var(--header-font);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 3px;
-}
-.chart-card-sub {
-  font-family: var(--body-font);
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 20px;
-  font-weight: 300;
-}
-
-/* ── Narrative ── */
-.narrative-grid {
+/* ── Executive Summary ── */
+.exec-grid {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  gap: 40px;
+  gap: 32px;
   align-items: start;
 }
-.narrative-body h3 {
+.exec-body h2 {
   font-family: var(--header-font);
   font-size: 22px;
   font-weight: 600;
   color: var(--navy);
+  margin-bottom: 14px;
   line-height: 1.3;
-  margin-bottom: 16px;
-  letter-spacing: 0.01em;
 }
-.narrative-body p {
-  font-family: var(--body-font);
+.exec-body p {
   font-size: 15px;
   font-weight: 300;
   color: var(--body-text);
-  line-height: 1.75;
+  line-height: 1.8;
   margin-bottom: 14px;
 }
-.narrative-body p:last-child { margin-bottom: 0; }
-.pull-quote {
-  font-family: var(--body-font);
-  font-size: 17px;
-  font-style: italic;
-  font-weight: 300;
-  color: var(--navy);
-  line-height: 1.6;
-  padding: 20px 20px 20px 24px;
-  margin: 24px 0;
-  border-left: 3px solid var(--light-blue);
-  background: #EEF2F6;
-}
-.narrative-aside {
+.exec-body p:last-child { margin-bottom: 0; }
+.exec-highlights {
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -475,14 +355,17 @@ section:last-child { border-bottom: none; }
   border-radius: 2px;
   overflow: hidden;
 }
-.insight-card {
-  background: var(--white);
-  padding: 20px 22px;
+.highlight-card {
+  padding: 18px 20px;
   border-bottom: 1px solid var(--border);
+  background: var(--white);
 }
-.insight-card:last-child { border-bottom: none; }
-.ins-label {
-  font-family: var(--body-font);
+.highlight-card:last-child { border-bottom: none; }
+.highlight-card.navy { background: var(--navy); }
+.highlight-card.navy .h-label { color: rgba(255,255,255,0.5); }
+.highlight-card.navy .h-value { color: var(--white); }
+.highlight-card.navy .h-sub { color: rgba(255,255,255,0.4); }
+.h-label {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -490,88 +373,310 @@ section:last-child { border-bottom: none; }
   color: var(--light-blue);
   margin-bottom: 6px;
 }
-.insight-card.ruby-accent { background: var(--ruby-light); }
-.insight-card.ruby-accent .ins-label { color: var(--ruby); }
-.insight-card.navy-accent { background: var(--navy); }
-.insight-card.navy-accent .ins-label { color: rgba(255,255,255,0.6); }
-.insight-card.navy-accent .ins-text { color: rgba(255,255,255,0.9); }
-.ins-text {
-  font-family: var(--body-font);
-  font-size: 13px;
+.h-value {
+  font-family: var(--header-font);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.h-sub {
+  font-size: 11px;
   font-weight: 300;
-  color: var(--body-text);
-  line-height: 1.6;
+  color: var(--muted);
 }
 
-/* ── Table ── */
-.table-shell {
+/* ── Map sections ── */
+.map-shell {
   border: 1px solid var(--border);
   border-radius: 2px;
   overflow: hidden;
   background: var(--white);
 }
-.search-input {
-  font-family: var(--body-font);
+.map-shell + .map-shell { margin-top: 16px; }
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+.panel-title {
+  font-family: var(--header-font);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+}
+.panel-sub {
   font-size: 12px;
-  padding: 7px 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.panel-actions { display: flex; gap: 8px; }
+
+.btn {
+  font-family: var(--body-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 15px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { background: var(--platinum); border-color: var(--light-blue); }
+.btn-navy { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.btn-navy:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+
+.map-placeholder {
+  width: 100%;
+  height: 460px;
+  background: #dde2ea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.map-placeholder.tall { height: 520px; }
+.map-placeholder svg { opacity: 0.2; color: var(--navy); }
+.map-ph-label {
+  font-family: var(--header-font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--light-blue);
+}
+.map-ph-hint {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  background: rgba(255,255,255,0.85);
+  padding: 7px 16px;
   border: 1px solid var(--border);
   border-radius: 2px;
-  background: var(--platinum);
-  color: var(--body-text);
-  outline: none;
-  width: 220px;
-  transition: border-color 0.15s;
+  text-align: center;
+  max-width: 480px;
 }
-.search-input:focus { border-color: var(--light-blue); }
-.search-input::placeholder { color: var(--muted); }
+.map-ph-hint code {
+  font-family: monospace;
+  font-size: 11px;
+  background: #e8edf5;
+  color: var(--navy);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
 
-/* Tabulator overrides */
-#data-table .tabulator {
+/* Map 2-col grid */
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Data / stat sections ── */
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--light-blue);
+  border-radius: 2px;
+  padding: 22px 20px 18px;
+  transition: border-top-color 0.2s;
+}
+.stat-card:hover { border-top-color: var(--navy); }
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--light-blue);
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-family: var(--header-font);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.data-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--light-blue);
+  border-radius: 2px;
+  padding: 22px 24px;
+  margin-top: 16px;
+}
+.summary-box h4 {
+  font-family: var(--header-font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.summary-box p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--body-text);
+  line-height: 1.75;
+}
+
+/* ── Drivetime table ── */
+.dt-shell {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--white);
+  margin-bottom: 16px;
+}
+.dt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--navy);
+}
+.dt-header .panel-title { color: var(--white); }
+.dt-header .panel-sub { color: rgba(255,255,255,0.45); }
+
+#drivetime-table .tabulator {
   border: none;
   font-family: var(--body-font);
   font-size: 13px;
   background: var(--white);
 }
-#data-table .tabulator-header {
+#drivetime-table .tabulator-header {
   border-bottom: 2px solid var(--navy);
   background: var(--navy);
 }
-#data-table .tabulator-col {
-  background: var(--navy);
-}
-#data-table .tabulator-col-title {
-  font-family: var(--body-font);
+#drivetime-table .tabulator-col { background: var(--navy); }
+#drivetime-table .tabulator-col-title {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.7);
 }
-#data-table .tabulator-row { border-bottom: 1px solid var(--border); background: var(--white); }
-#data-table .tabulator-row:nth-child(even) { background: #F7F8FA; }
-#data-table .tabulator-row:hover { background: #EEF2F6 !important; }
-#data-table .tabulator-cell { color: var(--body-text); padding: 10px 12px; font-weight: 300; }
+#drivetime-table .tabulator-row { border-bottom: 1px solid var(--border); background: var(--white); }
+#drivetime-table .tabulator-row:nth-child(even) { background: #F7F8FA; }
+#drivetime-table .tabulator-row:hover { background: var(--lb-pale) !important; }
+#drivetime-table .tabulator-cell { color: var(--body-text); padding: 10px 12px; font-weight: 300; }
 
-.badge {
-  display: inline-block;
-  font-family: var(--body-font);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 2px;
+/* ── Inward Investment ── */
+.invest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
 }
-.badge-green { background: #e3f2e8; color: #1e5c32; }
-.badge-amber { background: #fef3e2; color: #7a4a00; }
-.badge-blue  { background: #e8edf5; color: var(--navy); }
-.badge-red   { background: var(--ruby-light); color: var(--ruby); }
+.invest-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 24px;
+}
+.invest-card.featured {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.invest-org {
+  font-family: var(--header-font);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.invest-card.featured .invest-org { color: var(--white); }
+.invest-role {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.invest-card.featured .invest-role { color: rgba(255,255,255,0.45); }
+.invest-detail {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--body-text);
+  line-height: 1.65;
+  margin-bottom: 6px;
+}
+.invest-card.featured .invest-detail { color: rgba(255,255,255,0.7); }
+.invest-detail strong {
+  font-weight: 700;
+  color: var(--navy);
+}
+.invest-card.featured .invest-detail strong { color: rgba(255,255,255,0.9); }
+.invest-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--light-blue);
+  text-decoration: none;
+}
+.invest-link:hover { color: var(--navy); }
+.invest-card.featured .invest-link { color: rgba(255,255,255,0.6); }
+.invest-card.featured .invest-link:hover { color: var(--white); }
+
+/* Chart card */
+.chart-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.chart-card-title {
+  font-family: var(--header-font);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.chart-card-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
 
 /* ── Footer ── */
 .report-footer {
   background: var(--navy-deep);
-  color: rgba(255,255,255,0.35);
-  font-family: var(--body-font);
+  color: rgba(255,255,255,0.3);
   font-size: 11px;
   padding: 28px 40px;
   display: flex;
@@ -580,24 +685,40 @@ section:last-child { border-bottom: none; }
 }
 .footer-brand {
   font-family: var(--header-font);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.65);
   margin-bottom: 4px;
 }
 .footer-brand span {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 400;
   letter-spacing: 0.2em;
   display: block;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.3);
 }
 .report-footer a { color: var(--light-blue); text-decoration: none; }
-.report-footer a:hover { color: #fff; }
+.report-footer a:hover { color: var(--white); }
 
-/* ── Animations ── */
+/* ── Placeholder notice ── */
+.ph-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ruby);
+  background: var(--ruby-light);
+  border: 1px solid #e8b4b8;
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -606,11 +727,9 @@ section:last-child { border-bottom: none; }
 @media (max-width: 960px) {
   .wrapper, .report-hero, .report-footer { padding-left: 20px; padding-right: 20px; }
   .nav-inner { padding: 0 20px; }
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-stats { display: none; }
-  .kpi-row { grid-template-columns: repeat(2, 1fr); }
-  .chart-grid, .narrative-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
+  .exec-grid, .invest-grid, .map-grid, .data-grid, .data-grid-4 { grid-template-columns: 1fr; }
+  .contents-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -624,10 +743,15 @@ section:last-child { border-bottom: none; }
       <span class="nav-brand-group">Group</span>
     </a>
     <div class="nav-links">
-      <a href="#map">Map</a>
-      <a href="#charts">Data</a>
-      <a href="#analysis">Analysis</a>
-      <a href="#data">Tracker</a>
+      <a href="#executive-summary">Summary</a>
+      <a href="#site-map">Site Map</a>
+      <a href="#road-network">Road Network</a>
+      <a href="#competitors">Competitors</a>
+      <a href="#food-businesses">Food Businesses</a>
+      <a href="#population">Population</a>
+      <a href="#agriculture">Agriculture</a>
+      <a href="#investment">Investment</a>
+      <a href="#drivetime">Drivetime</a>
     </div>
     <div class="nav-badge">Internal · Confidential</div>
   </div>
@@ -636,24 +760,62 @@ section:last-child { border-bottom: none; }
 <!-- ── Hero ── -->
 <div class="report-hero">
   <div class="hero-inner">
-    <div>
-      <div class="hero-label">Market Intelligence Report &nbsp;·&nbsp; <span id="report-date"></span></div>
-      <h1 class="hero-title">UK Cold Chain<br>Market Overview</h1>
-      <p class="hero-subtitle">Competitive landscape, site activity, and emerging opportunity across the UK temperature-controlled logistics sector.</p>
+    <div class="hero-label">Site Intelligence Report &nbsp;·&nbsp; <span id="report-date"></span></div>
+    <h1 class="hero-title">[Site Name]<br>Site Intelligence Report</h1>
+    <p class="hero-subtitle">Comprehensive analysis of site characteristics, regional market context, competitor landscape, and investment opportunity for [Site Name / Location].</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>Location</strong>[Town, County]</div>
+      <div class="hero-meta-item"><strong>Site Area</strong>[X acres / sq ft]</div>
+      <div class="hero-meta-item"><strong>Classification</strong>[B2 / B8 / Mixed]</div>
+      <div class="hero-meta-item"><strong>Prepared by</strong>Sadel Group</div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">14</div>
-        <div class="hero-stat-label">Sites tracked</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">6</div>
-        <div class="hero-stat-label">Competitors</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">Q2 '25</div>
-        <div class="hero-stat-label">Period</div>
-      </div>
+  </div>
+</div>
+
+<!-- ── Contents ── -->
+<div class="contents-panel">
+  <div class="contents-inner">
+    <div class="contents-toggle" onclick="toggleContents()">
+      <div class="contents-toggle-label">Contents — Click to navigate</div>
+      <div class="contents-arrow" id="contents-arrow">▼</div>
+    </div>
+    <div class="contents-grid" id="contents-grid">
+      <a class="contents-item" href="#executive-summary">
+        <span class="contents-num">01</span>
+        <span class="contents-text">Executive Summary</span>
+      </a>
+      <a class="contents-item" href="#site-map">
+        <span class="contents-num">02</span>
+        <span class="contents-text">Site Map — Satellite & Plot Outline</span>
+      </a>
+      <a class="contents-item" href="#road-network">
+        <span class="contents-num">03</span>
+        <span class="contents-text">Road Network</span>
+      </a>
+      <a class="contents-item" href="#competitors">
+        <span class="contents-num">04</span>
+        <span class="contents-text">Regional Competitor Map</span>
+      </a>
+      <a class="contents-item" href="#food-businesses">
+        <span class="contents-num">05</span>
+        <span class="contents-text">Regional Food Businesses Map</span>
+      </a>
+      <a class="contents-item" href="#population">
+        <span class="contents-num">06</span>
+        <span class="contents-text">Regional Population Data</span>
+      </a>
+      <a class="contents-item" href="#agriculture">
+        <span class="contents-num">07</span>
+        <span class="contents-text">Regional Agricultural Data</span>
+      </a>
+      <a class="contents-item" href="#investment">
+        <span class="contents-num">08</span>
+        <span class="contents-text">Inward Investment Team</span>
+      </a>
+      <a class="contents-item" href="#drivetime">
+        <span class="contents-num">09</span>
+        <span class="contents-text">Drivetime Data & Industry Analysis</span>
+      </a>
     </div>
   </div>
 </div>
@@ -661,157 +823,358 @@ section:last-child { border-bottom: none; }
 <main>
 <div class="wrapper">
 
-  <!-- ── KPIs ── -->
-  <section id="kpis" style="animation-delay:0.05s">
+  <!-- ── 01 Executive Summary ── -->
+  <section id="executive-summary" style="animation-delay:0.05s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <div class="section-hdr-title">Key metrics</div>
+      <span class="section-hdr-num">01</span>
+      <div class="section-hdr-title">Executive Summary</div>
       <div class="section-hdr-rule"></div>
     </div>
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-label">Total market capacity</div>
-        <div class="kpi-value">2.4M</div>
-        <div class="kpi-change">&#9650; +3.2% vs prior year</div>
-        <div class="kpi-sub">pallet spaces</div>
+    <div class="ph-notice">&#9998; Placeholder — replace with your content</div>
+    <div class="exec-grid">
+      <div class="exec-body">
+        <h2>[Site Name] — Strategic Overview</h2>
+        <p>[Insert opening paragraph summarising the site, its location, and its strategic significance. Describe the key opportunity this site represents for Sadel Group and prospective occupiers or investors.]</p>
+        <p>[Insert second paragraph covering the regional context — proximity to key transport links, labour markets, and the food and cold storage sector landscape in this area.]</p>
+        <p>[Insert third paragraph covering headline conclusions — key strengths, any constraints, and the overall investment or development thesis.]</p>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-label">New developments</div>
-        <div class="kpi-value">7</div>
-        <div class="kpi-change">&#9650; +2 this quarter</div>
-        <div class="kpi-sub">planning / under construction</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Avg. cold store rate</div>
-        <div class="kpi-value">£18.4</div>
-        <div class="kpi-change down">&#9660; -1.1% vs H1</div>
-        <div class="kpi-sub">per pallet / week</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Active tenders</div>
-        <div class="kpi-value">11</div>
-        <div class="kpi-change">&#9650; +4 since last report</div>
-        <div class="kpi-sub">visible market</div>
+      <div class="exec-highlights">
+        <div class="highlight-card navy">
+          <div class="h-label">Site area</div>
+          <div class="h-value">[X] ac</div>
+          <div class="h-sub">[X] sq ft GIA</div>
+        </div>
+        <div class="highlight-card">
+          <div class="h-label">Nearest motorway</div>
+          <div class="h-value">[X] mi</div>
+          <div class="h-sub">[Junction / road name]</div>
+        </div>
+        <div class="highlight-card">
+          <div class="h-label">Regional population</div>
+          <div class="h-value">[X]M</div>
+          <div class="h-sub">within [X] mile radius</div>
+        </div>
+        <div class="highlight-card">
+          <div class="h-label">Competing cold stores</div>
+          <div class="h-value">[X]</div>
+          <div class="h-sub">within [X] mile catchment</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Map ── -->
-  <section id="map" style="animation-delay:0.1s">
+  <!-- ── 02 Site Map ── -->
+  <section id="site-map" style="animation-delay:0.08s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <div class="section-hdr-title">Geographic intelligence</div>
+      <span class="section-hdr-num">02</span>
+      <div class="section-hdr-title">Site Map — Satellite View & Plot Outline</div>
       <div class="section-hdr-rule"></div>
     </div>
     <div class="map-shell">
       <div class="panel-header">
-        <div class="panel-header-left">
-          <div class="panel-title">UK Cold Chain Site Map</div>
-          <div class="panel-sub">Competitor facilities, Sadel sites, and development activity</div>
+        <div>
+          <div class="panel-title">Satellite Imagery — Plot Boundary</div>
+          <div class="panel-sub">ArcGIS satellite basemap with site outline overlay</div>
         </div>
         <div class="panel-actions">
-          <button class="btn" onclick="window.open('YOUR_ARCGIS_MAP_URL','_blank')">Open full map ↗</button>
-          <button class="btn btn-navy">&#8635; Refresh</button>
+          <a class="btn" href="YOUR_ARCGIS_SATELLITE_URL" target="_blank">Open full map ↗</a>
         </div>
       </div>
       <!--
-        REPLACE the div below with your ArcGIS embed iframe, e.g.:
-        <iframe src="https://YOUR_ORG.maps.arcgis.com/apps/instant/basic/index.html?appid=YOUR_APP_ID"
-                width="100%" height="520" frameborder="0" allowfullscreen></iframe>
-        Or Experience Builder:
-        <iframe src="https://experience.arcgis.com/experience/YOUR_EXPERIENCE_ID"
-                width="100%" height="520" frameborder="0"></iframe>
+        REPLACE with ArcGIS iframe:
+        <iframe src="YOUR_ARCGIS_SATELLITE_APP_URL" width="100%" height="520" frameborder="0" allowfullscreen></iframe>
       -->
-      <div class="map-body">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-        <div class="map-body-label">Paste your ArcGIS embed code here</div>
-        <div class="map-body-hint">Replace with an <code>&lt;iframe&gt;</code> from ArcGIS Online, Experience Builder, or Story Maps</div>
+      <div class="map-placeholder tall">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <div class="map-ph-label">ArcGIS Satellite Map — Plot Outline</div>
+        <div class="map-ph-hint">Replace this block with your ArcGIS <code>&lt;iframe&gt;</code><br>Satellite basemap + plot boundary layer</div>
       </div>
     </div>
   </section>
 
-  <!-- ── Charts ── -->
-  <section id="charts" style="animation-delay:0.15s">
+  <!-- ── 03 Road Network ── -->
+  <section id="road-network" style="animation-delay:0.1s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <div class="section-hdr-title">Market data</div>
+      <span class="section-hdr-num">03</span>
+      <div class="section-hdr-title">Road Network</div>
       <div class="section-hdr-rule"></div>
     </div>
-    <div class="chart-grid">
-      <div class="chart-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
-          <div class="chart-card-title">Cold storage capacity by region</div>
-          <button class="btn" id="toggle-chart" style="margin-top:2px">Toggle stacked</button>
-        </div>
-        <div class="chart-card-sub">Million pallet spaces, tracked competitors</div>
-        <canvas id="barChart" height="240"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="chart-card-title">Market share</div>
-        <div class="chart-card-sub">By operator, current period</div>
-        <canvas id="doughnutChart" height="240"></canvas>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Analysis ── -->
-  <section id="analysis" style="animation-delay:0.2s">
-    <div class="section-hdr">
-      <div class="section-hdr-bar"></div>
-      <div class="section-hdr-title">Written analysis</div>
-      <div class="section-hdr-rule"></div>
-    </div>
-    <div class="narrative-grid">
-      <div class="narrative-body">
-        <h3>Capacity squeeze in the Midlands corridor is creating a pricing opportunity</h3>
-        <p>Several major operators have reported utilisation rates exceeding 94% across East Midlands and North Midlands facilities, driven by sustained demand from ambient-to-chilled conversion projects and a wave of meal kit and ready meal contracts awarded to regional manufacturers in Q1.</p>
-        <blockquote class="pull-quote">New development pipeline is not keeping pace with demand in the M1 corridor — a structural gap unlikely to close before mid-2026.</blockquote>
-        <p>Two notable planning applications were submitted in the Northampton/Daventry area this quarter, but lead times from consent to operational typically run 18–24 months for purpose-built cold stores. This leaves an identifiable window for existing operators with spare capacity to price at a premium.</p>
-        <p>The South West picture is more nuanced. Capacity at the Bristol and Swindon clusters remains available, though operational cost pressures — particularly energy — are suppressing margin recovery despite headline rate improvements. [Replace with your own analysis.]</p>
-      </div>
-      <div class="narrative-aside">
-        <div class="insight-card navy-accent">
-          <div class="ins-label">Key opportunity</div>
-          <div class="ins-text">Midlands capacity gap projected to widen until late 2026 — near-term pricing leverage for well-located operators.</div>
-        </div>
-        <div class="insight-card ruby-accent">
-          <div class="ins-label">Risk</div>
-          <div class="ins-text">Two speculative developments in East Midlands could release &gt;80,000 pallet spaces simultaneously, creating a sharp supply shock.</div>
-        </div>
-        <div class="insight-card">
-          <div class="ins-label">Watch list</div>
-          <div class="ins-text">Lineage completing acquisition of Agro Merchants UK sites — rebranding and repricing expected Q3.</div>
-        </div>
-        <div class="insight-card">
-          <div class="ins-label">Methodology</div>
-          <div class="ins-text">Capacity figures drawn from public planning records, company filings, and trade press. ±5% margin of error assumed.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Table ── -->
-  <section id="data" style="animation-delay:0.25s">
-    <div class="section-hdr">
-      <div class="section-hdr-bar"></div>
-      <div class="section-hdr-title">Competitor &amp; site tracker</div>
-      <div class="section-hdr-rule"></div>
-    </div>
-    <div class="table-shell">
+    <div class="map-shell">
       <div class="panel-header">
-        <div class="panel-header-left">
-          <div class="panel-title">Site tracker</div>
-          <div class="panel-sub">Click column headers to sort · Type below to filter</div>
+        <div>
+          <div class="panel-title">Road Network — Site Connectivity</div>
+          <div class="panel-sub">Primary and secondary road infrastructure surrounding the site</div>
         </div>
         <div class="panel-actions">
-          <input class="search-input" id="table-search" type="text" placeholder="Filter sites…">
-          <button class="btn btn-navy" onclick="exportTable()">Export CSV</button>
+          <a class="btn" href="YOUR_ARCGIS_ROAD_URL" target="_blank">Open full map ↗</a>
         </div>
       </div>
-      <div id="data-table"></div>
+      <!--
+        REPLACE with ArcGIS iframe:
+        <iframe src="YOUR_ARCGIS_ROAD_NETWORK_URL" width="100%" height="460" frameborder="0" allowfullscreen></iframe>
+      -->
+      <div class="map-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 17l4-10 4 6 3-4 4 8"/><circle cx="3" cy="17" r="1"/><circle cx="21" cy="17" r="1"/></svg>
+        <div class="map-ph-label">ArcGIS Road Network Map</div>
+        <div class="map-ph-hint">Replace this block with your ArcGIS <code>&lt;iframe&gt;</code><br>Road network basemap + key junction annotations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 04 & 05 Competitor + Food Business Maps ── -->
+  <section id="competitors" style="animation-delay:0.12s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">04</span>
+      <div class="section-hdr-title">Regional Competitor Map</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="map-shell">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Cold Storage & Logistics Competitors</div>
+          <div class="panel-sub">Temperature-controlled facilities within the regional catchment</div>
+        </div>
+        <div class="panel-actions">
+          <a class="btn" href="YOUR_ARCGIS_COMPETITORS_URL" target="_blank">Open full map ↗</a>
+        </div>
+      </div>
+      <!--
+        REPLACE with ArcGIS iframe:
+        <iframe src="YOUR_ARCGIS_COMPETITORS_URL" width="100%" height="460" frameborder="0" allowfullscreen></iframe>
+      -->
+      <div class="map-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div class="map-ph-label">ArcGIS Regional Competitor Map</div>
+        <div class="map-ph-hint">Replace with your ArcGIS <code>&lt;iframe&gt;</code><br>Competitor cold stores + logistics facilities plotted by location</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="food-businesses" style="animation-delay:0.14s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">05</span>
+      <div class="section-hdr-title">Regional Food Businesses Map</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="map-shell">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Food Manufacturers, Processors & Suppliers</div>
+          <div class="panel-sub">Potential customer base within the regional catchment</div>
+        </div>
+        <div class="panel-actions">
+          <a class="btn" href="YOUR_ARCGIS_FOOD_URL" target="_blank">Open full map ↗</a>
+        </div>
+      </div>
+      <!--
+        REPLACE with ArcGIS iframe:
+        <iframe src="YOUR_ARCGIS_FOOD_BUSINESSES_URL" width="100%" height="460" frameborder="0" allowfullscreen></iframe>
+      -->
+      <div class="map-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div class="map-ph-label">ArcGIS Regional Food Businesses Map</div>
+        <div class="map-ph-hint">Replace with your ArcGIS <code>&lt;iframe&gt;</code><br>Food manufacturers, processors & distributors by location</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 06 Population ── -->
+  <section id="population" style="animation-delay:0.16s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">06</span>
+      <div class="section-hdr-title">Regional Population Data</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="ph-notice">&#9998; Placeholder — replace with your data</div>
+    <div class="data-grid-4">
+      <div class="stat-card">
+        <div class="stat-label">Population (30 mi)</div>
+        <div class="stat-value">[X]M</div>
+        <div class="stat-sub">within 30 mile radius</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Population (60 mi)</div>
+        <div class="stat-value">[X]M</div>
+        <div class="stat-sub">within 60 mile radius</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Working age (16–64)</div>
+        <div class="stat-value">[X]%</div>
+        <div class="stat-sub">of regional population</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Unemployment rate</div>
+        <div class="stat-value">[X]%</div>
+        <div class="stat-sub">vs [X]% national avg</div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Population distribution by distance band</div>
+      <div class="chart-card-sub">Cumulative population within drivetime catchments — replace with real data</div>
+      <canvas id="popChart" height="160"></canvas>
+    </div>
+    <div class="summary-box">
+      <h4>Population Summary</h4>
+      <p>[Insert summary paragraph describing the regional population context — size, density, age profile, employment patterns, and what this means for the site's labour pool and end-consumer catchment. Reference the data points above and explain their significance for the investment or development opportunity.]</p>
+    </div>
+  </section>
+
+  <!-- ── 07 Agriculture ── -->
+  <section id="agriculture" style="animation-delay:0.18s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">07</span>
+      <div class="section-hdr-title">Regional Agricultural Data</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="ph-notice">&#9998; Placeholder — replace with your data</div>
+    <div class="data-grid">
+      <div class="stat-card">
+        <div class="stat-label">Agricultural land area</div>
+        <div class="stat-value">[X]K</div>
+        <div class="stat-sub">hectares within [X] mile radius</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Land classification</div>
+        <div class="stat-value">Grade [X]</div>
+        <div class="stat-sub">predominant ALC classification</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Primary crop types</div>
+        <div class="stat-value">[Crops]</div>
+        <div class="stat-sub">[e.g. Arable, Root vegetables, Brassicas]</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Livestock units</div>
+        <div class="stat-value">[X]K</div>
+        <div class="stat-sub">within regional catchment</div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Agricultural land use breakdown</div>
+      <div class="chart-card-sub">Land use types within [X] mile radius — replace with real data</div>
+      <canvas id="agriChart" height="160"></canvas>
+    </div>
+    <div class="summary-box">
+      <h4>Agricultural Summary</h4>
+      <p>[Insert summary paragraph covering the agricultural context of the region — predominant farming types, key crops and livestock, seasonal production patterns, and the implications for cold chain demand. Note any significant food production clusters, processing facilities, or supply chain nodes already present in the area.]</p>
+    </div>
+  </section>
+
+  <!-- ── 08 Inward Investment ── -->
+  <section id="investment" style="animation-delay:0.2s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">08</span>
+      <div class="section-hdr-title">Inward Investment Team</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="ph-notice">&#9998; Placeholder — replace with actual contacts</div>
+    <div class="invest-grid">
+      <div class="invest-card featured">
+        <div class="invest-org">[Local Enterprise Partnership / Growth Hub]</div>
+        <div class="invest-role">Lead Inward Investment Body</div>
+        <div class="invest-detail"><strong>Contact:</strong> [Name, Title]</div>
+        <div class="invest-detail"><strong>Email:</strong> [email@organisation.gov.uk]</div>
+        <div class="invest-detail"><strong>Phone:</strong> [+44 XXXX XXXXXX]</div>
+        <div class="invest-detail"><strong>Focus:</strong> [Key sectors, grant programmes, site support]</div>
+        <a class="invest-link" href="YOUR_LEP_URL" target="_blank">Visit website ↗</a>
+      </div>
+      <div class="invest-card">
+        <div class="invest-org">[Local Authority — Economic Development]</div>
+        <div class="invest-role">Local Authority Investment Team</div>
+        <div class="invest-detail"><strong>Contact:</strong> [Name, Title]</div>
+        <div class="invest-detail"><strong>Email:</strong> [email@council.gov.uk]</div>
+        <div class="invest-detail"><strong>Phone:</strong> [+44 XXXX XXXXXX]</div>
+        <div class="invest-detail"><strong>Focus:</strong> [Planning support, rates relief, local incentives]</div>
+        <a class="invest-link" href="YOUR_COUNCIL_URL" target="_blank">Visit website ↗</a>
+      </div>
+      <div class="invest-card">
+        <div class="invest-org">[Mayoral Combined Authority / Devolved Body]</div>
+        <div class="invest-role">Regional Investment Authority</div>
+        <div class="invest-detail"><strong>Contact:</strong> [Name, Title]</div>
+        <div class="invest-detail"><strong>Email:</strong> [email@authority.gov.uk]</div>
+        <div class="invest-detail"><strong>Phone:</strong> [+44 XXXX XXXXXX]</div>
+        <div class="invest-detail"><strong>Focus:</strong> [Strategic investment, infrastructure, skills funding]</div>
+        <a class="invest-link" href="YOUR_AUTHORITY_URL" target="_blank">Visit website ↗</a>
+      </div>
+      <div class="invest-card">
+        <div class="invest-org">UK Trade & Investment / DBT</div>
+        <div class="invest-role">Department for Business and Trade</div>
+        <div class="invest-detail"><strong>Contact:</strong> [Regional trade advisor name]</div>
+        <div class="invest-detail"><strong>Email:</strong> [email@dbt.gov.uk]</div>
+        <div class="invest-detail"><strong>Phone:</strong> [+44 XXXX XXXXXX]</div>
+        <div class="invest-detail"><strong>Focus:</strong> International investment, export support, trade facilitation</div>
+        <a class="invest-link" href="https://www.gov.uk/government/organisations/department-for-business-and-trade" target="_blank">Visit website ↗</a>
+      </div>
+    </div>
+    <div class="summary-box">
+      <h4>Investment Support Overview</h4>
+      <p>[Insert summary of available investment support, grant programmes, enterprise zones, or other incentives applicable to this site and region. Note any specific food sector or logistics-focused programmes, skills funding, or infrastructure commitments that strengthen the investment case.]</p>
+    </div>
+  </section>
+
+  <!-- ── 09 Drivetime ── -->
+  <section id="drivetime" style="animation-delay:0.22s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">09</span>
+      <div class="section-hdr-title">Drivetime Data &amp; Industry Analysis</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="ph-notice">&#9998; Placeholder — paste your drivetime data below</div>
+
+    <div class="data-grid-4" style="margin-bottom:24px">
+      <div class="stat-card">
+        <div class="stat-label">30 min catchment</div>
+        <div class="stat-value">[X]K</div>
+        <div class="stat-sub">businesses within zone</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">60 min catchment</div>
+        <div class="stat-value">[X]K</div>
+        <div class="stat-sub">businesses within zone</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Dominant sector</div>
+        <div class="stat-value">[Sector]</div>
+        <div class="stat-sub">[X]% of catchment businesses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Food sector businesses</div>
+        <div class="stat-value">[X]</div>
+        <div class="stat-sub">within 60 min drivetime</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-card-title">Prevalent industries within drivetime catchment</div>
+      <div class="chart-card-sub">Business count by SIC sector — replace with your exported data</div>
+      <canvas id="drivetimeChart" height="200"></canvas>
+    </div>
+
+    <div class="dt-shell">
+      <div class="dt-header">
+        <div>
+          <div class="panel-title">Drivetime Data Export</div>
+          <div class="panel-sub">Key industries and business counts by drivetime band</div>
+        </div>
+        <div class="panel-actions">
+          <button class="btn btn-navy" onclick="exportDrivetime()">Export CSV</button>
+        </div>
+      </div>
+      <div id="drivetime-table"></div>
+    </div>
+
+    <div class="summary-box">
+      <h4>Drivetime Analysis Summary</h4>
+      <p>[Insert summary paragraph describing the key findings from the drivetime analysis — the dominant industries within each catchment band, concentration of food-related businesses, and what this means for potential demand for cold storage, logistics, or processing capacity at this site. Reference specific sectors, notable employers, or clusters where relevant.]</p>
     </div>
   </section>
 
@@ -821,10 +1184,7 @@ section:last-child { border-bottom: none; }
 <!-- ── Footer ── -->
 <footer class="report-footer">
   <div>
-    <div class="footer-brand">
-      Sadel
-      <span>Group</span>
-    </div>
+    <div class="footer-brand">Sadel <span>Group</span></div>
     Internal use only &nbsp;·&nbsp; Do not distribute
   </div>
   <div style="text-align:right">
@@ -840,116 +1200,113 @@ section:last-child { border-bottom: none; }
   document.getElementById('report-date').textContent = ds;
   document.getElementById('footer-date').textContent = ds;
 
-  /* Chart defaults — Sadel brand palette */
+  /* Contents toggle */
+  function toggleContents() {
+    const grid = document.getElementById('contents-grid');
+    const arrow = document.getElementById('contents-arrow');
+    grid.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+  /* Open by default */
+  document.getElementById('contents-grid').classList.add('open');
+  document.getElementById('contents-arrow').classList.add('open');
+
+  /* Chart defaults */
   Chart.defaults.font.family = 'Lato';
   Chart.defaults.color = '#6b7280';
+  const NAVY = '#1C2746', LB = '#587391', LB2 = '#8aaac0', LB3 = '#b8ccd8', PLAT = '#EFEFEF';
 
-  const NAVY   = '#1C2746';
-  const LB     = '#587391';
-  const PLAT   = '#EFEFEF';
-  const RUBY   = '#941824';
-  const LB2    = '#8aaac0';
-
-  /* Bar chart */
-  const barChart = new Chart(document.getElementById('barChart').getContext('2d'), {
+  /* Population chart */
+  new Chart(document.getElementById('popChart').getContext('2d'), {
     type: 'bar',
     data: {
-      labels: ['North West','Yorkshire','East Mids','West Mids','South West','South East','Scotland'],
-      datasets: [
-        { label:'Current capacity', data:[0.42,0.35,0.58,0.31,0.28,0.44,0.19], backgroundColor:NAVY, borderRadius:2 },
-        { label:'Pipeline',         data:[0.05,0.02,0.12,0.08,0.03,0.06,0.01], backgroundColor:LB,   borderRadius:2 },
-      ]
+      labels: ['10 mi','20 mi','30 mi','45 mi','60 mi'],
+      datasets: [{
+        label: 'Cumulative population (M)',
+        data: [0.12, 0.38, 0.72, 1.4, 2.1],
+        backgroundColor: [LB3, LB2, LB, NAVY, '#0f1a2e'],
+        borderRadius: 2,
+      }]
     },
     options: {
       responsive: true,
-      plugins: { legend: { position:'bottom', labels: { font:{size:12}, boxWidth:12, padding:16 } } },
+      plugins: { legend: { display: false } },
       scales: {
-        x: { stacked:true, grid:{display:false}, ticks:{font:{size:11}} },
-        y: { stacked:true, grid:{color:'#e8eaed'}, border:{display:false}, ticks:{font:{size:11}} }
+        x: { grid:{display:false}, ticks:{font:{size:11}} },
+        y: { grid:{color:'#e8eaed'}, border:{display:false}, ticks:{font:{size:11}} }
       }
     }
   });
 
-  let stacked = true;
-  document.getElementById('toggle-chart').addEventListener('click', () => {
-    stacked = !stacked;
-    barChart.options.scales.x.stacked = stacked;
-    barChart.options.scales.y.stacked = stacked;
-    barChart.update();
-  });
-
-  /* Doughnut */
-  new Chart(document.getElementById('doughnutChart').getContext('2d'), {
+  /* Agriculture chart */
+  new Chart(document.getElementById('agriChart').getContext('2d'), {
     type: 'doughnut',
     data: {
-      labels: ['Lineage','Sadel / Magnavale','NewCold','Emergent Cold','Others'],
+      labels: ['Arable','Permanent Grassland','Horticulture','Woodland','Other'],
       datasets: [{
-        data: [31,18,14,11,26],
-        backgroundColor: [NAVY, LB, '#344e73', LB2, PLAT],
+        data: [45, 28, 12, 8, 7],
+        backgroundColor: [NAVY, LB, LB2, LB3, PLAT],
         borderColor: '#fff',
         borderWidth: 2,
-        hoverOffset: 6,
+        hoverOffset: 5,
       }]
     },
     options: {
-      cutout: '68%',
+      cutout: '65%',
       responsive: true,
       plugins: {
-        legend: { position:'bottom', labels:{font:{size:12},boxWidth:12,padding:14} },
+        legend: { position:'right', labels:{font:{size:12},boxWidth:12,padding:14} },
         tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
       }
     }
   });
 
-  /* Tabulator */
-  const tableData = [
-    {site:'Magnavale Bristol',     operator:'Magnavale', region:'South West', capacity:42000,  status:'Operational', rate:'£17.80', segment:'Frozen / Chilled', notes:'Main site — anchor clients secured'},
-    {site:'Lineage Haverhill',     operator:'Lineage',   region:'East',       capacity:95000,  status:'Operational', rate:'£19.20', segment:'Frozen',           notes:'Recently expanded eastern wing'},
-    {site:'NewCold Corby',         operator:'NewCold',   region:'East Mids',  capacity:130000, status:'Operational', rate:'£18.90', segment:'Automated frozen', notes:'High-bay automated; premium rates'},
-    {site:'Emergent Wakefield',    operator:'Emergent',  region:'Yorkshire',  capacity:55000,  status:'Operational', rate:'£16.40', segment:'Multi-temp',       notes:'Strong protein customer base'},
-    {site:'Magnavale Peterlee',    operator:'Magnavale', region:'North East', capacity:38000,  status:'Operational', rate:'£16.10', segment:'Chilled',          notes:''},
-    {site:'Lineage East Mids DC',  operator:'Lineage',   region:'East Mids',  capacity:78000,  status:'Operational', rate:'£18.50', segment:'Frozen / Chilled', notes:'Agro Merchants rebrand pending'},
-    {site:'Norish Grantham',       operator:'Norish',    region:'East Mids',  capacity:31000,  status:'Operational', rate:'£15.80', segment:'Chilled',          notes:''},
-    {site:'Spec dev — Daventry',   operator:'Unknown',   region:'East Mids',  capacity:50000,  status:'Planning',    rate:'TBC',    segment:'Frozen',           notes:'Planning submitted Q2 2025'},
-    {site:'Spec dev — Northampton',operator:'Unknown',   region:'East Mids',  capacity:40000,  status:'Planning',    rate:'TBC',    segment:'Multi-temp',       notes:'Pre-application stage'},
-    {site:'NewCold Expansion',     operator:'NewCold',   region:'East Mids',  capacity:60000,  status:'Construction',rate:'TBC',    segment:'Automated frozen', notes:'Phase 2 Corby — 2026 completion'},
-    {site:'Magnavale Manchester',  operator:'Magnavale', region:'North West', capacity:28000,  status:'Operational', rate:'£17.20', segment:'Chilled',          notes:''},
-    {site:'Emergent Skelmersdale', operator:'Emergent',  region:'North West', capacity:47000,  status:'Operational', rate:'£16.90', segment:'Frozen',           notes:'Price reduction flagged in trade press'},
+  /* Drivetime industry chart */
+  new Chart(document.getElementById('drivetimeChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Food Mfg','Cold Storage','Transport & Logistics','Wholesale','Agriculture','Retail Food','Other Mfg'],
+      datasets: [
+        { label:'30 min', data:[120,18,95,64,210,180,88], backgroundColor:LB3, borderRadius:2 },
+        { label:'60 min', data:[380,52,290,195,540,460,240], backgroundColor:NAVY, borderRadius:2 },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position:'bottom', labels:{font:{size:12},boxWidth:12,padding:14} } },
+      scales: {
+        x: { grid:{display:false}, ticks:{font:{size:11}} },
+        y: { grid:{color:'#e8eaed'}, border:{display:false}, ticks:{font:{size:11}} }
+      }
+    }
+  });
+
+  /* Drivetime table */
+  const drivetimeData = [
+    {industry:'Food Manufacturing (SIC 10)',        businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:'Replace with real data'},
+    {industry:'Cold Storage & Warehousing (SIC 52)',businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
+    {industry:'Transport & Logistics (SIC 49/52)',  businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
+    {industry:'Wholesale of Food (SIC 46)',         businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
+    {industry:'Agriculture (SIC 01)',               businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
+    {industry:'Retail — Food Stores (SIC 47)',      businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
+    {industry:'Beverage Manufacturing (SIC 11)',    businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
+    {industry:'Other Manufacturing (SIC 13–33)',    businesses_30:'[X]', businesses_60:'[X]', employees_60:'[X]', notes:''},
   ];
 
-  const statusFmt = cell => {
-    const v = cell.getValue();
-    const m = {Operational:'badge-green', Planning:'badge-amber', Construction:'badge-blue', Closed:'badge-red'};
-    return `<span class="badge ${m[v]||''}">${v}</span>`;
-  };
-
-  const table = new Tabulator('#data-table', {
-    data: tableData,
+  const dtTable = new Tabulator('#drivetime-table', {
+    data: drivetimeData,
     layout: 'fitColumns',
-    height: 440,
+    height: 360,
     columns: [
-      {title:'Site',               field:'site',      widthGrow:2},
-      {title:'Operator',           field:'operator',  widthGrow:1, headerFilter:'input'},
-      {title:'Region',             field:'region',    widthGrow:1, headerFilter:'input'},
-      {title:'Capacity (pallets)', field:'capacity',  widthGrow:1, hozAlign:'right', formatter:c=>c.getValue().toLocaleString()},
-      {title:'Status',             field:'status',    widthGrow:1, formatter:statusFmt, headerFilter:'input'},
-      {title:'Rate / pallet / wk', field:'rate',      widthGrow:1, hozAlign:'right'},
-      {title:'Segment',            field:'segment',   widthGrow:1.5},
-      {title:'Notes',              field:'notes',     widthGrow:2},
+      {title:'Industry (SIC)',           field:'industry',       widthGrow:3},
+      {title:'Businesses (30 min)',       field:'businesses_30',  widthGrow:1, hozAlign:'center'},
+      {title:'Businesses (60 min)',       field:'businesses_60',  widthGrow:1, hozAlign:'center'},
+      {title:'Est. Employees (60 min)',   field:'employees_60',   widthGrow:1, hozAlign:'center'},
+      {title:'Notes',                     field:'notes',          widthGrow:2},
     ]
   });
 
-  document.getElementById('table-search').addEventListener('input', function() {
-    table.setFilter([[
-      {field:'site',     type:'like', value:this.value},
-      {field:'operator', type:'like', value:this.value},
-      {field:'region',   type:'like', value:this.value},
-      {field:'segment',  type:'like', value:this.value},
-      {field:'notes',    type:'like', value:this.value},
-    ]]);
-  });
-
-  function exportTable() { table.download('csv','sadel-site-tracker.csv'); }
+  function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
 </script>
 </body>
 </html>
