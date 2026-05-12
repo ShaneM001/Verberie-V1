@@ -1881,7 +1881,7 @@ Madrid Site Intelligence Report</h1>
   const NAVY = '#1C2746', LB = '#587391', LB2 = '#8aaac0', LB3 = '#b8ccd8', PLAT = '#EFEFEF';
 
   /* Population chart */
-  if (document.getElementById('popChart')) { new Chart(document.getElementById('popChart').getContext('2d'), {
+  if (document.getElementById('popChart')) new Chart(document.getElementById('popChart').getContext('2d'), {
     type: 'bar',
     data: {
       labels: ['10 mi','20 mi','30 mi','45 mi','60 mi'],
@@ -1900,7 +1900,7 @@ Madrid Site Intelligence Report</h1>
         y: { grid:{color:'#e8eaed'}, border:{display:false}, ticks:{font:{size:11}} }
       }
     }
-  }); }
+  });
 
   /* Agriculture chart */
   if (document.getElementById('agriChart')) new Chart(document.getElementById('agriChart').getContext('2d'), {
@@ -2006,7 +2006,6 @@ Madrid Site Intelligence Report</h1>
   function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
 
   /* ── Click-to-load maps ── */
-  // Store map URLs so we can restore buttons when unloading
   const mapUrls = {};
 
   function toggleMapSection(id) {
@@ -2020,10 +2019,10 @@ Madrid Site Intelligence Report</h1>
   function loadMapToggle(event, id, url) {
     event.stopPropagation();
     if (!url || url.startsWith('YOUR_')) {
-      alert('Map URL not yet configured — paste your ArcGIS iframe URL into the HTML file.');
+      alert('Map URL not yet configured.');
       return;
     }
-    // Expand this section if not already
+    // Expand this section if collapsed
     const body = document.getElementById('body-' + id);
     const arrow = document.getElementById('arrow-' + id);
     if (body && !body.classList.contains('expanded')) {
@@ -2031,8 +2030,7 @@ Madrid Site Intelligence Report</h1>
       if (arrow) arrow.classList.add('open');
     }
     // Unload all other maps
-    const allIds = ['satellite', 'road', 'competitors', 'food'];
-    allIds.forEach(function(otherId) {
+    ['satellite','road','competitors','food'].forEach(function(otherId) {
       if (otherId === id) return;
       const otherContainer = document.getElementById('iframe-' + otherId);
       const otherCtl = document.getElementById('ctl-' + otherId);
@@ -2040,16 +2038,22 @@ Madrid Site Intelligence Report</h1>
         otherContainer.innerHTML = '';
         otherContainer.classList.remove('loaded');
         if (otherCtl) otherCtl.style.display = 'flex';
+        const otherBtn = document.getElementById('loadbtn-' + otherId);
+        if (otherBtn) {
+          otherBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg> Load map';
+          otherBtn.onclick = function(e) { loadMapToggle(e, otherId, mapUrls[otherId] || ''); };
+        }
       }
     });
-    // Load this map
+    // Store and load this map
     mapUrls[id] = url;
     const container = document.getElementById('iframe-' + id);
     const ctl = document.getElementById('ctl-' + id);
-    container.innerHTML = '<iframe src="' + url + '" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>';
-    container.classList.add('loaded');
+    if (container) {
+      container.innerHTML = '<iframe src="' + url + '" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>';
+      container.classList.add('loaded');
+    }
     if (ctl) ctl.style.display = 'none';
-    // Update load button text
     const loadBtn = document.getElementById('loadbtn-' + id);
     if (loadBtn) {
       loadBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="3" width="5" height="18"/></svg> Unload map';
@@ -2068,32 +2072,6 @@ Madrid Site Intelligence Report</h1>
       loadBtn.onclick = function(e) { loadMapToggle(e, id, mapUrls[id] || ''); };
     }
   }
-
-    // Unload all OTHER maps first to free memory
-    const allIds = ['satellite', 'road', 'competitors', 'food'];
-    allIds.forEach(function(otherId) {
-      if (otherId === id) return;
-      const otherCtl = document.getElementById('ctl-' + otherId);
-      const otherContainer = document.getElementById('iframe-' + otherId);
-      if (!otherCtl || !otherContainer) return;
-      if (otherContainer.classList.contains('loaded')) {
-        // Remove iframe to free memory
-        otherContainer.innerHTML = '';
-        otherContainer.classList.remove('loaded');
-        // Show the click-to-load button again
-        otherCtl.style.display = 'flex';
-      }
-    });
-
-    // Store URL for this map
-    mapUrls[id] = url;
-
-    // Load this map
-    container.innerHTML = '<iframe src="' + url + '" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>';
-    container.classList.add('loaded');
-    ctl.style.display = 'none';
-  }
-
 
   /* ── ArcGIS OAuth — redirect flow ── */
   const ARCGIS_CLIENT_ID = '1KkdwKYSVuGKQ0xL';
