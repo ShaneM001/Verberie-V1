@@ -1761,6 +1761,9 @@ section:last-child { border-bottom: none; }
   function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
 
   /* ── Click-to-load maps ── */
+  // Store map URLs so we can restore buttons when unloading
+  const mapUrls = {};
+
   function loadMap(id, url) {
     const ctl = document.getElementById('ctl-' + id);
     const container = document.getElementById('iframe-' + id);
@@ -1768,10 +1771,29 @@ section:last-child { border-bottom: none; }
       alert('Map URL not yet configured — paste your ArcGIS iframe URL into the HTML file.');
       return;
     }
-    // Swap in the iframe
+
+    // Unload all OTHER maps first to free memory
+    const allIds = ['satellite', 'road', 'competitors', 'food'];
+    allIds.forEach(function(otherId) {
+      if (otherId === id) return;
+      const otherCtl = document.getElementById('ctl-' + otherId);
+      const otherContainer = document.getElementById('iframe-' + otherId);
+      if (!otherCtl || !otherContainer) return;
+      if (otherContainer.classList.contains('loaded')) {
+        // Remove iframe to free memory
+        otherContainer.innerHTML = '';
+        otherContainer.classList.remove('loaded');
+        // Show the click-to-load button again
+        otherCtl.style.display = 'flex';
+      }
+    });
+
+    // Store URL for this map
+    mapUrls[id] = url;
+
+    // Load this map
     container.innerHTML = '<iframe src="' + url + '" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>';
     container.classList.add('loaded');
-    // Hide the click-to-load panel
     ctl.style.display = 'none';
   }
 
