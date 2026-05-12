@@ -888,7 +888,7 @@ section:last-child { border-bottom: none; }
     <div class="nav-links">
       <a href="#executive-summary">Summary</a>
       <a href="#site-map">Site Map</a>
-      <a href="#road-network">Road Network</a>
+      <a href="#road-network">Road &amp; Rail</a>
       <a href="#competitors">Competitors</a>
       <a href="#food-businesses">Food Businesses</a>
       <a href="#population">Population</a>
@@ -937,7 +937,7 @@ section:last-child { border-bottom: none; }
       </a>
       <a class="contents-item" href="#road-network">
         <span class="contents-num">03</span>
-        <span class="contents-text">Road Network</span>
+        <span class="contents-text">Road and Rail Network</span>
       </a>
       <a class="contents-item" href="#competitors">
         <span class="contents-num">04</span>
@@ -1046,28 +1046,20 @@ section:last-child { border-bottom: none; }
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
       <span class="section-hdr-num">03</span>
-      <div class="section-hdr-title">Road Network</div>
+      <div class="section-hdr-title">Road and Rail Network</div>
       <div class="section-hdr-rule"></div>
     </div>
     <div class="map-shell">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Road Network — Site Connectivity</div>
+          <div class="panel-title">Road and Rail Network — Site Connectivity</div>
           <div class="panel-sub">Primary and secondary road infrastructure surrounding the site</div>
         </div>
         <div class="panel-actions">
-          <a class="btn" href="YOUR_ARCGIS_ROAD_URL" target="_blank">Open full map ↗</a>
+          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78" target="_blank">Open full map ↗</a>
         </div>
       </div>
-      <!--
-        REPLACE with ArcGIS iframe:
-        <iframe src="YOUR_ARCGIS_ROAD_NETWORK_URL" width="100%" height="460" frameborder="0" allowfullscreen></iframe>
-      -->
-      <div class="map-placeholder">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 17l4-10 4 6 3-4 4 8"/><circle cx="3" cy="17" r="1"/><circle cx="21" cy="17" r="1"/></svg>
-        <div class="map-ph-label">ArcGIS Road Network Map</div>
-        <div class="map-ph-hint">Replace this block with your ArcGIS <code>&lt;iframe&gt;</code><br>Road network basemap + key junction annotations</div>
-      </div>
+      <iframe src="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78" width="100%" height="600" frameborder="0" style="border:0;display:block;" allowfullscreen>iFrames are not supported on this page.</iframe>
     </div>
   </section>
 
@@ -1448,7 +1440,7 @@ section:last-child { border-bottom: none; }
   function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
 
   /* ── ArcGIS OAuth ── */
-  const ARCGIS_CLIENT_ID = 'kXgmyB5dMzPTcFNl'; // Replace with your ArcGIS app Client ID
+  const ARCGIS_CLIENT_ID = '1KkdwKYSVuGKQ0xL'; // Replace with your ArcGIS app Client ID
   const REDIRECT_URI = window.location.href.split('#')[0];
   const ARCGIS_AUTH_URL = 'https://www.arcgis.com/sharing/rest/oauth2/authorize';
 
