@@ -1243,8 +1243,7 @@ section:last-child { border-bottom: none; }
 <nav class="site-nav">
   <div class="nav-inner">
     <a class="nav-brand" href="#">
-      <span class="nav-brand-sadel">Sadel</span>
-      <span class="nav-brand-group">Group</span>
+      <img src="https://sadelgroup.com/wp-content/uploads/2022/02/Asset-25.png" alt="Sadel Group" style="height:32px; width:auto; display:block;">
     </a>
       <div class="nav-user-bar" id="nav-user-bar">
         <span id="nav-username"></span>
@@ -2099,16 +2098,39 @@ Madrid Site Intelligence Report</h1>
   const ARCGIS_AUTH_URL = 'https://www.arcgis.com/sharing/rest/oauth2/authorize';
 
   function doLogin() {
+    // Show which redirect URI we're using (helps debug mismatches)
+    console.log('Redirect URI:', REDIRECT_URI);
+    console.log('Client ID:', ARCGIS_CLIENT_ID);
+
+    const authUrl = ARCGIS_AUTH_URL +
+      '?client_id=' + ARCGIS_CLIENT_ID +
+      '&response_type=token' +
+      '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) +
+      '&expiration=20160';
+
     const popup = window.open(
-      `${ARCGIS_AUTH_URL}?client_id=${ARCGIS_CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&expiration=20160`,
+      authUrl,
       'arcgis-login',
-      'width=500,height=600,left=' + (screen.width/2 - 250) + ',top=' + (screen.height/2 - 300)
+      'width=520,height=640,left=' + Math.round(screen.width/2 - 260) + ',top=' + Math.round(screen.height/2 - 320)
     );
+
+    // Popup was blocked by browser
+    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+      const errEl = document.getElementById('auth-error');
+      errEl.textContent = 'Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.';
+      errEl.classList.add('show');
+      return;
+    }
+
     const timer = setInterval(() => {
       try {
-        if (popup.closed) {
+        if (!popup || popup.closed) {
           clearInterval(timer);
-          document.getElementById('auth-error').classList.add('show');
+          const errEl = document.getElementById('auth-error');
+          if (!sessionStorage.getItem('arcgis_token')) {
+            errEl.textContent = 'Sign-in was cancelled or failed. Please try again.';
+            errEl.classList.add('show');
+          }
           return;
         }
         const hash = popup.location.hash;
@@ -2117,12 +2139,13 @@ Madrid Site Intelligence Report</h1>
           popup.close();
           const params = new URLSearchParams(hash.substring(1));
           const token = params.get('access_token');
-          const expires = Date.now() + (parseInt(params.get('expires_in')) * 1000);
+          const expires = Date.now() + (parseInt(params.get('expires_in') || '3600') * 1000);
           sessionStorage.setItem('arcgis_token', token);
-          sessionStorage.setItem('arcgis_token_exp', expires);
+          sessionStorage.setItem('arcgis_token_exp', String(expires));
+          document.getElementById('auth-error').classList.remove('show');
           onLoginSuccess(token);
         }
-      } catch(e) { /* cross-origin — keep waiting */ }
+      } catch(e) { /* cross-origin while ArcGIS loads — keep waiting */ }
     }, 500);
   }
 
