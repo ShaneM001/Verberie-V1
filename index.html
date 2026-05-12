@@ -2092,75 +2092,21 @@ Madrid Site Intelligence Report</h1>
   }
 
 
-  /* ── ArcGIS OAuth ── */
-  const ARCGIS_CLIENT_ID = '1KkdwKYSVuGKQ0xL'; // Replace with your ArcGIS app Client ID
-  const REDIRECT_URI = window.location.href.split('#')[0];
+  /* ── ArcGIS OAuth — redirect flow ── */
+  const ARCGIS_CLIENT_ID = '1KkdwKYSVuGKQ0xL';
   const ARCGIS_AUTH_URL = 'https://www.arcgis.com/sharing/rest/oauth2/authorize';
+  const PAGE_URL = window.location.origin + window.location.pathname;
 
   function doLogin() {
-    // Show which redirect URI we're using (helps debug mismatches)
-    console.log('Redirect URI:', REDIRECT_URI);
-    console.log('Client ID:', ARCGIS_CLIENT_ID);
-
-    const authUrl = ARCGIS_AUTH_URL +
-      '?client_id=' + ARCGIS_CLIENT_ID +
-      '&response_type=token' +
-      '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) +
-      '&expiration=20160';
-
-    const popup = window.open(
-      authUrl,
-      'arcgis-login',
-      'width=520,height=640,left=' + Math.round(screen.width/2 - 260) + ',top=' + Math.round(screen.height/2 - 320)
-    );
-
-    // Popup was blocked by browser
-    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-      const errEl = document.getElementById('auth-error');
-      errEl.textContent = 'Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.';
-      errEl.classList.add('show');
-      return;
-    }
-
-    const timer = setInterval(() => {
-      try {
-        if (!popup || popup.closed) {
-          clearInterval(timer);
-          const errEl = document.getElementById('auth-error');
-          if (!sessionStorage.getItem('arcgis_token')) {
-            errEl.textContent = 'Sign-in was cancelled or failed. Please try again.';
-            errEl.classList.add('show');
-          }
-          return;
-        }
-        const hash = popup.location.hash;
-        if (hash && hash.includes('access_token')) {
-          clearInterval(timer);
-          popup.close();
-          const params = new URLSearchParams(hash.substring(1));
-          const token = params.get('access_token');
-          const expires = Date.now() + (parseInt(params.get('expires_in') || '3600') * 1000);
-          sessionStorage.setItem('arcgis_token', token);
-          sessionStorage.setItem('arcgis_token_exp', String(expires));
-          document.getElementById('auth-error').classList.remove('show');
-          onLoginSuccess(token);
-        }
-      } catch(e) { /* cross-origin while ArcGIS loads — keep waiting */ }
-    }, 500);
-  }
-
-  function onLoginSuccess(token) {
-    // Hide overlay
-    document.getElementById('auth-overlay').classList.add('hidden');
-    document.getElementById('auth-error').classList.remove('show');
-    // Fetch username and show in nav
-    fetch(`https://www.arcgis.com/sharing/rest/community/self?f=json&token=${token}`)
-      .then(r => r.json())
-      .then(data => {
-        const name = data.fullName || data.username || 'Signed in';
-        document.getElementById('nav-username').textContent = name;
-        document.getElementById('nav-user-bar').classList.add('show');
-      });
+    // Store current URL so we can return after auth
+    sessionStorage.setItem('arcgis_return', PAGE_URL);
+    // Build auth URL and redirect directly — most reliable cross-browser
+    const authUrl = ARCGIS_AUTH_URL
+      + '?client_id=' + ARCGIS_CLIENT_ID
+      + '&response_type=token'
+      + '&redirect_uri=' + encodeURIComponent(PAGE_URL)
+      + '&expiration=20160';
+    window.location.href = authUrl;
   }
 
   function doLogout() {
@@ -2168,15 +2114,51 @@ Madrid Site Intelligence Report</h1>
     sessionStorage.removeItem('arcgis_token_exp');
     document.getElementById('nav-user-bar').classList.remove('show');
     document.getElementById('auth-overlay').classList.remove('hidden');
+    document.body.style.overflow = '';
   }
 
-  // Check for existing session on load
-  (function checkSession() {
-    const token = sessionStorage.getItem('arcgis_token');
-    const exp = parseInt(sessionStorage.getItem('arcgis_token_exp') || '0');
-    if (token && Date.now() < exp) {
-      onLoginSuccess(token);
+  function onLoginSuccess(token) {
+    document.getElementById('auth-overlay').classList.add('hidden');
+    document.body.style.overflow = '';
+    fetch('https://www.arcgis.com/sharing/rest/community/self?f=json&token=' + token)
+      .then(r => r.json())
+      .then(data => {
+        const name = data.fullName || data.username || 'Signed in';
+        document.getElementById('nav-username').textContent = name;
+        document.getElementById('nav-user-bar').classList.add('show');
+      })
+      .catch(() => {
+        document.getElementById('nav-username').textContent = 'Signed in';
+        document.getElementById('nav-user-bar').classList.add('show');
+      });
+  }
+
+  // On page load — check if ArcGIS redirected back with a token in the URL hash
+  (function checkAuth() {
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      const params = new URLSearchParams(hash.substring(1));
+      const token = params.get('access_token');
+      const expiresIn = parseInt(params.get('expires_in') || '3600');
+      if (token) {
+        sessionStorage.setItem('arcgis_token', token);
+        sessionStorage.setItem('arcgis_token_exp', String(Date.now() + expiresIn * 1000));
+        // Clean hash from URL without reload
+        history.replaceState(null, '', window.location.pathname);
+        onLoginSuccess(token);
+        return;
+      }
     }
+    // Check for existing valid session
+    const saved = sessionStorage.getItem('arcgis_token');
+    const exp = parseInt(sessionStorage.getItem('arcgis_token_exp') || '0');
+    if (saved && Date.now() < exp) {
+      onLoginSuccess(saved);
+      return;
+    }
+    // No valid session — show overlay
+    document.getElementById('auth-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
   })();
 
 </script>
