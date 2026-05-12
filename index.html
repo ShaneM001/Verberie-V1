@@ -1855,6 +1855,9 @@ Madrid Site Intelligence Report</h1>
 </footer>
 
 <script>
+  window.onerror = function(msg, src, line, col, err) {
+    console.error('JS Error:', msg, 'at line', line, ':', err);
+  };
   /* Dates */
   const fmt = { year:'numeric', month:'long', day:'numeric' };
   const ds = new Date().toLocaleDateString('en-GB', fmt);
@@ -1878,7 +1881,7 @@ Madrid Site Intelligence Report</h1>
   const NAVY = '#1C2746', LB = '#587391', LB2 = '#8aaac0', LB3 = '#b8ccd8', PLAT = '#EFEFEF';
 
   /* Population chart */
-  new Chart(document.getElementById('popChart').getContext('2d'), {
+  if (document.getElementById('popChart')) { new Chart(document.getElementById('popChart').getContext('2d'), {
     type: 'bar',
     data: {
       labels: ['10 mi','20 mi','30 mi','45 mi','60 mi'],
@@ -1897,10 +1900,10 @@ Madrid Site Intelligence Report</h1>
         y: { grid:{color:'#e8eaed'}, border:{display:false}, ticks:{font:{size:11}} }
       }
     }
-  });
+  }); }
 
   /* Agriculture chart */
-  new Chart(document.getElementById('agriChart').getContext('2d'), {
+  if (document.getElementById('agriChart')) new Chart(document.getElementById('agriChart').getContext('2d'), {
     type: 'doughnut',
     data: {
       labels: ['Arable','Permanent Grassland','Horticulture','Woodland','Other'],
@@ -1923,7 +1926,7 @@ Madrid Site Intelligence Report</h1>
   });
 
   /* Drivetime industry chart */
-  new Chart(document.getElementById('drivetimeChart').getContext('2d'), {
+  if (document.getElementById('drivetimeChart')) new Chart(document.getElementById('drivetimeChart').getContext('2d'), {
     type: 'bar',
     data: {
       labels: ['Food Mfg','Cold Storage','Transport & Logistics','Wholesale','Agriculture','Retail Food','Other Mfg'],
@@ -1954,7 +1957,7 @@ Madrid Site Intelligence Report</h1>
     {industry:'Other Manufacturing (SIC 13–33)',businesses_30:'TBC', businesses_60:'TBC', employees_60:'TBC', notes:'Logistics & Automation Madrid trade fair: 11–12 Nov 2026'},
   ];
 
-  const dtTable = new Tabulator('#drivetime-table', {
+  const dtTable = document.getElementById('drivetime-table') ? new Tabulator('#drivetime-table', {
     data: drivetimeData,
     layout: 'fitColumns',
     height: 360,
@@ -1965,7 +1968,7 @@ Madrid Site Intelligence Report</h1>
       {title:'Est. Employees (60 min)',   field:'employees_60',   widthGrow:1, hozAlign:'center'},
       {title:'Notes',                     field:'notes',          widthGrow:2},
     ]
-  });
+  }) : null;
 
 
   /* ── Expiry countdown ── */
@@ -2098,6 +2101,7 @@ Madrid Site Intelligence Report</h1>
   const PAGE_URL = window.location.origin + window.location.pathname;
 
   function doLogin() {
+    console.log('doLogin called');
     // Store current URL so we can return after auth
     sessionStorage.setItem('arcgis_return', PAGE_URL);
     // Build auth URL and redirect directly — most reliable cross-browser
@@ -2134,7 +2138,7 @@ Madrid Site Intelligence Report</h1>
   }
 
   // On page load — check if ArcGIS redirected back with a token in the URL hash
-  (function checkAuth() {
+  document.addEventListener("DOMContentLoaded", function checkAuth() {
     const hash = window.location.hash;
     if (hash && hash.includes('access_token')) {
       const params = new URLSearchParams(hash.substring(1));
@@ -2157,9 +2161,10 @@ Madrid Site Intelligence Report</h1>
       return;
     }
     // No valid session — show overlay
-    document.getElementById('auth-overlay').classList.remove('hidden');
+    const overlay = document.getElementById('auth-overlay');
+    if (overlay) overlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-  })();
+  });
 
 </script>
 </body>
