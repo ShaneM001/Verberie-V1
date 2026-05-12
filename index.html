@@ -854,6 +854,97 @@ section:last-child { border-bottom: none; }
   transition: all 0.15s;
 }
 .nav-user-bar button:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+/* ── Click-to-load maps ── */
+.map-ctl {
+  width: 100%;
+  height: 600px;
+  background: #dde2ea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.map-ctl::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #c8d4e0 0%, #dde2ea 50%, #cdd8e4 100%);
+}
+.map-ctl-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.map-ctl-icon {
+  width: 64px; height: 64px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.map-ctl-icon svg { opacity: 0.5; color: #1C2746; }
+.map-ctl-title {
+  font-family: 'Hind Siliguri', Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1C2746;
+}
+.map-ctl-sub {
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: #587391;
+  margin-top: -8px;
+}
+.map-ctl-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: #1C2746;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 20px rgba(28,39,70,0.25);
+}
+.map-ctl-btn:hover { background: #253060; transform: translateY(-1px); }
+.map-ctl-btn svg { flex-shrink: 0; }
+.map-ctl-note {
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #6b7280;
+}
+.map-iframe-container {
+  width: 100%;
+  display: none;
+}
+.map-iframe-container.loaded {
+  display: block;
+}
+.map-iframe-container iframe {
+  display: block;
+  width: 100%;
+  height: 600px;
+  border: 0;
+}
 </style>
 </head>
 <body>
@@ -895,6 +986,7 @@ section:last-child { border-bottom: none; }
       <a href="#agriculture">Agriculture</a>
       <a href="#investment">Investment</a>
       <a href="#drivetime">Drivetime</a>
+      <a href="#brochure">Brochure</a>
     </div>
       <div class="nav-user-bar" id="nav-user-bar">
         <span id="nav-username"></span>
@@ -962,6 +1054,10 @@ section:last-child { border-bottom: none; }
       <a class="contents-item" href="#drivetime">
         <span class="contents-num">09</span>
         <span class="contents-text">Drivetime Data & Industry Analysis</span>
+      </a>
+      <a class="contents-item" href="#brochure">
+        <span class="contents-num">10</span>
+        <span class="contents-text">Agent Provided IM / Brochure</span>
       </a>
     </div>
   </div>
@@ -1033,11 +1129,21 @@ section:last-child { border-bottom: none; }
         REPLACE with ArcGIS iframe:
         <iframe src="YOUR_ARCGIS_SATELLITE_APP_URL" width="100%" height="520" frameborder="0" allowfullscreen></iframe>
       -->
-      <div class="map-placeholder tall">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <div class="map-ph-label">ArcGIS Satellite Map — Plot Outline</div>
-        <div class="map-ph-hint">Replace this block with your ArcGIS <code>&lt;iframe&gt;</code><br>Satellite basemap + plot boundary layer</div>
+      <div class="map-ctl" id="ctl-satellite">
+        <div class="map-ctl-inner">
+          <div class="map-ctl-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="map-ctl-title">Satellite View — Plot Boundary</div>
+          <div class="map-ctl-sub">ArcGIS satellite basemap with site outline overlay</div>
+          <button class="map-ctl-btn" onclick="loadMap('satellite', 'YOUR_ARCGIS_SATELLITE_URL')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <div class="map-ctl-note">Paste your ArcGIS iframe URL to activate</div>
+        </div>
       </div>
+      <div class="map-iframe-container" id="iframe-satellite"></div>
     </div>
   </section>
 
@@ -1059,7 +1165,21 @@ section:last-child { border-bottom: none; }
           <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78" target="_blank">Open full map ↗</a>
         </div>
       </div>
-      <iframe src="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78" width="100%" height="600" frameborder="0" style="border:0;display:block;" allowfullscreen>iFrames are not supported on this page.</iframe>
+      <div class="map-ctl" id="ctl-road">
+        <div class="map-ctl-inner">
+          <div class="map-ctl-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l4-10 4 6 3-4 4 8"/><circle cx="3" cy="17" r="1"/><circle cx="21" cy="17" r="1"/></svg>
+          </div>
+          <div class="map-ctl-title">Road and Rail Network</div>
+          <div class="map-ctl-sub">Transport infrastructure surrounding the site</div>
+          <button class="map-ctl-btn" onclick="loadMap('road', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <div class="map-ctl-note">Map loads from ArcGIS Online — requires sign in</div>
+        </div>
+      </div>
+      <div class="map-iframe-container" id="iframe-road"></div>
     </div>
   </section>
 
@@ -1081,7 +1201,21 @@ section:last-child { border-bottom: none; }
           <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5" target="_blank">Open full map ↗</a>
         </div>
       </div>
-      <iframe src="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5" width="100%" height="600" frameborder="0" style="border:0;display:block;" allowfullscreen>iFrames are not supported on this page.</iframe>
+      <div class="map-ctl" id="ctl-competitors">
+        <div class="map-ctl-inner">
+          <div class="map-ctl-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div class="map-ctl-title">Regional Competitor Map</div>
+          <div class="map-ctl-sub">Cold storage &amp; logistics facilities</div>
+          <button class="map-ctl-btn" onclick="loadMap('competitors', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <div class="map-ctl-note">Map loads from ArcGIS Online — requires sign in</div>
+        </div>
+      </div>
+      <div class="map-iframe-container" id="iframe-competitors"></div>
     </div>
   </section>
 
@@ -1309,6 +1443,40 @@ section:last-child { border-bottom: none; }
     </div>
   </section>
 
+  <!-- ── 10 Agent Provided IM / Brochure ── -->
+  <section id="brochure" style="animation-delay:0.24s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">10</span>
+      <div class="section-hdr-title">Agent Provided IM / Brochure</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="map-shell">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Alma Meco by Dunas Capital</div>
+          <div class="panel-sub">Agent provided information memorandum — 7 pages</div>
+        </div>
+        <div class="panel-actions">
+          <a class="btn" href="documents/Alma_Meco_by_Dunas_Capital.pdf" download>Download PDF</a>
+          <a class="btn btn-navy" href="documents/Alma_Meco_by_Dunas_Capital.pdf" target="_blank">Open in new tab ↗</a>
+        </div>
+      </div>
+      <iframe
+        src="documents/Alma_Meco_by_Dunas_Capital.pdf"
+        width="100%"
+        height="780"
+        style="border:0; display:block;"
+        type="application/pdf">
+        <div style="padding:32px; text-align:center; font-family:'Lato',sans-serif; color:#6b7280;">
+          <p style="margin-bottom:12px;">Your browser does not support inline PDF viewing.</p>
+          <a href="documents/Alma_Meco_by_Dunas_Capital.pdf" style="color:#1C2746; font-weight:700;">Download the PDF instead</a>
+        </div>
+      </iframe>
+    </div>
+  </section>
+
+
 </div>
 </main>
 
@@ -1438,6 +1606,22 @@ section:last-child { border-bottom: none; }
   });
 
   function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
+
+  /* ── Click-to-load maps ── */
+  function loadMap(id, url) {
+    const ctl = document.getElementById('ctl-' + id);
+    const container = document.getElementById('iframe-' + id);
+    if (!url || url.startsWith('YOUR_')) {
+      alert('Map URL not yet configured — paste your ArcGIS iframe URL into the HTML file.');
+      return;
+    }
+    // Swap in the iframe
+    container.innerHTML = '<iframe src="' + url + '" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>';
+    container.classList.add('loaded');
+    // Hide the click-to-load panel
+    ctl.style.display = 'none';
+  }
+
 
   /* ── ArcGIS OAuth ── */
   const ARCGIS_CLIENT_ID = '1KkdwKYSVuGKQ0xL'; // Replace with your ArcGIS app Client ID
