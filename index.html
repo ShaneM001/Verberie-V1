@@ -1172,6 +1172,70 @@ section:last-child { border-bottom: none; }
   border-radius: 2px;
   border: 1px solid var(--border);
 }
+
+/* ── Brochure card ── */
+.brochure-card {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--white);
+}
+.brochure-preview {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+.brochure-preview-inner {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.brochure-icon {
+  width: 64px; height: 64px;
+  background: var(--lb-pale);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--light-blue);
+}
+.brochure-info { flex: 1; }
+.brochure-name {
+  font-family: var(--header-font);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.brochure-meta {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--light-blue);
+  margin-bottom: 10px;
+}
+.brochure-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--body-text);
+  line-height: 1.7;
+  max-width: 680px;
+}
+.brochure-actions {
+  display: flex;
+  gap: 10px;
+  padding: 18px 32px;
+  background: var(--platinum);
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+.brochure-actions .btn {
+  display: flex;
+  align-items: center;
+}
 </style>
 </head>
 <body>
