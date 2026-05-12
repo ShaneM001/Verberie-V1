@@ -1043,6 +1043,100 @@ section:last-child { border-bottom: none; }
   display: flex;
   align-items: center;
 }
+
+/* ── Expiry countdown ── */
+.hero-inner {
+  align-items: center;
+}
+.expiry-box {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 24px 28px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  min-width: 220px;
+  position: relative;
+  overflow: hidden;
+}
+.expiry-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.expiry-label {
+  font-family: var(--body-font);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 12px;
+}
+.expiry-countdown {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.expiry-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.expiry-num {
+  font-family: var(--header-font);
+  font-size: 36px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+  min-width: 48px;
+  text-align: center;
+}
+.expiry-unit-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.expiry-sep {
+  font-family: var(--header-font);
+  font-size: 28px;
+  color: rgba(255,255,255,0.2);
+  line-height: 1.2;
+  padding-top: 4px;
+}
+.expiry-date-line {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.expiry-date-line strong {
+  color: rgba(255,255,255,0.7);
+  font-weight: 700;
+}
+.expiry-warning {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ruby);
+  background: rgba(148,24,36,0.2);
+  border: 1px solid rgba(148,24,36,0.4);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.expiry-box.urgent .expiry-num { color: #ff8a8a; }
 </style>
 </head>
 <body>
@@ -1074,18 +1168,6 @@ section:last-child { border-bottom: none; }
       <span class="nav-brand-sadel">Sadel</span>
       <span class="nav-brand-group">Group</span>
     </a>
-    <div class="nav-links">
-      <a href="#executive-summary">Summary</a>
-      <a href="#site-map">Site Map</a>
-      <a href="#road-network">Road &amp; Rail</a>
-      <a href="#competitors">Competitors</a>
-      <a href="#food-businesses">Food Businesses</a>
-      <a href="#population">Population</a>
-      <a href="#agriculture">Agriculture</a>
-      <a href="#investment">Investment</a>
-      <a href="#drivetime">Drivetime</a>
-      <a href="#brochure">Brochure</a>
-    </div>
       <div class="nav-user-bar" id="nav-user-bar">
         <span id="nav-username"></span>
         <button onclick="doLogout()">Sign out</button>
@@ -1097,14 +1179,38 @@ section:last-child { border-bottom: none; }
 <!-- ── Hero ── -->
 <div class="report-hero">
   <div class="hero-inner">
-    <div class="hero-label">Site Intelligence Report &nbsp;·&nbsp; <span id="report-date"></span></div>
-    <h1 class="hero-title">[Site Name]<br>Site Intelligence Report</h1>
-    <p class="hero-subtitle">Comprehensive analysis of site characteristics, regional market context, competitor landscape, and investment opportunity for [Site Name / Location].</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item"><strong>Location</strong>[Town, County]</div>
-      <div class="hero-meta-item"><strong>Site Area</strong>[X acres / sq ft]</div>
-      <div class="hero-meta-item"><strong>Classification</strong>[B2 / B8 / Mixed]</div>
-      <div class="hero-meta-item"><strong>Prepared by</strong>Sadel Group</div>
+    <div>
+      <div class="hero-label">Site Intelligence Report &nbsp;·&nbsp; <span id="report-date"></span></div>
+      <h1 class="hero-title">[Site Name]<br>Site Intelligence Report</h1>
+      <p class="hero-subtitle">Comprehensive analysis of site characteristics, regional market context, competitor landscape, and investment opportunity for [Site Name / Location].</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>Location</strong>[Town, County]</div>
+        <div class="hero-meta-item"><strong>Site Area</strong>[X acres / sq ft]</div>
+        <div class="hero-meta-item"><strong>Classification</strong>[B2 / B8 / Mixed]</div>
+        <div class="hero-meta-item"><strong>Prepared by</strong>Sadel Group</div>
+      </div>
+    </div>
+    <div class="expiry-box" id="expiry-box">
+      <div class="expiry-label">Page expires in</div>
+      <div class="expiry-countdown">
+        <div class="expiry-unit">
+          <div class="expiry-num" id="exp-days">--</div>
+          <div class="expiry-unit-label">Days</div>
+        </div>
+        <div class="expiry-sep">:</div>
+        <div class="expiry-unit">
+          <div class="expiry-num" id="exp-hours">--</div>
+          <div class="expiry-unit-label">Hours</div>
+        </div>
+        <div class="expiry-sep">:</div>
+        <div class="expiry-unit">
+          <div class="expiry-num" id="exp-mins">--</div>
+          <div class="expiry-unit-label">Mins</div>
+        </div>
+      </div>
+      <div class="expiry-date-line">Expires <strong>30 May 2026</strong></div>
+      <div class="expiry-date-line" style="margin-top:8px;font-size:9px;color:rgba(255,255,255,0.3);max-width:180px;margin-left:auto;margin-right:auto;">ArcGIS apps use credits to continue hosting. To conserve resources this page will expire on <strong style="color:rgba(255,255,255,0.5);">30 May 2026</strong></div>
+      <div class="expiry-warning" id="expiry-warning" style="display:none;">Expiring soon</div>
     </div>
   </div>
 </div>
@@ -1757,6 +1863,39 @@ section:last-child { border-bottom: none; }
       {title:'Notes',                     field:'notes',          widthGrow:2},
     ]
   });
+
+
+  /* ── Expiry countdown ── */
+  (function() {
+    const EXPIRY = new Date('2026-05-30T23:59:59');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = EXPIRY - now;
+      if (diff <= 0) {
+        document.getElementById('exp-days').textContent = '00';
+        document.getElementById('exp-hours').textContent = '00';
+        document.getElementById('exp-mins').textContent = '00';
+        document.getElementById('expiry-box').classList.add('urgent');
+        document.getElementById('expiry-warning').style.display = 'inline-block';
+        document.getElementById('expiry-warning').textContent = 'Expired';
+        return;
+      }
+      const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById('exp-days').textContent  = String(days).padStart(2,'0');
+      document.getElementById('exp-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('exp-mins').textContent  = String(mins).padStart(2,'0');
+      // Show warning if under 5 days
+      if (days < 5) {
+        document.getElementById('expiry-box').classList.add('urgent');
+        document.getElementById('expiry-warning').style.display = 'inline-block';
+        document.getElementById('expiry-warning').textContent = 'Expiring soon';
+      }
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+  })();
 
   function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
 
