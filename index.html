@@ -1144,6 +1144,77 @@ section:last-child { border-bottom: none; }
   border-radius: 2px;
 }
 .expiry-box.urgent .expiry-num { color: #ff8a8a; }
+
+/* ── Collapsible map sections ── */
+.map-section-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease;
+}
+.map-section-body.expanded {
+  max-height: 700px;
+}
+.map-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.map-panel-header:hover { background: var(--lb-pale); }
+.map-panel-header-left { flex: 1; }
+.map-panel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.map-load-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--body-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.map-load-btn:hover { background: var(--navy-mid); }
+.map-collapse-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--platinum);
+  color: var(--navy);
+  font-family: var(--body-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-collapse-btn:hover { background: var(--plat-dark); }
+.map-collapse-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  font-size: 10px;
+}
+.map-collapse-arrow.open { transform: rotate(180deg); }
 </style>
 </head>
 <body>
@@ -1415,15 +1486,23 @@ Madrid Site Intelligence Report</h1>
       <div class="section-hdr-rule"></div>
     </div>
     <div class="map-shell">
-      <div class="panel-header">
-        <div>
+      <div class="map-panel-header" onclick="toggleMapSection('satellite')" id="header-satellite">
+        <div class="map-panel-header-left">
           <div class="panel-title">Satellite Imagery — Plot Boundary</div>
           <div class="panel-sub">ArcGIS satellite basemap with site outline overlay</div>
         </div>
-        <div class="panel-actions">
-          <a class="btn" href="YOUR_ARCGIS_SATELLITE_URL" target="_blank">Open full map ↗</a>
+        <div class="map-panel-header-actions">
+          <button class="map-load-btn" onclick="loadMapToggle(event, 'satellite', 'YOUR_ARCGIS_SATELLITE_URL')" id="loadbtn-satellite">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <a class="btn" href="YOUR_ARCGIS_SATELLITE_URL" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
+          <button class="map-collapse-btn" onclick="event.stopPropagation(); toggleMapSection('satellite')">
+            <span class="map-collapse-arrow" id="arrow-satellite">▼</span>
+          </button>
         </div>
       </div>
+      <div class="map-section-body" id="body-satellite">
       <!--
         REPLACE with ArcGIS iframe:
         <iframe src="YOUR_ARCGIS_SATELLITE_APP_URL" width="100%" height="520" frameborder="0" allowfullscreen></iframe>
@@ -1435,14 +1514,12 @@ Madrid Site Intelligence Report</h1>
           </div>
           <div class="map-ctl-title">Satellite View — Plot Boundary</div>
           <div class="map-ctl-sub">ArcGIS satellite basemap with site outline overlay</div>
-          <button class="map-ctl-btn" onclick="loadMap('satellite', 'YOUR_ARCGIS_SATELLITE_URL')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
-            Load map
-          </button>
+
           <div class="map-ctl-note">Paste your ArcGIS iframe URL to activate</div>
         </div>
       </div>
       <div class="map-iframe-container" id="iframe-satellite"></div>
+      </div>
     </div>
   </section>
 
@@ -1455,15 +1532,23 @@ Madrid Site Intelligence Report</h1>
       <div class="section-hdr-rule"></div>
     </div>
     <div class="map-shell">
-      <div class="panel-header">
-        <div>
+      <div class="map-panel-header" onclick="toggleMapSection('road')" id="header-road">
+        <div class="map-panel-header-left">
           <div class="panel-title">Road and Rail Network — Site Connectivity</div>
           <div class="panel-sub">Primary and secondary road infrastructure surrounding the site</div>
         </div>
-        <div class="panel-actions">
-          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78" target="_blank">Open full map ↗</a>
+        <div class="map-panel-header-actions">
+          <button class="map-load-btn" onclick="loadMapToggle(event, 'road', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78')" id="loadbtn-road">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
+          <button class="map-collapse-btn" onclick="event.stopPropagation(); toggleMapSection('road')">
+            <span class="map-collapse-arrow" id="arrow-road">▼</span>
+          </button>
         </div>
       </div>
+      <div class="map-section-body" id="body-road">
       <div class="map-ctl" id="ctl-road">
         <div class="map-ctl-inner">
           <div class="map-ctl-icon">
@@ -1471,14 +1556,12 @@ Madrid Site Intelligence Report</h1>
           </div>
           <div class="map-ctl-title">Road and Rail Network</div>
           <div class="map-ctl-sub">Transport infrastructure surrounding the site</div>
-          <button class="map-ctl-btn" onclick="loadMap('road', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=cdab1b4e0da34625b0731090fc6abe78')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
-            Load map
-          </button>
+
           <div class="map-ctl-note">Map loads from ArcGIS Online — requires sign in</div>
         </div>
       </div>
       <div class="map-iframe-container" id="iframe-road"></div>
+      </div>
     </div>
   </section>
 
@@ -1491,15 +1574,23 @@ Madrid Site Intelligence Report</h1>
       <div class="section-hdr-rule"></div>
     </div>
     <div class="map-shell">
-      <div class="panel-header">
-        <div>
+      <div class="map-panel-header" onclick="toggleMapSection('competitors')" id="header-competitors">
+        <div class="map-panel-header-left">
           <div class="panel-title">Cold Storage & Logistics Competitors</div>
           <div class="panel-sub">Temperature-controlled facilities within the regional catchment</div>
         </div>
-        <div class="panel-actions">
-          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5" target="_blank">Open full map ↗</a>
+        <div class="map-panel-header-actions">
+          <button class="map-load-btn" onclick="loadMapToggle(event, 'competitors', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5')" id="loadbtn-competitors">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
+          <button class="map-collapse-btn" onclick="event.stopPropagation(); toggleMapSection('competitors')">
+            <span class="map-collapse-arrow" id="arrow-competitors">▼</span>
+          </button>
         </div>
       </div>
+      <div class="map-section-body" id="body-competitors">
       <div class="map-ctl" id="ctl-competitors">
         <div class="map-ctl-inner">
           <div class="map-ctl-icon">
@@ -1507,14 +1598,12 @@ Madrid Site Intelligence Report</h1>
           </div>
           <div class="map-ctl-title">Regional Competitor Map</div>
           <div class="map-ctl-sub">Cold storage &amp; logistics facilities</div>
-          <button class="map-ctl-btn" onclick="loadMap('competitors', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=5f13594d5dee4cc7baa62f49a9faafb5')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
-            Load map
-          </button>
+
           <div class="map-ctl-note">Map loads from ArcGIS Online — requires sign in</div>
         </div>
       </div>
       <div class="map-iframe-container" id="iframe-competitors"></div>
+      </div>
     </div>
   </section>
 
@@ -1526,15 +1615,23 @@ Madrid Site Intelligence Report</h1>
       <div class="section-hdr-rule"></div>
     </div>
     <div class="map-shell">
-      <div class="panel-header">
-        <div>
+      <div class="map-panel-header" onclick="toggleMapSection('food')" id="header-food">
+        <div class="map-panel-header-left">
           <div class="panel-title">Food Manufacturers, Processors & Suppliers</div>
           <div class="panel-sub">Potential customer base within the regional catchment</div>
         </div>
-        <div class="panel-actions">
-          <a class="btn" href="YOUR_ARCGIS_FOOD_URL" target="_blank">Open full map ↗</a>
+        <div class="map-panel-header-actions">
+          <button class="map-load-btn" onclick="loadMapToggle(event, 'food', 'YOUR_ARCGIS_FOOD_URL')" id="loadbtn-food">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <a class="btn" href="YOUR_ARCGIS_FOOD_URL" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
+          <button class="map-collapse-btn" onclick="event.stopPropagation(); toggleMapSection('food')">
+            <span class="map-collapse-arrow" id="arrow-food">▼</span>
+          </button>
         </div>
       </div>
+      <div class="map-section-body" id="body-food">
       <!--
         REPLACE with ArcGIS iframe:
         <iframe src="YOUR_ARCGIS_FOOD_BUSINESSES_URL" width="100%" height="460" frameborder="0" allowfullscreen></iframe>
@@ -1910,13 +2007,65 @@ Madrid Site Intelligence Report</h1>
   // Store map URLs so we can restore buttons when unloading
   const mapUrls = {};
 
-  function loadMap(id, url) {
-    const ctl = document.getElementById('ctl-' + id);
-    const container = document.getElementById('iframe-' + id);
+  function toggleMapSection(id) {
+    const body = document.getElementById('body-' + id);
+    const arrow = document.getElementById('arrow-' + id);
+    if (!body) return;
+    body.classList.toggle('expanded');
+    if (arrow) arrow.classList.toggle('open');
+  }
+
+  function loadMapToggle(event, id, url) {
+    event.stopPropagation();
     if (!url || url.startsWith('YOUR_')) {
       alert('Map URL not yet configured — paste your ArcGIS iframe URL into the HTML file.');
       return;
     }
+    // Expand this section if not already
+    const body = document.getElementById('body-' + id);
+    const arrow = document.getElementById('arrow-' + id);
+    if (body && !body.classList.contains('expanded')) {
+      body.classList.add('expanded');
+      if (arrow) arrow.classList.add('open');
+    }
+    // Unload all other maps
+    const allIds = ['satellite', 'road', 'competitors', 'food'];
+    allIds.forEach(function(otherId) {
+      if (otherId === id) return;
+      const otherContainer = document.getElementById('iframe-' + otherId);
+      const otherCtl = document.getElementById('ctl-' + otherId);
+      if (otherContainer && otherContainer.classList.contains('loaded')) {
+        otherContainer.innerHTML = '';
+        otherContainer.classList.remove('loaded');
+        if (otherCtl) otherCtl.style.display = 'flex';
+      }
+    });
+    // Load this map
+    mapUrls[id] = url;
+    const container = document.getElementById('iframe-' + id);
+    const ctl = document.getElementById('ctl-' + id);
+    container.innerHTML = '<iframe src="' + url + '" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen></iframe>';
+    container.classList.add('loaded');
+    if (ctl) ctl.style.display = 'none';
+    // Update load button text
+    const loadBtn = document.getElementById('loadbtn-' + id);
+    if (loadBtn) {
+      loadBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="3" width="5" height="18"/></svg> Unload map';
+      loadBtn.onclick = function(e) { e.stopPropagation(); unloadMap(id); };
+    }
+  }
+
+  function unloadMap(id) {
+    const container = document.getElementById('iframe-' + id);
+    const ctl = document.getElementById('ctl-' + id);
+    if (container) { container.innerHTML = ''; container.classList.remove('loaded'); }
+    if (ctl) ctl.style.display = 'flex';
+    const loadBtn = document.getElementById('loadbtn-' + id);
+    if (loadBtn) {
+      loadBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg> Load map';
+      loadBtn.onclick = function(e) { loadMapToggle(e, id, mapUrls[id] || ''); };
+    }
+  }
 
     // Unload all OTHER maps first to free memory
     const allIds = ['satellite', 'road', 'competitors', 'food'];
