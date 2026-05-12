@@ -1244,8 +1244,7 @@ section:last-child { border-bottom: none; }
 <div id="auth-overlay">
   <div class="auth-card">
     <div class="auth-logo">
-      Sadel
-      <span>Group</span>
+      <img src="https://sadelgroup.com/wp-content/uploads/2022/02/Asset-25.png" alt="Sadel Group" style="height:48px; width:auto; display:block; margin:0 auto;">
     </div>
     <div class="auth-divider"></div>
     <div class="auth-title">Sign in to access this report</div>
@@ -1648,67 +1647,49 @@ Madrid Site Intelligence Report</h1>
         <div class="stat-sub">population growth 2024 (+104,618 people); +0.45% Q1 2025</div>
       </div>
     </div>
-    <div class="chart-card">
-      <div class="chart-card-title">Population distribution by distance band</div>
-      <div class="chart-card-sub">Cumulative population within drivetime catchments — replace with real data</div>
-      <canvas id="popChart" height="160"></canvas>
-    </div>
-    <div class="summary-box">
-      <h4>Population Summary</h4>
-      <p>The Comunidad de Madrid is home to approximately 7.1 million inhabitants — 14.4% of Spain's total — making it the country's third most populous region and the core of the EU's third-largest metropolitan area (~6.5–6.8 million, behind only Paris and the Ruhr). The City of Madrid itself recorded 3,422,416 inhabitants in the November 2024 INE census, with Móstoles (214,006), Alcalá de Henares (200,702) and Leganés (194,084) as the next largest municipalities. Madrid was one of Spain's fastest-growing regions in 2024, adding approximately 104,618 residents (+1.5%), with a further 0.45% growth recorded in Q1 2025. GDP per capita stands at €42,198 — the highest of any Spanish region and 36.3% above the national average — underpinning a deep and relatively high-wage labour market. The largest population cohort is 50–54 year-olds, with over-64s accounting for 20.7% of Spain nationally. Foreign-born residents make up 19.3% of Spain's population as of January 2025, with Colombian, Moroccan, Venezuelan and Romanian communities particularly prominent in Madrid. For cold-chain operators, the headline figure is MercaMadrid's supply catchment of approximately 12 million consumers within a 500 km radius — underscoring Madrid's role as the primary distribution hub for perishable food across the Iberian Peninsula. On labour costs: warehouse workers in Madrid average approximately €29,779/year (~€14/hr), within a typical range of €22,513–€34,782. The 2025 statutory minimum wage is €1,184/month. Logistics vacancies grew 9% across Spain in 2024, with advertised salaries up 3.1%, reflecting sustained demand for cold-chain and warehousing skills in the region.</p>
-    </div>
-  </section>
-
-  <!-- ── 08 Agriculture ── -->
-  <section id="agriculture" style="animation-delay:0.18s">
-    <div class="section-hdr">
-      <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">08</span>
-      <div class="section-hdr-title">Regional Agricultural Data</div>
-      <div class="section-hdr-rule"></div>
+    <div class="map-shell">
+      <div class="map-panel-header" onclick="toggleMapSection('population')" id="header-population">
+        <div class="map-panel-header-left">
+          <div class="panel-title">Population Demographic Data</div>
+          <div class="panel-sub">Regional population distribution and demographic analysis</div>
+        </div>
+        <div class="map-panel-header-actions">
+          <button class="map-load-btn" onclick="loadMapToggle(event, 'population', 'YOUR_ARCGIS_POPULATION_URL')" id="loadbtn-population">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
+            Load map
+          </button>
+          <a class="btn" href="YOUR_ARCGIS_POPULATION_URL" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
+          <button class="map-collapse-btn" onclick="event.stopPropagation(); toggleMapSection('population')">
+            <span class="map-collapse-arrow" id="arrow-population">▼</span>
+          </button>
+        </div>
+      </div>
+      <div class="map-section-body" id="body-population">
+        <div class="map-ctl" id="ctl-population">
+          <div class="map-ctl-inner">
+            <div class="map-ctl-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="map-ctl-title">Population Demographic Data</div>
+            <div class="map-ctl-sub">Regional population distribution and demographic analysis</div>
+            <button class="map-ctl-btn" onclick="loadMapToggle(event, 'population', 'YOUR_ARCGIS_POPULATION_URL')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+              Load map
+            </button>
+            <div class="map-ctl-note">Paste your ArcGIS iframe URL to activate</div>
+          </div>
+        </div>
+        <div class="map-iframe-container" id="iframe-population"></div>
+      </div>
     </div>
     <div class="ph-notice">&#9998; Placeholder — replace with your data</div>
     <div class="data-grid">
-      <div class="stat-card">
-        <div class="stat-label">Agricultural land area</div>
-        <div class="stat-value">Urban</div>
-        <div class="stat-sub">Madrid is an eminently urban region — agriculture &lt;1% of regional GDP</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Land classification</div>
-        <div class="stat-value">Hub</div>
-        <div class="stat-sub">Strategic value as distribution &amp; processing hub, not primary production</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Primary crop types</div>
-        <div class="stat-value">5.0Mt</div>
-        <div class="stat-sub">Spain pig meat production 2024 — 23.5% of EU total, largest EU exporter since 2020</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Livestock units</div>
-        <div class="stat-value">532K t</div>
-        <div class="stat-sub">Spain frozen fish production 2024 — EU's largest producer; $9.5B seafood imports</div>
-      </div>
+      
+      
+      
+      
     </div>
-    <div class="chart-card">
-      <div class="chart-card-title">Agricultural land use breakdown</div>
-      <div class="chart-card-sub">Land use types within [X] mile radius — replace with real data</div>
-      <canvas id="agriChart" height="160"></canvas>
-    </div>
-    <div class="summary-box">
-      <h4>Agricultural Summary</h4>
-      <p>The Comunidad de Madrid itself is an eminently urban region where primary agriculture contributes well under 1% of regional GDP. Its strategic value for a cold-storage business is as a distribution and processing hub rather than as a primary production region. Spain as a whole, however, is one of the EU's largest producers across every major frozen-storage food category, and Madrid sits at the centre of the national logistics network that connects these production regions to domestic and export markets. Spain produced 5.0 million tonnes of pig meat in 2024 — 23.5% of total EU production, ahead of Germany and France — and has been the largest EU exporter of pork and pork products since 2020, with a net export surplus of approximately US$6 billion. Production is concentrated in Catalonia (~41.6% of slaughter), Aragón (20.7%) and Castilla y León (11.8%), with Madrid centrally positioned between these regions and the southern and coastal export gateways. On poultry, Spain produced approximately 1.8 million tonnes in 2024 (12.8% of EU output) and is the fastest-growing fresh/chilled chicken importer in the world, up 255.9% from 2020 to 2024. Spain is the EU's largest frozen-fish producer (532–592,000 tonnes in 2024) and the world's second-largest producer of canned fish and seafood, importing $9.5 billion of seafood annually and functioning as a major re-export hub. On frozen vegetables, Spain is the world's third-largest exporter (608,000 tonnes in 2023), with production concentrated in Navarra, Murcia and Andalusia — with Madrid roughly equidistant from all three. The industry body ASEVEC covers 8 member companies representing approximately 95% of national frozen-vegetable output. MercaMadrid — with throughput of 2.71 million tonnes of fresh food annually, ~700–800 trading companies, and ~15,000 vehicle movements per day — is the operational anchor for cold-storage 3PLs in the region. FIAB, Spain's national food and drink federation, is headquartered in Madrid and represents ~5,000 companies with a combined turnover of €120 billion and 436,700 employees.</p>
-    </div>
-  </section>
 
-  <!-- ── 09 Inward Investment ── -->
-  <section id="investment" style="animation-delay:0.2s">
-    <div class="section-hdr">
-      <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">09</span>
-      <div class="section-hdr-title">Inward Investment Team</div>
-      <div class="section-hdr-rule"></div>
-    </div>
     <div class="ph-notice">&#9998; Placeholder — replace with actual contacts</div>
     <div class="invest-grid">
       <div class="invest-card featured">
@@ -1876,29 +1857,6 @@ Madrid Site Intelligence Report</h1>
     }
   });
 
-  /* Agriculture chart */
-  if (document.getElementById('agriChart')) new Chart(document.getElementById('agriChart').getContext('2d'), {
-    type: 'doughnut',
-    data: {
-      labels: ['Arable','Permanent Grassland','Horticulture','Woodland','Other'],
-      datasets: [{
-        data: [45, 28, 12, 8, 7],
-        backgroundColor: [NAVY, LB, LB2, LB3, PLAT],
-        borderColor: '#fff',
-        borderWidth: 2,
-        hoverOffset: 5,
-      }]
-    },
-    options: {
-      cutout: '65%',
-      responsive: true,
-      plugins: {
-        legend: { position:'right', labels:{font:{size:12},boxWidth:12,padding:14} },
-        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
-      }
-    }
-  });
-
   /* Drivetime industry chart */
   if (document.getElementById('drivetimeChart')) new Chart(document.getElementById('drivetimeChart').getContext('2d'), {
     type: 'bar',
@@ -2004,7 +1962,7 @@ Madrid Site Intelligence Report</h1>
       if (arrow) arrow.classList.add('open');
     }
     // Unload all other maps
-    ['satellite','road','competitors','food'].forEach(function(otherId) {
+    ['satellite','road','competitors','food','population'].forEach(function(otherId) {
       if (otherId === id) return;
       const otherContainer = document.getElementById('iframe-' + otherId);
       const otherCtl = document.getElementById('ctl-' + otherId);
