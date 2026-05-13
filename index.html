@@ -1296,6 +1296,29 @@ section:last-child { border-bottom: none; }
 .maps-link:hover { background: var(--lb-pale); border-color: var(--light-blue); }
 .capacity-cell { text-align: right; font-variant-numeric: tabular-nums; }
 .capacity-total { font-weight: 700; color: var(--navy); }
+
+/* ── Target businesses table ── */
+#target-table .tabulator { border: none; font-family: var(--body-font); font-size: 13px; background: var(--white); }
+#target-table .tabulator-header { border-bottom: 2px solid var(--navy); background: var(--navy); }
+#target-table .tabulator-col { background: var(--navy); }
+#target-table .tabulator-col-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); }
+#target-table .tabulator-row { border-bottom: 1px solid var(--border); background: var(--white); }
+#target-table .tabulator-row:nth-child(even) { background: #F7F8FA; }
+#target-table .tabulator-row:hover { background: var(--lb-pale) !important; }
+#target-table .tabulator-cell { color: var(--body-text); padding: 10px 12px; font-weight: 300; }
+#target-search {
+  font-family: var(--body-font);
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 2px;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  outline: none;
+  width: 200px;
+}
+#target-search::placeholder { color: rgba(255,255,255,0.4); }
+#target-search:focus { border-color: rgba(255,255,255,0.5); }
 </style>
 </head>
 <body>
@@ -1687,6 +1710,19 @@ Madrid Site Intelligence Report</h1>
         <div class="map-ph-hint">Replace with your ArcGIS <code>&lt;iframe&gt;</code><br>Food manufacturers, processors & distributors by location</div>
       </div>
     </div>
+    <div class="competitor-table-wrap" style="margin-top:24px;">
+      <div class="competitor-table-header">
+        <div>
+          <div class="panel-title">Target Businesses in the Region</div>
+          <div class="panel-sub">Food businesses identified as potential customers within the regional catchment</div>
+        </div>
+        <div class="competitor-table-controls">
+          <input id="target-search" type="text" placeholder="Filter businesses…">
+          <button class="btn btn-navy" onclick="exportTargets()" style="border-color:rgba(255,255,255,0.2);">Export CSV</button>
+        </div>
+      </div>
+      <div id="target-table"></div>
+    </div>
   </section>
 
   <!-- ── 07 Population ── -->
@@ -2027,6 +2063,44 @@ Madrid Site Intelligence Report</h1>
     setInterval(updateCountdown, 60000);
   })();
 
+
+
+  /* ── Target businesses table ── */
+  const targetData = [
+    {
+      name: '[Business name]',
+      group: '[Parent group / owner]',
+      maps_url: 'https://maps.google.com',
+      product_type: '[e.g. Frozen meat / Dairy / Seafood]',
+      volume: '[e.g. ~5,000t/yr]'
+    },
+  ];
+
+  const targetTable = document.getElementById('target-table') ? new Tabulator('#target-table', {
+    data: targetData,
+    layout: 'fitColumns',
+    height: 420,
+    columns: [
+      { title: 'Name',             field: 'name',         widthGrow: 2 },
+      { title: 'Business Group',   field: 'group',        widthGrow: 1.5 },
+      { title: 'Map Link',         field: 'maps_url',     widthGrow: 0.8, formatter: mapsLinkFormatter, hozAlign: 'center' },
+      { title: 'Product Type',     field: 'product_type', widthGrow: 2 },
+      { title: 'Volume Indication',field: 'volume',       widthGrow: 1.5 },
+    ]
+  }) : null;
+
+  document.getElementById('target-search') && document.getElementById('target-search').addEventListener('input', function() {
+    if (!targetTable) return;
+    targetTable.setFilter([[
+      { field: 'name',         type: 'like', value: this.value },
+      { field: 'group',        type: 'like', value: this.value },
+      { field: 'product_type', type: 'like', value: this.value },
+    ]]);
+  });
+
+  function exportTargets() {
+    if (targetTable) targetTable.download('csv', 'sadel-target-businesses.csv');
+  }
 
   /* ── Competitor table ── */
   const competitorData = [
