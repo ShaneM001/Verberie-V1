@@ -2104,16 +2104,25 @@ Madrid Site Intelligence Report</h1>
 
   /* ── Competitor table ── */
   const competitorData = [
-    {
-      name: '[Competitor name]',
-      group: '[Parent group]',
-      address: '[Full address]',
-      maps_url: 'https://maps.google.com',
-      frozen: '',
-      chilled: '',
-      ambient: '',
-      total: ''
-    },
+    { trucking: '0-30', name: 'Coviran Madrid',                          group: 'Coviran',            frozen: 'Unavailable', total: 'Unavailable', built: 2014, retirement: 2044 },
+    { trucking: '0-30', name: 'Havi Logistic Guadalajara',               group: 'Havi Logistic',      frozen: 'Unavailable', total: 'Unavailable', built: 1974, retirement: 2004 },
+    { trucking: '0-30', name: 'Havi Logistic Madrid',                    group: 'Havi Logistic',      frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
+    { trucking: '0-30', name: 'STEF Alcala',                             group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
+    { trucking: '0-30', name: 'STEF Casablanca',                         group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2016, retirement: 2046 },
+    { trucking: '0-30', name: 'STEF Madrid',                             group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2012, retirement: 2042 },
+    { trucking: '0-30', name: 'STEF Torrejon',                           group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 1985, retirement: 2015 },
+    { trucking: '30-60', name: 'Asgasa',                                 group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2006, retirement: 2031 },
+    { trucking: '30-60', name: 'Cefrusa - MercaMadrid',                  group: 'Cefrusa',            frozen: '7,000',       total: '7,000',       built: 1984, retirement: 2014 },
+    { trucking: '30-60', name: 'Confremar',                              group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
+    { trucking: '30-60', name: 'Krustagroup SA',                         group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 1985, retirement: 2015 },
+    { trucking: '30-60', name: 'Logifrio Madrid (1)',                     group: 'Logifrio',           frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Logifrio Madrid (2)',                     group: 'Logifrio',           frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Logista Getafe',                         group: 'Logista',            frozen: 'Unavailable', total: 'Unavailable', built: 2009, retirement: 2039 },
+    { trucking: '30-60', name: 'Mercadona — Bloque Logístico de Getafe', group: 'Mercadona',          frozen: 'Unavailable', total: 'Unavailable', built: 2020, retirement: 2050 },
+    { trucking: '30-60', name: 'Montfrisa Madrid',                       group: 'Montfrisa',          frozen: 'Unavailable', total: '23,565',      built: 2018, retirement: 2048 },
+    { trucking: '30-60', name: 'Salvesen Logistica Madrid',              group: 'Salvesen Logistica', frozen: 'Unavailable', total: '9,500',       built: 2003, retirement: 2033 },
+    { trucking: '30-60', name: 'STEF Getafe',                            group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Trasmediterranea Logistica Madrid',      group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
   ];
 
   function mapsLinkFormatter(cell) {
@@ -2139,23 +2148,41 @@ Madrid Site Intelligence Report</h1>
     layout: 'fitColumns',
     height: 420,
     columns: [
-      { title: 'Name',             field: 'name',      widthGrow: 2 },
-      { title: 'Group',            field: 'group',     widthGrow: 1.5 },
-      { title: 'Address',          field: 'address',   widthGrow: 2.5 },
-      { title: 'Map',              field: 'maps_url',  widthGrow: 0.7, formatter: mapsLinkFormatter, hozAlign: 'center' },
-      { title: 'Frozen (pallets)', field: 'frozen',    widthGrow: 1, formatter: capacityFormatter, hozAlign: 'right' },
-      { title: 'Chilled (pallets)',field: 'chilled',   widthGrow: 1, formatter: capacityFormatter, hozAlign: 'right' },
-      { title: 'Ambient (pallets)',field: 'ambient',   widthGrow: 1, formatter: capacityFormatter, hozAlign: 'right' },
-      { title: 'Total (pallets)',  field: 'total',     widthGrow: 1, formatter: totalFormatter,    hozAlign: 'right' },
+      { title: 'Trucking Time',       field: 'trucking',    widthGrow: 0.7, hozAlign: 'center',
+        formatter: cell => {
+          const v = cell.getValue();
+          const bg = v === '0-30' ? '#1C2746' : '#587391';
+          return '<span style="background:' + bg + ';color:#fff;padding:2px 8px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.08em;">' + v + ' min</span>';
+        }
+      },
+      { title: 'Cold Store Name',     field: 'name',        widthGrow: 2 },
+      { title: 'Group',               field: 'group',       widthGrow: 1.5 },
+      { title: 'Frozen Capacity',     field: 'frozen',      widthGrow: 1, hozAlign: 'right' },
+      { title: 'Total Capacity',      field: 'total',       widthGrow: 1, hozAlign: 'right', formatter: cell => {
+          const v = cell.getValue();
+          if (!v || v === 'Unavailable') return '<span style="color:var(--stone-light);">Unavailable</span>';
+          return '<span style="font-weight:700;color:var(--navy);">' + v + '</span>';
+        }
+      },
+      { title: 'Construction Year',   field: 'built',       widthGrow: 0.8, hozAlign: 'center' },
+      { title: 'Est. Retirement',     field: 'retirement',  widthGrow: 0.8, hozAlign: 'center',
+        formatter: cell => {
+          const v = cell.getValue();
+          const yr = new Date().getFullYear();
+          const color = v < yr ? '#941824' : v < yr + 5 ? '#856404' : 'inherit';
+          const weight = v < yr ? '700' : '400';
+          return '<span style="color:' + color + ';font-weight:' + weight + ';">' + v + (v < yr ? ' ⚠' : '') + '</span>';
+        }
+      },
     ]
   }) : null;
 
   document.getElementById('competitor-search') && document.getElementById('competitor-search').addEventListener('input', function() {
     if (!competitorTable) return;
     competitorTable.setFilter([[
-      { field: 'name',    type: 'like', value: this.value },
-      { field: 'group',   type: 'like', value: this.value },
-      { field: 'address', type: 'like', value: this.value },
+      { field: 'name',     type: 'like', value: this.value },
+      { field: 'group',    type: 'like', value: this.value },
+      { field: 'trucking', type: 'like', value: this.value },
     ]]);
   });
 
