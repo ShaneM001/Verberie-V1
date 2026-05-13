@@ -1236,6 +1236,66 @@ section:last-child { border-bottom: none; }
   display: flex;
   align-items: center;
 }
+
+/* ── Competitor table ── */
+.competitor-table-wrap {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.competitor-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+}
+.competitor-table-header .panel-title { color: var(--white); }
+.competitor-table-header .panel-sub { color: rgba(255,255,255,0.45); }
+.competitor-table-controls { display: flex; gap: 8px; align-items: center; }
+#competitor-search {
+  font-family: var(--body-font);
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 2px;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  outline: none;
+  width: 200px;
+  transition: border-color 0.15s;
+}
+#competitor-search::placeholder { color: rgba(255,255,255,0.4); }
+#competitor-search:focus { border-color: rgba(255,255,255,0.5); }
+#competitor-table .tabulator { border: none; font-family: var(--body-font); font-size: 13px; background: var(--white); }
+#competitor-table .tabulator-header { border-bottom: 2px solid var(--navy); background: var(--navy); }
+#competitor-table .tabulator-col { background: var(--navy); }
+#competitor-table .tabulator-col-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); }
+#competitor-table .tabulator-row { border-bottom: 1px solid var(--border); background: var(--white); }
+#competitor-table .tabulator-row:nth-child(even) { background: #F7F8FA; }
+#competitor-table .tabulator-row:hover { background: var(--lb-pale) !important; }
+#competitor-table .tabulator-cell { color: var(--body-text); padding: 10px 12px; font-weight: 300; vertical-align: middle; }
+.maps-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--light-blue);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.maps-link:hover { background: var(--lb-pale); border-color: var(--light-blue); }
+.capacity-cell { text-align: right; font-variant-numeric: tabular-nums; }
+.capacity-total { font-weight: 700; color: var(--navy); }
 </style>
 </head>
 <body>
@@ -1576,6 +1636,19 @@ Madrid Site Intelligence Report</h1>
       </div>
       <div class="map-iframe-container" id="iframe-competitors"></div>
       </div>
+    </div>
+    <div class="competitor-table-wrap">
+      <div class="competitor-table-header">
+        <div>
+          <div class="panel-title">Competitors in the Near Region</div>
+          <div class="panel-sub">Cold storage operators — frozen, chilled &amp; ambient capacity (pallets)</div>
+        </div>
+        <div class="competitor-table-controls">
+          <input id="competitor-search" type="text" placeholder="Filter competitors…">
+          <button class="btn btn-navy" onclick="exportCompetitors()" style="border-color:rgba(255,255,255,0.2);">Export CSV</button>
+        </div>
+      </div>
+      <div id="competitor-table"></div>
     </div>
   </section>
 
@@ -1953,6 +2026,68 @@ Madrid Site Intelligence Report</h1>
     updateCountdown();
     setInterval(updateCountdown, 60000);
   })();
+
+
+  /* ── Competitor table ── */
+  const competitorData = [
+    {
+      name: '[Competitor name]',
+      group: '[Parent group]',
+      address: '[Full address]',
+      maps_url: 'https://maps.google.com',
+      frozen: '',
+      chilled: '',
+      ambient: '',
+      total: ''
+    },
+  ];
+
+  function mapsLinkFormatter(cell) {
+    const url = cell.getValue();
+    if (!url || url === 'https://maps.google.com') return '<span style="color:var(--stone-light);font-size:11px;">— add link —</span>';
+    return '<a class="maps-link" href="' + url + '" target="_blank"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> View</a>';
+  }
+
+  function capacityFormatter(cell) {
+    const v = cell.getValue();
+    if (!v || v === '') return '<span style="color:var(--stone-light);">—</span>';
+    return '<span class="capacity-cell">' + Number(v).toLocaleString() + '</span>';
+  }
+
+  function totalFormatter(cell) {
+    const v = cell.getValue();
+    if (!v || v === '') return '<span style="color:var(--stone-light);">—</span>';
+    return '<span class="capacity-cell capacity-total">' + Number(v).toLocaleString() + '</span>';
+  }
+
+  const competitorTable = document.getElementById('competitor-table') ? new Tabulator('#competitor-table', {
+    data: competitorData,
+    layout: 'fitColumns',
+    height: 420,
+    columns: [
+      { title: 'Name',             field: 'name',      widthGrow: 2 },
+      { title: 'Group',            field: 'group',     widthGrow: 1.5 },
+      { title: 'Address',          field: 'address',   widthGrow: 2.5 },
+      { title: 'Map',              field: 'maps_url',  widthGrow: 0.7, formatter: mapsLinkFormatter, hozAlign: 'center' },
+      { title: 'Frozen (pallets)', field: 'frozen',    widthGrow: 1, formatter: capacityFormatter, hozAlign: 'right' },
+      { title: 'Chilled (pallets)',field: 'chilled',   widthGrow: 1, formatter: capacityFormatter, hozAlign: 'right' },
+      { title: 'Ambient (pallets)',field: 'ambient',   widthGrow: 1, formatter: capacityFormatter, hozAlign: 'right' },
+      { title: 'Total (pallets)',  field: 'total',     widthGrow: 1, formatter: totalFormatter,    hozAlign: 'right' },
+    ]
+  }) : null;
+
+  document.getElementById('competitor-search') && document.getElementById('competitor-search').addEventListener('input', function() {
+    if (!competitorTable) return;
+    competitorTable.setFilter([[
+      { field: 'name',    type: 'like', value: this.value },
+      { field: 'group',   type: 'like', value: this.value },
+      { field: 'address', type: 'like', value: this.value },
+    ]]);
+  });
+
+  function exportCompetitors() {
+    if (competitorTable) competitorTable.download('csv', 'sadel-competitor-data.csv');
+  }
 
   function exportDrivetime() { dtTable.download('csv','sadel-drivetime-data.csv'); }
 
