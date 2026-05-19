@@ -1716,16 +1716,22 @@ Madrid Sites Intelligence Report</h1>
         </div>
       </div>
       <div class="map-section-body" id="body-food">
-      <!--
-        REPLACE with ArcGIS iframe:
-        <iframe src="YOUR_ARCGIS_FOOD_BUSINESSES_URL" width="100%" height="460" frameborder="0" allowfullscreen></iframe>
-      -->
-      <div class="map-placeholder">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        <div class="map-ph-label">ArcGIS Regional Food Businesses Map</div>
-        <div class="map-ph-hint">Replace with your ArcGIS <code>&lt;iframe&gt;</code><br>Food manufacturers, processors & distributors by location</div>
+        <div class="map-ctl" id="ctl-food">
+          <div class="map-ctl-inner">
+            <div class="map-ctl-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+            <div class="map-ctl-title">Regional Food Businesses Map</div>
+            <div class="map-ctl-sub">Food manufacturers, processors &amp; distributors by location</div>
+            <button class="map-ctl-btn" onclick="loadMapToggle(event, 'food', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=03f84aa4af604a1d8b41129febb55d9d')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+              Load map
+            </button>
+            <div class="map-ctl-note">Map loads from ArcGIS Online — requires sign in</div>
+          </div>
+        </div>
+        <div class="map-iframe-container" id="iframe-food"></div>
       </div>
-    </div>
     <div class="competitor-table-wrap" style="margin-top:24px;">
       <div class="competitor-table-header">
         <div>
