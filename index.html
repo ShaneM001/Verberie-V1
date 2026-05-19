@@ -1428,21 +1428,21 @@ Madrid Sites Intelligence Report</h1>
         <span class="contents-num">06</span>
         <span class="contents-text">Regional Food Businesses Map</span>
       </a>
-      <a class="contents-item" href="#population">
+      <a class="contents-item" href="#drivetime">
         <span class="contents-num">07</span>
+        <span class="contents-text">Drivetime Data &amp; Industry Analysis</span>
+      </a>
+      <a class="contents-item" href="#population">
+        <span class="contents-num">08</span>
         <span class="contents-text">Regional Population Data</span>
       </a>
       <a class="contents-item" href="#agriculture">
-        <span class="contents-num">08</span>
+        <span class="contents-num">09</span>
         <span class="contents-text">Regional Agricultural Data</span>
       </a>
       <a class="contents-item" href="#investment">
-        <span class="contents-num">09</span>
-        <span class="contents-text">Inward Investment Team</span>
-      </a>
-      <a class="contents-item" href="#drivetime">
         <span class="contents-num">10</span>
-        <span class="contents-text">Drivetime Data &amp; Industry Analysis</span>
+        <span class="contents-text">Inward Investment Team</span>
       </a>
     </div>
   </div>
@@ -1747,11 +1747,68 @@ Madrid Sites Intelligence Report</h1>
     </div>
   </section>
 
-  <!-- ── 07 Population ── -->
-  <section id="population" style="animation-delay:0.16s">
+  <!-- ── 07 Drivetime ── -->
+  <section id="drivetime" style="animation-delay:0.22s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
       <span class="section-hdr-num">07</span>
+      <div class="section-hdr-title">Drivetime Data &amp; Industry Analysis</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+
+    <div class="data-grid-4" style="margin-bottom:24px">
+      <div class="stat-card">
+        <div class="stat-label">30 min catchment</div>
+        <div class="stat-value">27</div>
+        <div class="stat-sub">food businesses within 30 minute trucking time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">60 min catchment</div>
+        <div class="stat-value">65</div>
+        <div class="stat-sub">food businesses within 60 minute trucking time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Dominant sector</div>
+        <div class="stat-value">Food &amp; Bev</div>
+        <div class="stat-sub">Dominant sector — FIAB: ~5,000 companies, €120B turnover, 436,700 employees nationally</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Food sector businesses</div>
+        <div class="stat-value">2.71Mt</div>
+        <div class="stat-sub">MercaMadrid annual throughput of fresh food; ~15,000 vehicle movements/day</div>
+      </div>
+    </div>
+
+
+    <div class="chart-card" style="margin-bottom:16px;">
+      <div class="chart-card-title">Food Businesses within 120-Minute Trucking Radius</div>
+      <div class="chart-card-sub">Breakdown by product type — Madrid Sites vs Magnavale Easton (baseline)</div>
+      <canvas id="foodCompChart" height="180"></canvas>
+    </div>
+
+    <div class="competitor-table-wrap" style="margin-bottom:24px;">
+      <div class="competitor-table-header">
+        <div>
+          <div class="panel-title">Food Businesses by Product Type — 120 Min Radius</div>
+          <div class="panel-sub">Madrid Sites vs Magnavale Easton baseline</div>
+        </div>
+        <div class="competitor-table-controls">
+          <button class="btn btn-navy" onclick="exportFoodComp()" style="border-color:rgba(255,255,255,0.2);">Export CSV</button>
+        </div>
+      </div>
+      <div id="food-comp-table"></div>
+    </div>
+    <div class="summary-box">
+      <h4>Drivetime Analysis Summary</h4>
+      <p>Madrid's transport infrastructure positions the Alovera and Meco sites at the intersection of Spain's national logistics network. Seven radial motorways (A-1 through A-6 and A-42) converge on Madrid, connecting the city to Burgos, Zaragoza, Barcelona, France, Valencia, Andalusia, the Port of Algeciras, Badajoz/Portugal, Galicia and Toledo. The M-30, M-40, M-45 and M-50 orbital motorways provide direct intra-regional connectivity. On rail, Madrid's 15 logistics facilities — including Abroñigal and Vicálvaro, two of Spain's five largest rail freight terminals — handle approximately 11,000 goods trains per year. The Coslada Dry Port, 10 minutes from Barajas, provides seamless rail connections to Spain's major seaports. The operational anchor for cold-storage demand in the catchment is MercaMadrid — Europe's largest perishable food wholesale market and the world's second-largest fish market after Tokyo. With approximately 700–800 trading companies, 2.71 million tonnes of fresh food throughput annually, daily footfall of ~20,000 people and ~15,000 vehicle movements per day, MercaMadrid represents both a concentrated customer base and a benchmark for the scale of cold-chain demand in the region. Lineage and Fripecan (Grupo Alonso) have both established cold-storage operations adjacent to MercaMadrid, confirming the commercial logic of the location. The broader food sector context — Spain's position as the EU's largest frozen-fish producer, the world's largest pork exporter, the third-largest frozen-vegetable exporter, and a major frozen-food re-export hub — underscores the structural depth of cold-chain demand in this market.</p>
+    </div>
+  </section>
+
+    <!-- ── 08 Population ── -->
+  <section id="population" style="animation-delay:0.16s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">08</span>
       <div class="section-hdr-title">Regional Population Data</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1821,11 +1878,11 @@ Madrid Sites Intelligence Report</h1>
     </div>
   </section>
 
-  <!-- ── 08 Agriculture ── -->
+  <!-- ── 09 Agriculture ── -->
   <section id="agriculture" style="animation-delay:0.18s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">08</span>
+      <span class="section-hdr-num">09</span>
       <div class="section-hdr-title">Regional Agricultural Data</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1837,11 +1894,11 @@ Madrid Sites Intelligence Report</h1>
     </div>
   </section>
 
-  <!-- ── 09 Inward Investment ── -->
+  <!-- ── 10 Inward Investment ── -->
   <section id="investment" style="animation-delay:0.2s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">09</span>
+      <span class="section-hdr-num">10</span>
       <div class="section-hdr-title">Inward Investment Team</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1888,62 +1945,7 @@ Madrid Sites Intelligence Report</h1>
     </div>
   </section>
 
-  <!-- ── 10 Drivetime ── -->
-  <section id="drivetime" style="animation-delay:0.22s">
-    <div class="section-hdr">
-      <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">10</span>
-      <div class="section-hdr-title">Drivetime Data &amp; Industry Analysis</div>
-      <div class="section-hdr-rule"></div>
-    </div>
 
-    <div class="data-grid-4" style="margin-bottom:24px">
-      <div class="stat-card">
-        <div class="stat-label">30 min catchment</div>
-        <div class="stat-value">27</div>
-        <div class="stat-sub">food businesses within 30 minute trucking time</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">60 min catchment</div>
-        <div class="stat-value">65</div>
-        <div class="stat-sub">food businesses within 60 minute trucking time</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Dominant sector</div>
-        <div class="stat-value">Food &amp; Bev</div>
-        <div class="stat-sub">Dominant sector — FIAB: ~5,000 companies, €120B turnover, 436,700 employees nationally</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Food sector businesses</div>
-        <div class="stat-value">2.71Mt</div>
-        <div class="stat-sub">MercaMadrid annual throughput of fresh food; ~15,000 vehicle movements/day</div>
-      </div>
-    </div>
-
-
-    <div class="chart-card" style="margin-bottom:16px;">
-      <div class="chart-card-title">Food Businesses within 120-Minute Trucking Radius</div>
-      <div class="chart-card-sub">Breakdown by product type — Madrid Sites vs Magnavale Easton (baseline)</div>
-      <canvas id="foodCompChart" height="180"></canvas>
-    </div>
-
-    <div class="competitor-table-wrap" style="margin-bottom:24px;">
-      <div class="competitor-table-header">
-        <div>
-          <div class="panel-title">Food Businesses by Product Type — 120 Min Radius</div>
-          <div class="panel-sub">Madrid Sites vs Magnavale Easton baseline</div>
-        </div>
-        <div class="competitor-table-controls">
-          <button class="btn btn-navy" onclick="exportFoodComp()" style="border-color:rgba(255,255,255,0.2);">Export CSV</button>
-        </div>
-      </div>
-      <div id="food-comp-table"></div>
-    </div>
-    <div class="summary-box">
-      <h4>Drivetime Analysis Summary</h4>
-      <p>Madrid's transport infrastructure positions the Alovera and Meco sites at the intersection of Spain's national logistics network. Seven radial motorways (A-1 through A-6 and A-42) converge on Madrid, connecting the city to Burgos, Zaragoza, Barcelona, France, Valencia, Andalusia, the Port of Algeciras, Badajoz/Portugal, Galicia and Toledo. The M-30, M-40, M-45 and M-50 orbital motorways provide direct intra-regional connectivity. On rail, Madrid's 15 logistics facilities — including Abroñigal and Vicálvaro, two of Spain's five largest rail freight terminals — handle approximately 11,000 goods trains per year. The Coslada Dry Port, 10 minutes from Barajas, provides seamless rail connections to Spain's major seaports. The operational anchor for cold-storage demand in the catchment is MercaMadrid — Europe's largest perishable food wholesale market and the world's second-largest fish market after Tokyo. With approximately 700–800 trading companies, 2.71 million tonnes of fresh food throughput annually, daily footfall of ~20,000 people and ~15,000 vehicle movements per day, MercaMadrid represents both a concentrated customer base and a benchmark for the scale of cold-chain demand in the region. Lineage and Fripecan (Grupo Alonso) have both established cold-storage operations adjacent to MercaMadrid, confirming the commercial logic of the location. The broader food sector context — Spain's position as the EU's largest frozen-fish producer, the world's largest pork exporter, the third-largest frozen-vegetable exporter, and a major frozen-food re-export hub — underscores the structural depth of cold-chain demand in this market.</p>
-    </div>
-  </section>
 
 
 
