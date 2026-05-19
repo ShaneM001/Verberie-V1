@@ -2173,6 +2173,175 @@ Madrid Sites Intelligence Report</h1>
     document.body.style.overflow = 'hidden';
   });
 
+
+  /* ── Shared formatters ── */
+  function mapsLinkFormatter(cell) {
+    const url = cell.getValue();
+    if (!url || url === 'https://maps.google.com') return '<span style="color:var(--stone-light);font-size:11px;">— add link —</span>';
+    return '<a class="maps-link" href="' + url + '" target="_blank"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> View</a>';
+  }
+
+  /* ── Competitor table ── */
+  const competitorData = [
+    { trucking: '0-30',  name: 'Coviran Madrid',                           group: 'Coviran',            frozen: 'Unavailable', total: 'Unavailable', built: 2014, retirement: 2044 },
+    { trucking: '0-30',  name: 'Havi Logistic Guadalajara',                group: 'Havi Logistic',      frozen: 'Unavailable', total: 'Unavailable', built: 1974, retirement: 2004 },
+    { trucking: '0-30',  name: 'Havi Logistic Madrid',                     group: 'Havi Logistic',      frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
+    { trucking: '0-30',  name: 'STEF Alcala',                              group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
+    { trucking: '0-30',  name: 'STEF Casablanca',                          group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2016, retirement: 2046 },
+    { trucking: '0-30',  name: 'STEF Madrid',                              group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2012, retirement: 2042 },
+    { trucking: '0-30',  name: 'STEF Torrejon',                            group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 1985, retirement: 2015 },
+    { trucking: '30-60', name: 'Asgasa',                                   group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2006, retirement: 2031 },
+    { trucking: '30-60', name: 'Cefrusa - MercaMadrid',                    group: 'Cefrusa',            frozen: '7,000',       total: '7,000',       built: 1984, retirement: 2014 },
+    { trucking: '30-60', name: 'Confremar',                                group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
+    { trucking: '30-60', name: 'Krustagroup SA',                           group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 1985, retirement: 2015 },
+    { trucking: '30-60', name: 'Logifrio Madrid (1)',                      group: 'Logifrio',           frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Logifrio Madrid (2)',                      group: 'Logifrio',           frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Logista Getafe',                          group: 'Logista',            frozen: 'Unavailable', total: 'Unavailable', built: 2009, retirement: 2039 },
+    { trucking: '30-60', name: 'Mercadona — Bloque Logístico de Getafe',  group: 'Mercadona',          frozen: 'Unavailable', total: 'Unavailable', built: 2020, retirement: 2050 },
+    { trucking: '30-60', name: 'Montfrisa Madrid',                        group: 'Montfrisa',          frozen: 'Unavailable', total: '23,565',      built: 2018, retirement: 2048 },
+    { trucking: '30-60', name: 'Salvesen Logistica Madrid',               group: 'Salvesen Logistica', frozen: 'Unavailable', total: '9,500',       built: 2003, retirement: 2033 },
+    { trucking: '30-60', name: 'STEF Getafe',                             group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Trasmediterranea Logistica Madrid',       group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
+  ];
+
+  const competitorTable = document.getElementById('competitor-table') ? new Tabulator('#competitor-table', {
+    data: competitorData,
+    layout: 'fitColumns',
+    height: 520,
+    columns: [
+      { title: 'Trucking Time', field: 'trucking', widthGrow: 0.7, hozAlign: 'center',
+        formatter: function(cell) {
+          const v = cell.getValue();
+          const bg = v === '0-30' ? '#1C2746' : '#587391';
+          return '<span style="background:' + bg + ';color:#fff;padding:2px 8px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.08em;">' + v + ' min</span>';
+        }
+      },
+      { title: 'Cold Store Name',   field: 'name',       widthGrow: 2 },
+      { title: 'Group',             field: 'group',      widthGrow: 1.5 },
+      { title: 'Frozen Capacity',   field: 'frozen',     widthGrow: 1, hozAlign: 'right' },
+      { title: 'Total Capacity',    field: 'total',      widthGrow: 1, hozAlign: 'right',
+        formatter: function(cell) {
+          const v = cell.getValue();
+          if (!v || v === 'Unavailable') return '<span style="color:#C8C2B8;">Unavailable</span>';
+          return '<span style="font-weight:700;color:#1C2746;">' + v + '</span>';
+        }
+      },
+      { title: 'Construction Year', field: 'built',      widthGrow: 0.8, hozAlign: 'center' },
+      { title: 'Est. Retirement',   field: 'retirement', widthGrow: 0.8, hozAlign: 'center',
+        formatter: function(cell) {
+          const v = cell.getValue();
+          const yr = new Date().getFullYear();
+          const color = v < yr ? '#941824' : v < yr + 5 ? '#856404' : 'inherit';
+          const weight = v < yr ? '700' : '400';
+          return '<span style="color:' + color + ';font-weight:' + weight + ';">' + v + (v < yr ? ' ⚠' : '') + '</span>';
+        }
+      },
+    ]
+  }) : null;
+
+  document.getElementById('competitor-search') && document.getElementById('competitor-search').addEventListener('input', function() {
+    if (!competitorTable) return;
+    competitorTable.setFilter([[
+      { field: 'name',     type: 'like', value: this.value },
+      { field: 'group',    type: 'like', value: this.value },
+      { field: 'trucking', type: 'like', value: this.value },
+    ]]);
+  });
+
+  function exportCompetitors() {
+    if (competitorTable) competitorTable.download('csv', 'sadel-competitor-data.csv');
+  }
+
+  /* ── Target businesses table ── */
+  const targetData = [
+    { name: 'SEDIASA ALIMENTACIÓN S.A.',                               group: 'Grupo Fuertes',      maps_url: 'https://maps.google.com/?q=SEDIASA+ALIMENTACION+Madrid',         product_type: 'Meat processing',                        volume: '70,000 t/yr production capacity; 600 employees' },
+    { name: 'Distribuciones Avícolas Vázquez S.A. (DISAVASA)',         group: 'Plukon Food Group',  maps_url: 'https://maps.google.com/?q=DISAVASA+poultry+Spain',               product_type: 'Poultry farming, cutting & distribution', volume: 'Revenue >€30M; 50–250 employees' },
+    { name: 'Avícola de Íscar S.L.',                                   group: 'Plukon Food Group',  maps_url: 'https://maps.google.com/?q=Avicola+de+Iscar+Spain',               product_type: 'Poultry',                                volume: '—' },
+    { name: 'Industrias Palomo S.A.',                                  group: '',                   maps_url: 'https://maps.google.com/?q=Industrias+Palomo+meat+Spain',         product_type: 'Meat processing & preservation',         volume: 'Turnover €2–10M; 10–49 employees' },
+    { name: 'AN S.COOP. (Grupo AN)',                                   group: 'Grupo AN',           maps_url: 'https://maps.google.com/?q=Grupo+AN+cooperativa+Spain',           product_type: 'Cereal, dairy & poultry (cooperative)',  volume: '1.78M t cereals; 4th-largest poultry operator in Spain' },
+    { name: 'Queserías Entrepinares S.A. (Fuenlabrada plant)',         group: 'Entrepinares',       maps_url: 'https://maps.google.com/?q=Queseria+Entrepinares+Fuenlabrada',   product_type: 'Cheese manufacturing',                   volume: "Spain's largest cheese maker; Fuenlabrada is a main production site" },
+    { name: 'Lactalis Nestlé Productos Lácteos Refrigerados Guadalajara S.L.', group: 'Lactalis / Nestlé (JV)', maps_url: 'https://maps.google.com/?q=Lactalis+Nestle+Guadalajara+Spain', product_type: 'Chilled dairy — milk & yogurt', volume: 'Joint venture between Lactalis and Nestlé' },
+    { name: 'Mantequerías Arias S.A.',                                 group: 'Savencia Group',     maps_url: 'https://maps.google.com/?q=Mantequerias+Arias+Spain',             product_type: 'Dairy products (butter & spreads)',      volume: '—' },
+  ];
+
+  const targetTable = document.getElementById('target-table') ? new Tabulator('#target-table', {
+    data: targetData,
+    layout: 'fitColumns',
+    height: 320,
+    columns: [
+      { title: 'Name',              field: 'name',         widthGrow: 2.5 },
+      { title: 'Business Group',    field: 'group',        widthGrow: 1.5 },
+      { title: 'Map',               field: 'maps_url',     widthGrow: 0.6, formatter: mapsLinkFormatter, hozAlign: 'center' },
+      { title: 'Product Type',      field: 'product_type', widthGrow: 2 },
+      { title: 'Volume / Notes',    field: 'volume',       widthGrow: 2.5 },
+    ]
+  }) : null;
+
+  document.getElementById('target-search') && document.getElementById('target-search').addEventListener('input', function() {
+    if (!targetTable) return;
+    targetTable.setFilter([[
+      { field: 'name',         type: 'like', value: this.value },
+      { field: 'group',        type: 'like', value: this.value },
+      { field: 'product_type', type: 'like', value: this.value },
+    ]]);
+  });
+
+  function exportTargets() {
+    if (targetTable) targetTable.download('csv', 'sadel-target-businesses.csv');
+  }
+
+  /* ── Food business comparison chart & table ── */
+  const foodCategories = ['Meat','Poultry','Fish/Seafood','Dairy','Eggs','Ready Meals','Bakery','Fruit & Veg','Frozen'];
+  const madridData  = [206, 37, 44, 146, 128, 10, 7, 14, 3];
+  const eastonData  = [547, 164, 99, 43, 42, 200, 108, 189, 242];
+
+  if (document.getElementById('foodCompChart')) {
+    new Chart(document.getElementById('foodCompChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: foodCategories,
+        datasets: [
+          { label: 'Madrid Sites',     data: madridData, backgroundColor: '#1C2746', borderRadius: 2 },
+          { label: 'Magnavale Easton', data: eastonData, backgroundColor: '#587391', borderRadius: 2 },
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 12 }, boxWidth: 12, padding: 16 } },
+          tooltip: { callbacks: { label: function(ctx) { return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y + ' businesses'; } } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+          y: { grid: { color: '#e8eaed' }, border: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  const foodCompTableData = foodCategories.map(function(cat, i) {
+    return { category: cat, madrid: madridData[i], easton: eastonData[i], diff: madridData[i] - eastonData[i], pct: eastonData[i] > 0 ? Math.round((madridData[i] / eastonData[i]) * 100) : 0 };
+  });
+  foodCompTableData.push({ category: 'TOTAL', madrid: madridData.reduce(function(a,b){return a+b;},0), easton: eastonData.reduce(function(a,b){return a+b;},0), diff: madridData.reduce(function(a,b){return a+b;},0) - eastonData.reduce(function(a,b){return a+b;},0), pct: Math.round((madridData.reduce(function(a,b){return a+b;},0) / eastonData.reduce(function(a,b){return a+b;},0)) * 100) });
+
+  const foodCompTable = document.getElementById('food-comp-table') ? new Tabulator('#food-comp-table', {
+    data: foodCompTableData,
+    layout: 'fitColumns',
+    columns: [
+      { title: 'Product Type',      field: 'category', widthGrow: 1.5, formatter: function(cell) { return cell.getValue() === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
+      { title: 'Madrid Sites',      field: 'madrid',   widthGrow: 1, hozAlign: 'right', formatter: function(cell) { return cell.getRow().getData().category === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
+      { title: 'Magnavale Easton',  field: 'easton',   widthGrow: 1, hozAlign: 'right', formatter: function(cell) { return cell.getRow().getData().category === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
+      { title: 'Difference',        field: 'diff',     widthGrow: 1, hozAlign: 'right', formatter: function(cell) { const v = cell.getValue(); const color = v >= 0 ? '#155724' : '#721c24'; const prefix = v >= 0 ? '+' : ''; return '<span style="color:' + color + ';font-weight:600;">' + prefix + v + '</span>'; } },
+      { title: 'Madrid vs Easton',  field: 'pct',      widthGrow: 1, hozAlign: 'right', formatter: function(cell) { const v = cell.getValue(); const color = v >= 100 ? '#155724' : '#721c24'; return '<span style="color:' + color + ';font-weight:600;">' + v + '%</span>'; } },
+    ]
+  }) : null;
+
+  function exportFoodComp() {
+    if (foodCompTable) foodCompTable.download('csv', 'madrid-food-business-comparison.csv');
+  }
+
+  function exportDrivetime() {}
+
 </script>
 </body>
 </html>
