@@ -1319,9 +1319,76 @@ section:last-child { border-bottom: none; }
 }
 #target-search::placeholder { color: rgba(255,255,255,0.4); }
 #target-search:focus { border-color: rgba(255,255,255,0.5); }
+
+/* ── Portfolio tabs ── */
+.portfolio-tabs {
+  background: var(--navy-deep);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 58px;
+  z-index: 99;
+}
+.portfolio-tabs-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+.portfolio-tab {
+  font-family: var(--body-font);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  padding: 12px 20px;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.portfolio-tab:hover { color: rgba(255,255,255,0.8); }
+.portfolio-tab.active {
+  color: var(--white);
+  border-bottom-color: var(--light-blue);
+}
+.portfolio-tab-home {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  padding: 12px 20px 12px 0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  margin-right: 8px;
+  font-family: var(--body-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  transition: color 0.15s;
+}
+.portfolio-tab-home:hover { color: rgba(255,255,255,0.7); }
 </style>
 </head>
 <body>
+
+<!-- ── Portfolio tab bar ── -->
+<div class="portfolio-tabs">
+  <div class="portfolio-tabs-inner">
+    <a class="portfolio-tab-home" href="index.html">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      Portfolio
+    </a>
+    <a class="portfolio-tab active" href="madrid.html">Madrid Sites</a>
+    <a class="portfolio-tab" href="carvin.html">Carvin</a>
+    <a class="portfolio-tab" href="longueil.html">Longueil-St-Marie</a>
+    <a class="portfolio-tab" href="grimbergen.html">Grimbergen</a>
+  </div>
+</div>
+
 
 <!-- ── Auth Overlay ── -->
 <div id="auth-overlay">
@@ -1651,11 +1718,11 @@ Madrid Sites Intelligence Report</h1>
           <div class="panel-sub">Temperature-controlled facilities within the regional catchment</div>
         </div>
         <div class="map-panel-header-actions">
-          <button class="map-load-btn" onclick="loadMapToggle(event, 'competitors', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=93c292c274ae4484aa1ef1476ec369d4')" id="loadbtn-competitors">
+          <button class="map-load-btn" onclick="loadMapToggle(event, 'competitors', 'https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=e68f5ad6b9d84274a428bfb7584f8703')" id="loadbtn-competitors">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
             Load map
           </button>
-          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=93c292c274ae4484aa1ef1476ec369d4" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
+          <a class="btn" href="https://sadel.maps.arcgis.com/apps/instant/basic/index.html?appid=e68f5ad6b9d84274a428bfb7584f8703" target="_blank" onclick="event.stopPropagation()">Open full map ↗</a>
           <button class="map-collapse-btn" onclick="event.stopPropagation(); toggleMapSection('competitors')">
             <span class="map-collapse-arrow" id="arrow-competitors">▼</span>
           </button>
@@ -2221,24 +2288,27 @@ Madrid Sites Intelligence Report</h1>
   /* ── Competitor table ── */
   const competitorData = [
     { trucking: '0-30',  name: 'Coviran Madrid',                           group: 'Coviran',            frozen: 'Unavailable', total: 'Unavailable', built: 2014, retirement: 2044 },
-    { trucking: '0-30',  name: 'Havi Logistic Guadalajara',                group: 'Havi Logistic',      frozen: 'Unavailable', total: 'Unavailable', built: 1974, retirement: 2004 },
-    { trucking: '0-30',  name: 'Havi Logistic Madrid',                     group: 'Havi Logistic',      frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
+    { trucking: '0-30',  name: 'Havi Logistic Guadalajara',                group: 'Havi Logistics',     frozen: 'Unavailable', total: 'Unavailable', built: 1974, retirement: 2004 },
+    { trucking: '0-30',  name: 'Havi Logistic Madrid',                     group: 'Havi Logistics',     frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
+    { trucking: '0-30',  name: 'HAVI Logistics — San Fernando',            group: 'Havi Logistics',     frozen: 'Unavailable', total: '22,300',      built: 2025, retirement: 2050 },
+    { trucking: '0-30',  name: 'Logifrio — Torrejon de Ardoz',             group: 'Logifrio',           frozen: 'Unavailable', total: '10,000',      built: 2016, retirement: 2042 },
     { trucking: '0-30',  name: 'STEF Alcala',                              group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2002, retirement: 2032 },
     { trucking: '0-30',  name: 'STEF Casablanca',                          group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2016, retirement: 2046 },
-    { trucking: '0-30',  name: 'STEF Madrid',                              group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2012, retirement: 2042 },
+    { trucking: '0-30',  name: 'STEF Madrid',                              group: 'STEF',               frozen: '5,000',       total: '15,000',      built: 2012, retirement: 2042 },
     { trucking: '0-30',  name: 'STEF Torrejon',                            group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 1985, retirement: 2015 },
     { trucking: '30-60', name: 'Asgasa',                                   group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2006, retirement: 2031 },
-    { trucking: '30-60', name: 'Cefrusa - MercaMadrid',                    group: 'Cefrusa',            frozen: '7,000',       total: '7,000',       built: 1984, retirement: 2014 },
-    { trucking: '30-60', name: 'Confremar',                                group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
+    { trucking: '30-60', name: 'Cefrusa — MercaMadrid',                    group: 'Cefrusa',            frozen: '7,000',       total: '7,000',       built: 1984, retirement: 2014 },
+    { trucking: '30-60', name: 'Confremar',                                group: '',                   frozen: '14,000',      total: '14,000',      built: 2001, retirement: 2031 },
     { trucking: '30-60', name: 'Krustagroup SA',                           group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 1985, retirement: 2015 },
+    { trucking: '30-60', name: 'Logifrio — Fuenlabrada',                   group: 'Logifrio',           frozen: 'Unavailable', total: '24,000',      built: 2025, retirement: 2050 },
     { trucking: '30-60', name: 'Logifrio Madrid (1)',                      group: 'Logifrio',           frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
     { trucking: '30-60', name: 'Logifrio Madrid (2)',                      group: 'Logifrio',           frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
-    { trucking: '30-60', name: 'Logista Getafe',                          group: 'Logista',            frozen: 'Unavailable', total: 'Unavailable', built: 2009, retirement: 2039 },
-    { trucking: '30-60', name: 'Mercadona — Bloque Logístico de Getafe',  group: 'Mercadona',          frozen: 'Unavailable', total: 'Unavailable', built: 2020, retirement: 2050 },
-    { trucking: '30-60', name: 'Montfrisa Madrid',                        group: 'Montfrisa',          frozen: 'Unavailable', total: '23,565',      built: 2018, retirement: 2048 },
-    { trucking: '30-60', name: 'Salvesen Logistica Madrid',               group: 'Salvesen Logistica', frozen: 'Unavailable', total: '9,500',       built: 2003, retirement: 2033 },
-    { trucking: '30-60', name: 'STEF Getafe',                             group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
-    { trucking: '30-60', name: 'Trasmediterranea Logistica Madrid',       group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
+    { trucking: '30-60', name: 'Logista Getafe',                           group: 'Logista',            frozen: 'Unavailable', total: 'Unavailable', built: 2003, retirement: 2033 },
+    { trucking: '30-60', name: 'Mercadona — Bloque Logístico de Getafe',   group: 'Mercadona',          frozen: 'Unavailable', total: 'Unavailable', built: 2020, retirement: 2050 },
+    { trucking: '30-60', name: 'Montfrisa Madrid',                         group: 'Montfrisa',          frozen: 'Unavailable', total: '23,565',      built: 2018, retirement: 2048 },
+    { trucking: '30-60', name: 'Salvesen Logistica Madrid',                group: 'Salvesen Logistica', frozen: 'Unavailable', total: '9,500',       built: 2003, retirement: 2033 },
+    { trucking: '30-60', name: 'STEF Getafe',                              group: 'STEF',               frozen: 'Unavailable', total: 'Unavailable', built: 2005, retirement: 2035 },
+    { trucking: '30-60', name: 'Trasmediterranea Logistica Madrid',        group: '',                   frozen: 'Unavailable', total: 'Unavailable', built: 2001, retirement: 2031 },
   ];
 
   const competitorTable = document.getElementById('competitor-table') ? new Tabulator('#competitor-table', {
