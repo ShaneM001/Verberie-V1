@@ -1533,24 +1533,11 @@ Site Intelligence Report</h1>
         <p>[Insert regional context paragraph]</p>
         <p>[Insert headline conclusions paragraph]</p>
       </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;">
-            <div style="padding:16px 18px;border-right:1px solid var(--border);">
-              <div class="h-label">Meco</div>
-              <div class="h-value" style="font-size:24px;">2.7M m²</div>
-              <div class="h-sub">[details]</div>
-            </div>
-            <div style="padding:16px 18px;border-right:1px solid var(--border);">
-              <div class="h-label">Alcala</div>
-              <div class="h-value" style="font-size:24px;">58,069 m²</div>
-              <div class="h-sub">[details]</div>
-            </div>
-            <div style="padding:16px 18px;">
-              <div class="h-label">Alovera</div>
-              <div class="h-value" style="font-size:24px;">29,047 m²</div>
-              <div class="h-sub">[details]</div>
-            </div>
-          </div>
+      <div class="exec-highlights">
+        <div class="highlight-card navy">
+          <div class="h-label">Site Area</div>
+          <div class="h-value">[X]</div>
+          <div class="h-sub">[ha / acres / sq m]</div>
         </div>
         <div class="highlight-card">
           <div class="h-label">Nearest motorway</div>
@@ -2280,7 +2267,57 @@ Site Intelligence Report</h1>
   }
 
   /* ── Competitor table ── */
-  const competitorData = [];
+  const competitorData = [
+    { trucking: '0-30',   name: 'FM Logistic — Longueil-Sainte-Marie',       group: 'FM Logistic',              frozen: 'N/A',    total: '115,000', built: 1998, retirement: 2028 },
+    { trucking: '30-60',  name: '1001 — Negoce',                              group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '30-60',  name: 'Carrefour Supply Chain — La Courneuve',      group: 'Carrefour',                frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '30-60',  name: 'STEF — Beauvais',                            group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '30-60',  name: 'STEF — Chaulnes',                            group: 'STEF',                     frozen: 'N/A',    total: '1,500',   built: 2007, retirement: 2037 },
+    { trucking: '30-60',  name: 'STG Logistique — Mitry-Mory',                group: 'STG Logistique',           frozen: 'N/A',    total: '6,000',   built: null, retirement: null },
+    { trucking: '60-90',  name: 'Alloga',                                     group: 'Walgreens Boots Alliance', frozen: 'N/A',    total: 'N/A',     built: 2006, retirement: 2036 },
+    { trucking: '60-90',  name: 'Auchan — Direct Entrepôt — Chilly-Mazarin', group: 'Auchan',                   frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Bonduelle — Estrées-Mons',                   group: 'Bonduelle',                frozen: '23,000', total: '23,000',  built: 2011, retirement: 2036 },
+    { trucking: '60-90',  name: 'Buisson',                                    group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Centrale Entreposage Frigorifique',          group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'CFROID — Wissous',                           group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Chronofresh M.I.N Rungis',                  group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Délice et Création',                         group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Frigo 8 Grigny',                            group: '',                         frozen: '4,500',  total: '4,500',   built: null, retirement: null },
+    { trucking: '60-90',  name: 'GXO — Wissous',                              group: 'GXO',                      frozen: 'N/A',    total: '4,720',   built: 2014, retirement: 2041 },
+    { trucking: '60-90',  name: 'Lidl — Chanteloup-les-Vignes',               group: 'Lidl',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Nord Stockage Frais',                        group: '',                         frozen: 'N/A',    total: '2,000',   built: null, retirement: null },
+    { trucking: '60-90',  name: 'POMONA PassionFroid — Amiens',               group: 'Pomona',                   frozen: '800',    total: '2,000',   built: 1985, retirement: 2015 },
+    { trucking: '60-90',  name: 'Socafna',                                    group: 'Socafna',                  frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Sofrilog — Marne',                           group: 'Sofrilog',                 frozen: '25,000', total: '25,000',  built: null, retirement: null },
+    { trucking: '60-90',  name: 'Sofrilog — Orly',                            group: 'Sofrilog',                 frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Sofrilog — Vitry',                           group: 'Sofrilog',                 frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'Somaudex — Orly',                            group: 'Somaudex',                 frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'STEF — Arras',                               group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'STEF — Itancourt',                           group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'STEF — Paris Vitry',                         group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'STEF — Rungis',                              group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'STEF — Tigery',                              group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '60-90',  name: 'STG — Amiens',                               group: 'STG Logistique',           frozen: 'N/A',    total: '500',     built: 2006, retirement: 2036 },
+    { trucking: '60-90',  name: 'STG Logistique — 95',                        group: 'STG Logistique',           frozen: '3,750',  total: '8,200',   built: null, retirement: null },
+    { trucking: '60-90',  name: 'STG Logistique — Wissous',                   group: 'STG Logistique',           frozen: 'N/A',    total: '9,000',   built: null, retirement: null },
+    { trucking: '90-120', name: 'Auchan / Kuehne+Nagel — Carvin',             group: 'Kuehne+Nagel',             frozen: 'N/A',    total: '15,000',  built: 2016, retirement: 2046 },
+    { trucking: '90-120', name: 'Carrefour Supply Chain — Saint-Germain',     group: 'Carrefour',                frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'Frignord',                                   group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'Frigorifique d'Ablis',                      group: '',                         frozen: '5,000',  total: '5,000',   built: null, retirement: null },
+    { trucking: '90-120', name: 'Lineage Logistics — Arras',                  group: 'Lineage',                  frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'Lineage Logistics — Harnes 1&2',             group: 'Lineage',                  frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'Locagel',                                    group: '',                         frozen: '41,500', total: '41,500',  built: null, retirement: null },
+    { trucking: '90-120', name: 'Match Entrepôt Frais',                       group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'Relais Frigorifique A21 SA',                 group: '',                         frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'Sofrilog — Trappes',                         group: 'Sofrilog',                 frozen: '13,000', total: '13,000',  built: null, retirement: null },
+    { trucking: '90-120', name: 'STEF — Lesquin',                             group: 'STEF',                     frozen: 'N/A',    total: 'N/A',     built: null, retirement: null },
+    { trucking: '90-120', name: 'STEF — Lille',                               group: 'STEF',                     frozen: 'N/A',    total: '3,500',   built: 2024, retirement: 2049 },
+    { trucking: '90-120', name: 'STEF — Reims',                               group: 'STEF',                     frozen: 'N/A',    total: '2,500',   built: 2012, retirement: 2037 },
+    { trucking: '90-120', name: 'STG Logistique — Carvin',                    group: 'STG Logistique',           frozen: '5,600',  total: '8,800',   built: null, retirement: null },
+    { trucking: '90-120', name: 'Supergel — Ballancourt',                     group: 'Supergel',                 frozen: '8,000',  total: '8,000',   built: null, retirement: null },
+    { trucking: '90-120', name: 'TRM — Rouvroy',                              group: 'Transports René Madrias',  frozen: '1,000',  total: '1,000',   built: 2018, retirement: 2043 },
+    { trucking: '90-120', name: 'XPO — Sainghin-en-Mélantois (GXO)',          group: 'GXO',                      frozen: 'N/A',    total: '12,000',  built: 2017, retirement: 2043 },
+  ];
 
   const competitorTable = document.getElementById('competitor-table') ? new Tabulator('#competitor-table', {
     data: competitorData,
@@ -2290,7 +2327,8 @@ Site Intelligence Report</h1>
       { title: 'Trucking Time', field: 'trucking', widthGrow: 0.7, hozAlign: 'center',
         formatter: function(cell) {
           const v = cell.getValue();
-          const bg = v === '0-30' ? '#1C2746' : '#587391';
+          const colors = { '0-30': '#1C2746', '30-60': '#587391', '60-90': '#8aaac0', '90-120': '#b8ccd8' };
+          const bg = colors[v] || '#587391';
           return '<span style="background:' + bg + ';color:#fff;padding:2px 8px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.08em;">' + v + ' min</span>';
         }
       },
