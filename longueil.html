@@ -1456,8 +1456,8 @@ Oise (Paris) Site Intelligence Report</h1>
           <div class="expiry-unit-label">Mins</div>
         </div>
       </div>
-      <div class="expiry-date-line">Expires <strong>30 May 2026</strong></div>
-      <div class="expiry-date-line" style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.3);max-width:180px;margin-left:auto;margin-right:auto;">ArcGIS apps use credits to continue hosting. To conserve resources this page will expire on <strong style="color:rgba(255,255,255,0.5);">30 May 2026</strong></div>
+      <div class="expiry-date-line">Expires <strong>15 June 2026</strong></div>
+      <div class="expiry-date-line" style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.3);max-width:180px;margin-left:auto;margin-right:auto;">ArcGIS apps use credits to continue hosting. To conserve resources this page will expire on <strong style="color:rgba(255,255,255,0.5);">15 June 2026</strong></div>
       <div class="expiry-warning" id="expiry-warning" style="display:none;">Expiring soon</div>
     </div>
   </div>
@@ -1808,30 +1808,30 @@ Oise (Paris) Site Intelligence Report</h1>
     <div class="data-grid-4" style="margin-bottom:24px">
       <div class="stat-card">
         <div class="stat-label">30 min catchment</div>
-        <div class="stat-value">[X]</div>
+        <div class="stat-value">7</div>
         <div class="stat-sub">food businesses within 30 minute trucking time</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">60 min catchment</div>
-        <div class="stat-value">[X]</div>
+        <div class="stat-value">71</div>
         <div class="stat-sub">food businesses within 60 minute trucking time</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Dominant sector</div>
-        <div class="stat-value">[X]</div>
-        <div class="stat-sub">Dominant sector — FIAB: ~5,000 companies, €120B turnover, 436,700 employees nationally</div>
+        <div class="stat-label">90 min catchment</div>
+        <div class="stat-value">124</div>
+        <div class="stat-sub">food businesses within 90 minute trucking time</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Food sector businesses</div>
-        <div class="stat-value">[X]</div>
-        <div class="stat-sub">MercaMadrid annual throughput of fresh food; ~15,000 vehicle movements/day</div>
+        <div class="stat-label">120 min catchment</div>
+        <div class="stat-value">155</div>
+        <div class="stat-sub">food businesses within 120 minute trucking time</div>
       </div>
     </div>
 
 
     <div class="chart-card" style="margin-bottom:16px;">
       <div class="chart-card-title">Food Businesses within 120-Minute Trucking Radius</div>
-      <div class="chart-card-sub">Breakdown by product type — Madrid Sites vs Magnavale Easton (baseline)</div>
+      <div class="chart-card-sub">Breakdown by product type — Longueil-Sainte-Marie vs Magnavale Easton (baseline)</div>
       <canvas id="foodCompChart" height="180"></canvas>
     </div>
 
@@ -1839,7 +1839,7 @@ Oise (Paris) Site Intelligence Report</h1>
       <div class="competitor-table-header">
         <div>
           <div class="panel-title">Food Businesses by Product Type — 120 Min Radius</div>
-          <div class="panel-sub">Madrid Sites vs Magnavale Easton baseline</div>
+          <div class="panel-sub">Longueil-Sainte-Marie vs Magnavale Easton baseline</div>
         </div>
         <div class="competitor-table-controls">
           <button class="btn btn-navy" onclick="exportFoodComp()" style="border-color:rgba(255,255,255,0.2);">Export CSV</button>
@@ -2194,7 +2194,7 @@ Oise (Paris) Site Intelligence Report</h1>
 
   /* ── Expiry countdown ── */
   (function() {
-    const EXPIRY = new Date('2026-05-30T23:59:59'); // Update expiry date
+    const EXPIRY = new Date('2026-06-15T23:59:59');
     function updateCountdown() {
       const now = new Date();
       const diff = EXPIRY - now;
@@ -2402,7 +2402,7 @@ Oise (Paris) Site Intelligence Report</h1>
 
   /* ── Food business comparison chart & table ── */
   const foodCategories = ['Meat','Poultry','Fish/Seafood','Dairy','Eggs','Ready Meals','Bakery','Fruit & Veg','Frozen'];
-  const madridData  = [206, 37, 44, 146, 128, 10, 7, 14, 3];
+  const madridData  = [91, 75, 6, 8, 94, 28, 15, 5, 95];
   const eastonData  = [547, 164, 99, 43, 42, 200, 108, 189, 242];
 
   if (document.getElementById('foodCompChart')) {
@@ -2411,7 +2411,7 @@ Oise (Paris) Site Intelligence Report</h1>
       data: {
         labels: foodCategories,
         datasets: [
-          { label: 'Madrid Sites',     data: madridData, backgroundColor: '#1C2746', borderRadius: 2 },
+          { label: 'Longueil-Sainte-Marie', data: madridData, backgroundColor: '#1C2746', borderRadius: 2 },
           { label: 'Magnavale Easton', data: eastonData, backgroundColor: '#587391', borderRadius: 2 },
         ]
       },
@@ -2439,10 +2439,10 @@ Oise (Paris) Site Intelligence Report</h1>
     layout: 'fitColumns',
     columns: [
       { title: 'Product Type',      field: 'category', widthGrow: 1.5, formatter: function(cell) { return cell.getValue() === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
-      { title: 'Madrid Sites',      field: 'madrid',   widthGrow: 1, hozAlign: 'right', formatter: function(cell) { return cell.getRow().getData().category === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
+      { title: 'Longueil-S-M',      field: 'madrid',   widthGrow: 1, hozAlign: 'right', formatter: function(cell) { return cell.getRow().getData().category === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
       { title: 'Magnavale Easton',  field: 'easton',   widthGrow: 1, hozAlign: 'right', formatter: function(cell) { return cell.getRow().getData().category === 'TOTAL' ? '<strong style="color:#1C2746;">' + cell.getValue() + '</strong>' : cell.getValue(); } },
       { title: 'Difference',        field: 'diff',     widthGrow: 1, hozAlign: 'right', formatter: function(cell) { const v = cell.getValue(); const color = v >= 0 ? '#155724' : '#721c24'; const prefix = v >= 0 ? '+' : ''; return '<span style="color:' + color + ';font-weight:600;">' + prefix + v + '</span>'; } },
-      { title: 'Madrid vs Easton',  field: 'pct',      widthGrow: 1, hozAlign: 'right', formatter: function(cell) { const v = cell.getValue(); const color = v >= 100 ? '#155724' : '#721c24'; return '<span style="color:' + color + ';font-weight:600;">' + v + '%</span>'; } },
+      { title: 'LSM vs Easton',     field: 'pct',      widthGrow: 1, hozAlign: 'right', formatter: function(cell) { const v = cell.getValue(); const color = v >= 100 ? '#155724' : '#721c24'; return '<span style="color:' + color + ';font-weight:600;">' + v + '%</span>'; } },
     ]
   }) : null;
 
