@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSPIRE Land Registry Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f5f4f0; }
+
+  #map { width: 100%; height: 100vh; }
+
+  #panel {
+    position: absolute;
+    top: 16px; left: 16px;
+    z-index: 1000;
+    background: #fff;
+    border: 0.5px solid rgba(0,0,0,0.15);
+    border-radius: 12px;
+    padding: 16px;
+    width: 300px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  #panel h1 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 4px;
+  }
+
+  #panel p.sub {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .coord-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .coord-row label {
+    font-size: 11px;
+    color: #888;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .coord-row input {
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 13px;
+    border: 0.5px solid rgba(0,0,0,0.2);
+    border-radius: 8px;
+    outline: none;
+    background: #fafaf9;
+    color: #111;
+  }
+
+  .coord-row input:focus {
+    border-color: rgba(0,0,0,0.4);
+    background: #fff;
+  }
+
+  #go-btn {
+    width: 100%;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #go-btn:hover { background: #333; }
+
+  #result-box {
+    margin-top: 14px;
+    padding: 12px;
+    background: #f5f4f0;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #333;
+    display: none;
+  }
+
+  #result-box .inspire-id {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 6px;
+    word-break: break-all;
+  }
+
+  #result-box a {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #185FA5;
+    text-decoration: none;
+  }
+
+  #result-box a:hover { text-decoration: underline; }
+
+  #status {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #888;
+    display: none;
+  }
+
+  .legend {
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+    z-index: 1000;
+    background: #fff;
+    border: 0.5px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #444;
+  }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .legend-row:last-child { margin-bottom: 0; }
+
+  .swatch {
+    width: 20px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="panel">
+  <h1>INSPIRE polygon lookup</h1>
+  <p class="sub">Coordinates pre-populated from email link. Adjust if needed, then click Go.</p>
+
+  <div class="coord-row">
+    <div>
+      <label>Latitude</label>
+      <input type="text" id="lat-input" placeholder="51.4545" />
+    </div>
+    <div>
+      <label>Longitude</label>
+      <input type="text" id="lng-input" placeholder="-2.5879" />
+    </div>
+  </div>
+
+  <button id="go-btn">Go to location →</button>
+
+  <div id="status">Searching...</div>
+
+  <div id="result-box">
+    <div class="inspire-id" id="inspire-id-val"></div>
+    <div id="coords-display"></div>
+    <a id="fap-link" href="#" target="_blank">Open in Find a Property ↗</a>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-row">
+    <div class="swatch" style="background: rgba(230,80,30,0.25); border: 1.5px solid rgba(230,80,30,0.7);"></div>
+    <span>INSPIRE freehold polygon</span>
+  </div>
+  <div class="legend-row">
+    <div class="swatch" style="background: rgba(24,95,165,0.9); border-radius: 50%; width: 12px; height: 12px;"></div>
+    <span>Selected location</span>
+  </div>
+</div>
+
+<script>
+const INSPIRE_WMS = "https://inspire.landregistry.gov.uk/inspire/wms";
+
+const map = L.map("map", { zoomControl: true }).setView([52.5, -1.5], 7);
+
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/">CARTO</a>',
+  subdomains: "abcd",
+  maxZoom: 20
+}).addTo(map);
+
+const inspireLayer = L.tileLayer.wms(INSPIRE_WMS, {
+  layers: "inspire:register_dl",
+  format: "image/png",
+  transparent: true,
+  opacity: 0.7,
+  version: "1.3.0",
+  attribution: "© HM Land Registry"
+}).addTo(map);
+
+let marker = null;
+
+function parseParams() {
+  const params = new URLSearchParams(window.location.search);
+  const lat = parseFloat(params.get("lat"));
+  const lng = parseFloat(params.get("lng"));
+  if (!isNaN(lat) && !isNaN(lng)) {
+    document.getElementById("lat-input").value = lat.toFixed(6);
+    document.getElementById("lng-input").value = lng.toFixed(6);
+    goToLocation(lat, lng);
+  }
+}
+
+function goToLocation(lat, lng) {
+  map.setView([lat, lng], 19);
+
+  if (marker) map.removeLayer(marker);
+  marker = L.circleMarker([lat, lng], {
+    radius: 8,
+    fillColor: "#185FA5",
+    color: "#fff",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.95
+  }).addTo(map);
+
+  queryInspireID(lat, lng);
+}
+
+function queryInspireID(lat, lng) {
+  const status = document.getElementById("status");
+  const resultBox = document.getElementById("result-box");
+  status.style.display = "block";
+  resultBox.style.display = "none";
+
+  const size = 256;
+  const point = map.latLngToContainerPoint([lat, lng]);
+  const bounds = map.getBounds();
+  const sw = bounds.getSouthWest();
+  const ne = bounds.getNorthEast();
+  const bbox = `${sw.lng},${sw.lat},${ne.lng},${ne.lat}`;
+
+  const wmsGetFeatureUrl = `${INSPIRE_WMS}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo` +
+    `&LAYERS=inspire:register_dl&QUERY_LAYERS=inspire:register_dl` +
+    `&INFO_FORMAT=application/json` +
+    `&BBOX=${bbox}` +
+    `&CRS=CRS:84` +
+    `&WIDTH=${map.getSize().x}&HEIGHT=${map.getSize().y}` +
+    `&I=${Math.round(point.x)}&J=${Math.round(point.y)}` +
+    `&FEATURE_COUNT=1`;
+
+  fetch(wmsGetFeatureUrl)
+    .then(r => r.json())
+    .then(data => {
+      status.style.display = "none";
+      const features = data.features || [];
+      if (features.length > 0) {
+        const props = features[0].properties || {};
+        const inspireId = props.inspireid || props.INSPIREID || props.inspire_id || JSON.stringify(props);
+        showResult(inspireId, lat, lng);
+      } else {
+        showNoResult(lat, lng);
+      }
+    })
+    .catch(() => {
+      status.style.display = "none";
+      showNoResult(lat, lng);
+    });
+}
+
+function showResult(inspireId, lat, lng) {
+  const resultBox = document.getElementById("result-box");
+  document.getElementById("inspire-id-val").textContent = "INSPIRE ID: " + inspireId;
+  document.getElementById("coords-display").textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+  const fapUrl = `https://eservices.landregistry.gov.uk/eservices/FindAProperty/view/LrInspireIdInit.do?inspireid=${encodeURIComponent(inspireId)}`;
+  document.getElementById("fap-link").href = fapUrl;
+  resultBox.style.display = "block";
+}
+
+function showNoResult(lat, lng) {
+  const resultBox = document.getElementById("result-box");
+  document.getElementById("inspire-id-val").textContent = "No polygon found at this point";
+  document.getElementById("coords-display").textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+  document.getElementById("fap-link").style.display = "none";
+  resultBox.style.display = "block";
+}
+
+document.getElementById("go-btn").addEventListener("click", () => {
+  const lat = parseFloat(document.getElementById("lat-input").value);
+  const lng = parseFloat(document.getElementById("lng-input").value);
+  if (!isNaN(lat) && !isNaN(lng)) {
+    goToLocation(lat, lng);
+  }
+});
+
+[document.getElementById("lat-input"), document.getElementById("lng-input")].forEach(input => {
+  input.addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("go-btn").click(); });
+});
+
+map.on("click", e => {
+  document.getElementById("lat-input").value = e.latlng.lat.toFixed(6);
+  document.getElementById("lng-input").value = e.latlng.lng.toFixed(6);
+  goToLocation(e.latlng.lat, e.latlng.lng);
+});
+
+parseParams();
+</script>
+</body>
+</html>
