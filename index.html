@@ -111,26 +111,34 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
   .nav-inner { padding: 0 20px; }
 }
 
-.nav-mob-btns { display: flex; gap: 8px; align-items: center; }
-.nav-mob-btn {
+
+
+.hero-mob-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.hero-mob-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.55);
   font-family: var(--body-font);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
   text-decoration: none;
-  padding: 4px 10px;
-  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.12);
   transition: all 0.15s;
   white-space: nowrap;
 }
-.nav-mob-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.06); }
-.nav-mob-btn svg { flex-shrink: 0; opacity: 0.7; }
+.hero-mob-btn:hover { background: rgba(255,255,255,0.1); color: var(--white); border-color: rgba(255,255,255,0.3); }
+.hero-mob-btn svg { flex-shrink: 0; opacity: 0.6; }
 </style>
 </head>
 <body>
@@ -162,16 +170,6 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
         <span id="nav-username"></span>
         <button onclick="doLogout()">Sign out</button>
       </div>
-      <div class="nav-mob-btns">
-        <a class="nav-mob-btn" href="europefbmapmob.html" target="_blank">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-          Food Biz · Mobile
-        </a>
-        <a class="nav-mob-btn" href="europecsmapmob.html" target="_blank">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Cold Store · Mobile
-        </a>
-      </div>
       <div class="nav-badge">Internal · Confidential</div>
     </div>
   </div>
@@ -187,6 +185,16 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       European Mapping
     </a>
+    <div class="hero-mob-btns">
+      <a class="hero-mob-btn" href="europecsmapmob.html">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Cold Store · Mobile
+      </a>
+      <a class="hero-mob-btn" href="europefbmapmob.html">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Food Biz · Mobile
+      </a>
+    </div>
   </div>
 </div>
 
