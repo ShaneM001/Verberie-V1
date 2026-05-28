@@ -269,7 +269,10 @@ html, body {
     const iframe = document.getElementById('map-iframe');
     if (ctl) ctl.style.display = 'none';
     if (loading) loading.classList.remove('gone');
-    iframe.src = MAP_URL;
+    // Append token to URL so ArcGIS app recognises the session
+    const token = sessionStorage.getItem('arcgis_token');
+    const mapSrc = token ? MAP_URL + '&token=' + token : MAP_URL;
+    iframe.src = mapSrc;
     iframe.onload = function() {
       if (loading) {
         loading.classList.add('fade-out');
