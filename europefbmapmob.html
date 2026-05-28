@@ -260,8 +260,10 @@ html, body {
 </div>
 
 <script>
-
   const MAP_URL = 'https://sadel.maps.arcgis.com/apps/instant/nearby/index.html?appid=f1bd6c421a964e0b8077f4346f430ade';
+  const ARCGIS_CLIENT_ID = 'oLyXz0TABzZ0Pfsz';
+  const ARCGIS_AUTH_URL = 'https://www.arcgis.com/sharing/rest/oauth2/authorize';
+  const PAGE_URL = window.location.origin + window.location.pathname;
 
   function loadMap() {
     const ctl = document.getElementById('map-ctl');
@@ -269,7 +271,6 @@ html, body {
     const iframe = document.getElementById('map-iframe');
     if (ctl) ctl.style.display = 'none';
     if (loading) loading.classList.remove('gone');
-    // Append token to URL so ArcGIS app recognises the session
     const token = sessionStorage.getItem('arcgis_token');
     const mapSrc = token ? MAP_URL + '&token=' + token : MAP_URL;
     iframe.src = mapSrc;
@@ -281,57 +282,28 @@ html, body {
       iframe.classList.add('loaded');
     };
   }
-  const ARCGIS_CLIENT_ID = 'oLyXz0TABzZ0Pfsz';
-  const ARCGIS_AUTH_URL = 'https://www.arcgis.com/sharing/rest/oauth2/authorize';
-  const PAGE_URL = window.location.origin + window.location.pathname;
 
   function doLogin() {
+    // Always use redirect — most reliable on mobile
+    sessionStorage.setItem('arcgis_autoload', '1');
     const authUrl = ARCGIS_AUTH_URL
       + '?client_id=' + ARCGIS_CLIENT_ID
       + '&response_type=token'
       + '&redirect_uri=' + encodeURIComponent(PAGE_URL)
       + '&expiration=20160';
-
-    // Try popup first — better on mobile
-    const popup = window.open(authUrl, 'arcgis_auth', 'width=600,height=700,left=50,top=50');
-
-    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-      // Popup blocked — fall back to redirect
-      sessionStorage.setItem('arcgis_return', PAGE_URL);
-      window.location.href = authUrl;
-      return;
-    }
-
-    // Poll for token in popup URL
-    const poll = setInterval(function() {
-      try {
-        const popupUrl = popup.location.href;
-        if (popupUrl && popupUrl.includes('access_token')) {
-          clearInterval(poll);
-          popup.close();
-          const hash = popup.location.hash || popupUrl.split('#')[1] || '';
-          const params = new URLSearchParams(hash.replace('#',''));
-          const token = params.get('access_token');
-          if (token) {
-            const expiresIn = parseInt(params.get('expires_in') || '3600');
-            sessionStorage.setItem('arcgis_token', token);
-            sessionStorage.setItem('arcgis_token_exp', String(Date.now() + expiresIn * 1000));
-            onLoginSuccess();
-          }
-        }
-      } catch(e) {
-        // Cross-origin — popup still on ArcGIS domain, keep polling
-      }
-      if (popup.closed) { clearInterval(poll); }
-    }, 500);
+    window.location.href = authUrl;
   }
 
   function onLoginSuccess() {
     document.getElementById('auth-overlay').classList.add('hidden');
+    // Auto-load map if user just came back from login
+    if (sessionStorage.getItem('arcgis_autoload') === '1') {
+      sessionStorage.removeItem('arcgis_autoload');
+      loadMap();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Check if we came back from a redirect (fallback flow)
     const hash = window.location.hash;
     if (hash && hash.includes('access_token')) {
       const params = new URLSearchParams(hash.substring(1));
@@ -345,13 +317,12 @@ html, body {
         return;
       }
     }
-    // Check for existing valid session
     const saved = sessionStorage.getItem('arcgis_token');
     const exp = parseInt(sessionStorage.getItem('arcgis_token_exp') || '0');
     if (saved && Date.now() < exp) { onLoginSuccess(); return; }
-    // Show overlay
     document.getElementById('auth-overlay').classList.remove('hidden');
   });
+
 </script>
 </body>
 </html>
