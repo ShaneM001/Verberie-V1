@@ -60,6 +60,25 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
 .hero-label::before { content: ''; display: block; width: 3px; height: 14px; background: var(--light-blue); border-radius: 1px; }
 .hero-title { font-family: var(--header-font); font-size: clamp(28px, 3.5vw, 46px); font-weight: 600; color: #fff; margin-bottom: 12px; letter-spacing: 0.02em; line-height: 1.15; }
 .hero-subtitle { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.7; }
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 13px 28px;
+  background: var(--light-blue);
+  color: var(--white);
+  font-family: var(--body-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.15s;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.hero-btn:hover { background: #4a6380; transform: translateY(-1px); }
 
 /* Grid */
 .portfolio-grid { max-width: var(--max); margin: 0 auto; padding: 48px 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; flex: 1; }
@@ -133,6 +152,10 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
     <div class="hero-label">Site Intelligence Portfolio</div>
     <h1 class="hero-title">Sadel Group<br>Site Portfolio</h1>
     <p class="hero-subtitle">Select a site below to access the full intelligence report — including maps, competitor analysis, population data, and investment information.</p>
+    <a class="hero-btn" href="europe.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      European Mapping
+    </a>
   </div>
 </div>
 
