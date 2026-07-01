@@ -90,7 +90,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
 .site-card:hover { border-top-color: var(--navy); box-shadow: 0 4px 24px rgba(28,39,70,0.1); }
 .site-card-status { position: absolute; top: 18px; right: 18px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; }
 .status-active { background: #e3f2e8; color: #1e5c32; }
-.status-prep { background: var(--lb-pale); color: var(--light-blue); }
+.status-archived { background: #e8e8e8; color: #5a5a5a; }
 .site-card-num { font-family: var(--header-font); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light-blue); margin-bottom: 8px; }
 .site-card-title { font-family: var(--header-font); font-size: 28px; font-weight: 600; color: var(--navy); margin-bottom: 4px; line-height: 1.15; }
 .site-card-location { font-size: 12px; font-weight: 400; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -112,6 +112,10 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
 .site-card-archived .site-card-btn { background: var(--light-blue); }
 .site-card-archived:hover .site-card-btn { background: #4a6380; }
 
+/* Disabled card — no pointer, no hover effects */
+.site-card-disabled { pointer-events: none; opacity: 0.55; cursor: default; }
+.site-card-disabled .site-card-btn { background: var(--muted); }
+
 /* Footer */
 .portfolio-footer { background: var(--navy-deep); color: rgba(255,255,255,0.3); font-family: var(--body-font); font-size: 11px; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
 .footer-brand { font-family: var(--header-font); font-size: 15px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
@@ -123,8 +127,6 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
   .portfolio-hero { padding: 40px 20px; }
   .nav-inner { padding: 0 20px; }
 }
-
-
 
 .hero-mob-btns {
   display: flex;
@@ -232,7 +234,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
   </div>
 
   <a class="site-card site-card-archived" href="madrid.html">
-    <div class="site-card-status status-active">Active</div>
+    <div class="site-card-status status-archived">Archived</div>
     <div class="site-card-num">Site 01</div>
     <div class="site-card-title">Madrid Sites</div>
     <div class="site-card-location">Alcala, Alovera &amp; Meco · Spain</div>
@@ -245,7 +247,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
   </a>
 
   <a class="site-card site-card-archived" href="carvin.html">
-    <div class="site-card-status status-active">Active</div>
+    <div class="site-card-status status-archived">Archived</div>
     <div class="site-card-num">Site 02</div>
     <div class="site-card-title">Carvin</div>
     <div class="site-card-location">Carvin · France</div>
@@ -257,8 +259,8 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
     <div class="site-card-btn">View report →</div>
   </a>
 
-  <a class="site-card site-card-archived" href="longueil.html">
-    <div class="site-card-status status-active">Active</div>
+  <a class="site-card site-card-archived site-card-disabled" href="longueil.html">
+    <div class="site-card-status status-archived">Archived</div>
     <div class="site-card-num">Site 03</div>
     <div class="site-card-title">Longueil-St-Marie</div>
     <div class="site-card-location">Longueil-St-Marie · France</div>
@@ -271,7 +273,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
   </a>
 
   <a class="site-card site-card-archived" href="grimbergen.html">
-    <div class="site-card-status status-active">Active</div>
+    <div class="site-card-status status-archived">Archived</div>
     <div class="site-card-num">Site 04</div>
     <div class="site-card-title">Grimbergen</div>
     <div class="site-card-location">Grimbergen · Belgium</div>
