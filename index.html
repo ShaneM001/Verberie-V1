@@ -100,6 +100,18 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
 .site-card-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--body-font); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; background: var(--navy); color: #fff; border-radius: 2px; transition: background 0.15s; }
 .site-card:hover .site-card-btn { background: var(--navy-mid); }
 
+/* Archived section divider */
+.archive-divider { grid-column: 1 / -1; margin-top: 16px; padding-bottom: 4px; border-bottom: 2px solid var(--border); }
+.archive-divider-title { font-family: var(--header-font); font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.archive-divider-sub { font-size: 12px; font-weight: 300; color: var(--muted); letter-spacing: 0.03em; }
+
+/* Archived cards — muted top border and reduced emphasis */
+.site-card-archived { border-top-color: var(--border); }
+.site-card-archived:hover { border-top-color: var(--light-blue); }
+.site-card-archived .site-card-title { color: var(--light-blue); }
+.site-card-archived .site-card-btn { background: var(--light-blue); }
+.site-card-archived:hover .site-card-btn { background: #4a6380; }
+
 /* Footer */
 .portfolio-footer { background: var(--navy-deep); color: rgba(255,255,255,0.3); font-family: var(--body-font); font-size: 11px; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
 .footer-brand { font-family: var(--header-font); font-size: 15px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
@@ -202,7 +214,24 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
 <!-- Cards -->
 <div class="portfolio-grid">
 
-  <a class="site-card" href="madrid.html">
+  <a class="site-card" href="uae.html">
+    <div class="site-card-status status-active">Active</div>
+    <div class="site-card-num">Region 1</div>
+    <div class="site-card-title">United Arab Emirates</div>
+    <div class="site-card-location">Region Analysis</div>
+    <div class="site-card-meta">
+      <div class="site-card-meta-item"><strong>Report</strong>10 sections · 5 live maps · Competitor data</div>
+    </div>
+    <div class="site-card-btn">View report →</div>
+  </a>
+
+  <!-- Archived Reports divider — spans full width -->
+  <div class="archive-divider">
+    <div class="archive-divider-title">Archived Reports</div>
+    <div class="archive-divider-sub">Archived Reports available for re-upload upon request.</div>
+  </div>
+
+  <a class="site-card site-card-archived" href="madrid.html">
     <div class="site-card-status status-active">Active</div>
     <div class="site-card-num">Site 01</div>
     <div class="site-card-title">Madrid Sites</div>
@@ -215,7 +244,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
     <div class="site-card-btn">View report →</div>
   </a>
 
-  <a class="site-card" href="carvin.html">
+  <a class="site-card site-card-archived" href="carvin.html">
     <div class="site-card-status status-active">Active</div>
     <div class="site-card-num">Site 02</div>
     <div class="site-card-title">Carvin</div>
@@ -228,7 +257,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
     <div class="site-card-btn">View report →</div>
   </a>
 
-  <a class="site-card" href="longueil.html">
+  <a class="site-card site-card-archived" href="longueil.html">
     <div class="site-card-status status-active">Active</div>
     <div class="site-card-num">Site 03</div>
     <div class="site-card-title">Longueil-St-Marie</div>
@@ -241,7 +270,7 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
     <div class="site-card-btn">View report →</div>
   </a>
 
-  <a class="site-card" href="grimbergen.html">
+  <a class="site-card site-card-archived" href="grimbergen.html">
     <div class="site-card-status status-active">Active</div>
     <div class="site-card-num">Site 04</div>
     <div class="site-card-title">Grimbergen</div>
@@ -249,17 +278,6 @@ body { font-family: var(--body-font); background: var(--platinum); color: var(--
     <div class="site-card-meta">
       <div class="site-card-meta-item"><strong>Site Area</strong>105,552 m² · 10.6 ha · 26.1 ac</div>
       <div class="site-card-meta-item"><strong>Classification</strong>Logistics / Industrial</div>
-      <div class="site-card-meta-item"><strong>Report</strong>10 sections · 5 live maps · Competitor data</div>
-    </div>
-    <div class="site-card-btn">View report →</div>
-  </a>
-
-  <a class="site-card" href="uae.html">
-    <div class="site-card-status status-active">Active</div>
-    <div class="site-card-num">Region 1</div>
-    <div class="site-card-title">United Arab Emirates</div>
-    <div class="site-card-location">Region Analysis</div>
-    <div class="site-card-meta">
       <div class="site-card-meta-item"><strong>Report</strong>10 sections · 5 live maps · Competitor data</div>
     </div>
     <div class="site-card-btn">View report →</div>
