@@ -731,6 +731,58 @@ section:last-child { border-bottom: none; }
 }
 .summary-box p + p { margin-top: 12px; }
 
+/* ── Retail brands (07) ── */
+.rb-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.rb-scroll { max-height: 560px; overflow-y: auto; }
+.rb-table thead th { position: sticky; top: 0; z-index: 2; }
+.rb-table th.rb-c, .rb-table td.rb-c { text-align: center; white-space: nowrap; }
+.rb-fac {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 3px 9px;
+  border-radius: 2px;
+}
+.rb-fac-uae { background: var(--lb-pale); color: var(--light-blue); }
+.rb-fac-int { background: var(--platinum); color: var(--muted); }
+.rb-yes {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: #e3f2e8;
+  color: #1e5c32;
+}
+.rb-no { color: var(--muted); font-weight: 300; }
+.rb-tgt {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+.rb-tgt-yes { background: #e3f2e8; color: #1e5c32; }
+.rb-tgt-maybe { background: var(--lb-pale); color: var(--light-blue); }
+#rb-search {
+  font-family: var(--body-font);
+  font-size: 13px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  min-width: 200px;
+  color: var(--navy);
+}
+#rb-search:focus { outline: none; border-color: var(--light-blue); }
+
 /* ── Drivetime table ── */
 .dt-shell {
   border: 1px solid var(--border);
@@ -1161,24 +1213,28 @@ section:last-child { border-bottom: none; }
         <span class="contents-num">06</span>
         <span class="contents-text">Regional Competitor Map</span>
       </a>
-      <a class="contents-item" href="#food-businesses">
+      <a class="contents-item" href="#retail-brands">
         <span class="contents-num">07</span>
+        <span class="contents-text">UAE Retail Brands</span>
+      </a>
+      <a class="contents-item" href="#food-businesses">
+        <span class="contents-num">08</span>
         <span class="contents-text">Regional Food Businesses Map</span>
       </a>
       <a class="contents-item" href="#drivetime">
-        <span class="contents-num">08</span>
+        <span class="contents-num">09</span>
         <span class="contents-text">Drivetime Data &amp; Industry Analysis</span>
       </a>
       <a class="contents-item" href="#population">
-        <span class="contents-num">09</span>
+        <span class="contents-num">10</span>
         <span class="contents-text">Regional Population Data</span>
       </a>
       <a class="contents-item" href="#agriculture">
-        <span class="contents-num">10</span>
+        <span class="contents-num">11</span>
         <span class="contents-text">Regional Agricultural Data</span>
       </a>
       <a class="contents-item" href="#investment">
-        <span class="contents-num">11</span>
+        <span class="contents-num">12</span>
         <span class="contents-text">Inward Investment Team</span>
       </a>
     </div>
@@ -1569,11 +1625,243 @@ section:last-child { border-bottom: none; }
     </div>
   </section>
 
-  <!-- ── 07 Food Businesses ── -->
-  <section id="food-businesses" style="animation-delay:0.14s">
+  <!-- ── 07 UAE Retail Brands ── -->
+  <section id="retail-brands" style="animation-delay:0.13s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
       <span class="section-hdr-num">07</span>
+      <div class="section-hdr-title">UAE Retail Brands</div>
+      <div class="section-hdr-rule"></div>
+    </div>
+    <div class="exec-body" style="margin-bottom:24px; max-width:none;">
+      <p>Food brands present in major UAE food retailers. UK and international imports noted. Potential target customers identified.</p>
+    </div>
+    <div class="rb-stats">
+      <div class="stat-card"><div class="stat-label">Total Brands</div><div class="stat-value">185</div><div class="stat-sub">Frozen brands mapped across both retailers</div></div>
+      <div class="stat-card"><div class="stat-label">UAE Brands</div><div class="stat-value">27</div><div class="stat-sub">Produced in the UAE</div></div>
+      <div class="stat-card"><div class="stat-label">International Brands</div><div class="stat-value">158</div><div class="stat-sub">Produced outside the UAE</div></div>
+      <div class="stat-card"><div class="stat-label">Imported — UK &amp; Ireland</div><div class="stat-value">47</div><div class="stat-sub">Brands sourced from the UK &amp; Ireland</div></div>
+      <div class="stat-card"><div class="stat-label">Stocked by Both</div><div class="stat-value">53</div><div class="stat-sub">Listed in both LuLu &amp; Carrefour</div></div>
+      <div class="stat-card"><div class="stat-label">Target Customers</div><div class="stat-value">31</div><div class="stat-sub">Identified as potential targets (Yes / Maybe)</div></div>
+    </div>
+    <div class="importers-wrap">
+      <div class="importers-header" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div>
+          <div class="panel-title">Frozen Brands — LuLu &amp; Carrefour</div>
+          <div class="panel-sub">Frozen food brands identified across the two major UAE grocery retailers — with production origin, UK &amp; Ireland import status and target-customer assessment</div>
+        </div>
+        <input id="rb-search" type="text" placeholder="Filter brands…" oninput="filterRetailBrands()">
+      </div>
+      <div class="importers-table-scroll rb-scroll">
+        <table class="importers-table rb-table">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Production facility</th>
+              <th class="rb-c">Imported — UK &amp; Ireland</th>
+              <th class="rb-c">LuLu</th>
+              <th class="rb-c">Carrefour</th>
+              <th class="rb-c">Target customer</th>
+            </tr>
+          </thead>
+          <tbody id="rb-tbody">
+            <tr data-brand="aashirvaad"><td class="imp-brand">Aashirvaad</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="admirals"><td class="imp-brand">Admirals</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="adriana"><td class="imp-brand">Adriana</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="aktaslar"><td class="imp-brand">Aktaslar</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al ain"><td class="imp-brand">Al Ain</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al areesh"><td class="imp-brand">Al Areesh</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al baker"><td class="imp-brand">Al Baker</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al barakat"><td class="imp-brand">Al Barakat</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al islami"><td class="imp-brand">Al Islami</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al kabeer"><td class="imp-brand">Al Kabeer</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al karamah"><td class="imp-brand">Al Karamah</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al naeem"><td class="imp-brand">Al Naeem</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al rawdah"><td class="imp-brand">Al Rawdah</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al salwa"><td class="imp-brand">Al Salwa</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="al tamam"><td class="imp-brand">Al Tamam</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="alexia"><td class="imp-brand">Alexia</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="algida"><td class="imp-brand">Algida</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="all things"><td class="imp-brand">All Things</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="americana"><td class="imp-brand">Americana</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="amul"><td class="imp-brand">Amul</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="aqua marine"><td class="imp-brand">Aqua Marine</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="arctic gold"><td class="imp-brand">Arctic Gold</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="ardo"><td class="imp-brand">Ardo</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="a&#x27;saffa"><td class="imp-brand">A&#x27;Saffa</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="ashoka"><td class="imp-brand">Ashoka</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="asmak"><td class="imp-brand">Asmak</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="astra"><td class="imp-brand">Astra</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="baker street"><td class="imp-brand">Baker Street</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="balade"><td class="imp-brand">Balade</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="barakat"><td class="imp-brand">Barakat</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="baskin robbins"><td class="imp-brand">Baskin Robbins</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="basma"><td class="imp-brand">Basma</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="becky&#x27;s bakery"><td class="imp-brand">Becky&#x27;s Bakery</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="ben &amp; jerry&#x27;s"><td class="imp-brand">Ben &amp; Jerry&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="beyond meat"><td class="imp-brand">Beyond Meat</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="bibigo"><td class="imp-brand">Bibigo</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="binggrae"><td class="imp-brand">Binggrae</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="birds eye"><td class="imp-brand">Birds Eye</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="blu sea"><td class="imp-brand">Blu Sea</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="blue ocean"><td class="imp-brand">Blue Ocean</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="bounty"><td class="imp-brand">Bounty</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="bright bites"><td class="imp-brand">Bright Bites</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="butlers secret"><td class="imp-brand">Butlers Secret</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="cadbury"><td class="imp-brand">Cadbury</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="camelicious"><td class="imp-brand">Camelicious</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="carrefour"><td class="imp-brand">Carrefour</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="carte dor"><td class="imp-brand">Carte Dor</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="cathedral city"><td class="imp-brand">Cathedral City</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="caviar classic"><td class="imp-brand">Caviar Classic</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="celtic"><td class="imp-brand">Celtic</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="chocodate"><td class="imp-brand">Chocodate</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="clover"><td class="imp-brand">Clover</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="coconut collab"><td class="imp-brand">Coconut Collab</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="cornetto"><td class="imp-brand">Cornetto</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="creapan"><td class="imp-brand">Creapan</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="croxton manor"><td class="imp-brand">Croxton Manor</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="cucina"><td class="imp-brand">Cucina</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="dairylea"><td class="imp-brand">Dairylea</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="dat-schaub"><td class="imp-brand">Dat-Schaub</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="delamere dairy"><td class="imp-brand">Delamere Dairy</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="dodo"><td class="imp-brand">Dodo</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="dolceria alba"><td class="imp-brand">Dolceria Alba</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="dr oetker"><td class="imp-brand">Dr Oetker</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="emborg"><td class="imp-brand">Emborg</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="emerald farms"><td class="imp-brand">Emerald Farms</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="eskimos"><td class="imp-brand">Eskimos</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="essential everyday"><td class="imp-brand">Essential Everyday</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="farm fresh"><td class="imp-brand">Farm Fresh</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="feli&#x27;s kitchen"><td class="imp-brand">Feli&#x27;s Kitchen</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="ferrero"><td class="imp-brand">Ferrero</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="filosophy"><td class="imp-brand">Filosophy</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="frangosul"><td class="imp-brand">Frangosul</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="frenzel"><td class="imp-brand">Frenzel</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="freshly foods"><td class="imp-brand">Freshly Foods</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="frosty foods"><td class="imp-brand">Frosty Foods</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="frozen"><td class="imp-brand">Frozen</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="fulan sweet"><td class="imp-brand">Fulan Sweet</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="galaxy"><td class="imp-brand">Galaxy</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="germania"><td class="imp-brand">Germania</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="glenilen farm"><td class="imp-brand">Glenilen Farm</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="glenstal"><td class="imp-brand">Glenstal</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="good seoul"><td class="imp-brand">Good Seoul</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="goodfella&#x27;s"><td class="imp-brand">Goodfella&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="graham&#x27;s"><td class="imp-brand">Graham&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="green giant"><td class="imp-brand">Green Giant</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="haagen-dazs"><td class="imp-brand">Haagen-Dazs</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="hanover"><td class="imp-brand">Hanover</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="hartley&#x27;s"><td class="imp-brand">Hartley&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="harvey &amp; brockless"><td class="imp-brand">Harvey &amp; Brockless</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="hayat"><td class="imp-brand">Hayat</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="hershey&#x27;s"><td class="imp-brand">Hershey&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="holy"><td class="imp-brand">Holy</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="hortex"><td class="imp-brand">Hortex</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="house of pops"><td class="imp-brand">House Of Pops</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="icenack"><td class="imp-brand">Icenack</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="id"><td class="imp-brand">iD</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="igloo"><td class="imp-brand">Igloo</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="i-xtech"><td class="imp-brand">I-Xtech</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="jekor"><td class="imp-brand">Jekor</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="k&amp;n&#x27;s"><td class="imp-brand">K&amp;N&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kawan"><td class="imp-brand">Kawan</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kian guan"><td class="imp-brand">Kian Guan</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kinder"><td class="imp-brand">Kinder</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kitkat"><td class="imp-brand">Kitkat</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="kohinoor"><td class="imp-brand">Kohinoor</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kraft philadelphia"><td class="imp-brand">Kraft Philadelphia</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kri kri"><td class="imp-brand">Kri Kri</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kwality"><td class="imp-brand">Kwality</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="kwik bite"><td class="imp-brand">Kwik Bite</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="lamb weston"><td class="imp-brand">Lamb Weston</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="lamesa"><td class="imp-brand">Lamesa</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="le chef"><td class="imp-brand">Le Chef</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="little moons"><td class="imp-brand">Little Moons</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="loacker"><td class="imp-brand">Loacker</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="london dairy"><td class="imp-brand">London Dairy</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="lulu pl"><td class="imp-brand">LuLu PL</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="magnum"><td class="imp-brand">Magnum</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="mccain"><td class="imp-brand">Mccain</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="mcvities"><td class="imp-brand">McVities</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="melona"><td class="imp-brand">Melona</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="mfood"><td class="imp-brand">MFOOD</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="minute kitchen"><td class="imp-brand">Minute Kitchen</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="miratorg"><td class="imp-brand">Miratorg</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="monte christo"><td class="imp-brand">Monte Christo</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="mr kipling"><td class="imp-brand">Mr Kipling</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="muller"><td class="imp-brand">Muller</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="mumtaz"><td class="imp-brand">Mumtaz</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="my mochi"><td class="imp-brand">My Mochi</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="nat"><td class="imp-brand">Nat</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="nestle"><td class="imp-brand">Nestle</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="nush"><td class="imp-brand">Nush</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="oreo"><td class="imp-brand">Oreo</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="organic larder"><td class="imp-brand">Organic Larder</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="original"><td class="imp-brand">Original</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="orkney"><td class="imp-brand">Orkney</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="papila"><td class="imp-brand">Papila</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="patiswiss"><td class="imp-brand">Patiswiss</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="pfp"><td class="imp-brand">PFP</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="pinar"><td class="imp-brand">Pinar</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="plein soleil"><td class="imp-brand">Plein Soleil</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="polonez"><td class="imp-brand">Polonez</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="popsicle"><td class="imp-brand">Popsicle</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="prime"><td class="imp-brand">Prime</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="qualiko"><td class="imp-brand">Qualiko</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="quanta"><td class="imp-brand">Quanta</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="quorn"><td class="imp-brand">Quorn</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="reese&#x27;s"><td class="imp-brand">Reese&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="ristorante"><td class="imp-brand">Ristorante</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-yes">Yes</span></td></tr>
+            <tr data-brand="rocher"><td class="imp-brand">Rocher</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="rude health"><td class="imp-brand">Rude Health</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="sadia"><td class="imp-brand">Sadia</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="sailor"><td class="imp-brand">Sailor</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="salud"><td class="imp-brand">Salud</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="sambazon"><td class="imp-brand">Sambazon</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="sammontana"><td class="imp-brand">Sammontana</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="sea sparkle"><td class="imp-brand">Sea Sparkle</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="seara"><td class="imp-brand">Seara</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="selecta"><td class="imp-brand">Selecta</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="siblou"><td class="imp-brand">Siblou</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="siniora"><td class="imp-brand">Siniora</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="snickers"><td class="imp-brand">Snickers</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="snowdonia"><td class="imp-brand">Snowdonia</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="spooners"><td class="imp-brand">Spooners</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="strings &amp; things"><td class="imp-brand">Strings &amp; Things</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="sunbulah"><td class="imp-brand">Sunbulah</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="switch"><td class="imp-brand">Switch</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="switz"><td class="imp-brand">Switz</td><td><span class="rb-fac rb-fac-uae">UAE</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="taja col"><td class="imp-brand">Taja Col</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="tanmiah"><td class="imp-brand">Tanmiah</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="tgi friday&#x27;s"><td class="imp-brand">Tgi Friday&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="the king&#x27;s dairy"><td class="imp-brand">The King&#x27;s Dairy</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="tonitto"><td class="imp-brand">Tonitto</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="trebon"><td class="imp-brand">Trebon</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="tru fru"><td class="imp-brand">Tru Fru</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="true froot"><td class="imp-brand">True Froot</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="tubzee"><td class="imp-brand">Tubzee</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="vadilal"><td class="imp-brand">Vadilal</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="wall&#x27;s"><td class="imp-brand">Wall&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-tgt rb-tgt-maybe">Maybe</span></td></tr>
+            <tr data-brand="wang korea"><td class="imp-brand">Wang Korea</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="wattie&#x27;s"><td class="imp-brand">Wattie&#x27;s</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="webster"><td class="imp-brand">Webster</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="welpac"><td class="imp-brand">Welpac</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="wow momo"><td class="imp-brand">Wow Momo</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="wyke farms"><td class="imp-brand">Wyke Farms</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+            <tr data-brand="zahrat al baher"><td class="imp-brand">Zahrat Al Baher</td><td><span class="rb-fac rb-fac-int">International</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-no">—</span></td><td class="rb-c"><span class="rb-yes">Yes</span></td><td class="rb-c"><span class="rb-no">—</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="importers-note">Frozen-aisle brand audit across LuLu and Carrefour UAE. <strong>Production facility</strong> indicates whether the brand is UAE-produced or international. <strong>Imported — UK &amp; Ireland</strong> flags brands sourced from those markets. <strong>Target customer</strong> reflects an internal assessment of fit as a potential cold-storage / distribution customer (<strong>Yes</strong> = identified; <strong>Maybe</strong> = possible). Source: UAE_Brands — Combined brand list.</div>
+    </div>
+  </section>
+
+  <!-- ── 08 Food Businesses ── -->
+  <section id="food-businesses" style="animation-delay:0.14s">
+    <div class="section-hdr">
+      <div class="section-hdr-bar"></div>
+      <span class="section-hdr-num">08</span>
       <div class="section-hdr-title">Regional Food Businesses</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1662,11 +1950,11 @@ section:last-child { border-bottom: none; }
     </div>
   </section>
 
-  <!-- ── 08 Drivetime ── -->
+  <!-- ── 09 Drivetime ── -->
   <section id="drivetime" style="animation-delay:0.22s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">08</span>
+      <span class="section-hdr-num">09</span>
       <div class="section-hdr-title">Drivetime Data &amp; Industry Analysis</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1699,11 +1987,11 @@ section:last-child { border-bottom: none; }
     </div>
   </section>
 
-  <!-- ── 09 Population ── -->
+  <!-- ── 10 Population ── -->
   <section id="population" style="animation-delay:0.16s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">09</span>
+      <span class="section-hdr-num">10</span>
       <div class="section-hdr-title">Regional Population Data</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1754,11 +2042,11 @@ section:last-child { border-bottom: none; }
     </div>
   </section>
 
-  <!-- ── 10 Agriculture ── -->
+  <!-- ── 11 Agriculture ── -->
   <section id="agriculture" style="animation-delay:0.18s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">10</span>
+      <span class="section-hdr-num">11</span>
       <div class="section-hdr-title">Regional Agricultural Data</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -1770,11 +2058,11 @@ section:last-child { border-bottom: none; }
     </div>
   </section>
 
-  <!-- ── 11 Inward Investment ── -->
+  <!-- ── 12 Inward Investment ── -->
   <section id="investment" style="animation-delay:0.2s">
     <div class="section-hdr">
       <div class="section-hdr-bar"></div>
-      <span class="section-hdr-num">11</span>
+      <span class="section-hdr-num">12</span>
       <div class="section-hdr-title">Inward Investment Team</div>
       <div class="section-hdr-rule"></div>
     </div>
@@ -2231,6 +2519,16 @@ section:last-child { border-bottom: none; }
   }) : null;
 
   function exportFoodComp() { if (foodCompTable) foodCompTable.download('csv', 'uae-food-business-comparison.csv'); }
+
+  function filterRetailBrands() {
+    var q = (document.getElementById('rb-search').value || '').trim().toLowerCase();
+    var rows = document.querySelectorAll('#rb-tbody tr');
+    for (var i = 0; i < rows.length; i++) {
+      var b = rows[i].getAttribute('data-brand') || '';
+      rows[i].style.display = (b.indexOf(q) !== -1) ? '' : 'none';
+    }
+  }
+
 </script>
 </body>
 </html>
